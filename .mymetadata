@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="yadu_platform"
+  id="myeclipse.1459757960859"
+  context-root="/yadu_platform"
+  j2ee-spec="6.0"
+  archive="yadu_platform.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

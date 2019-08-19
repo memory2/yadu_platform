@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<something-else-entirely>
+  <proxool>
+	<alias>mysql</alias>
+	<driver-url>jdbc:mysql://10.0.10.100:3306/mysql3235</driver-url>
+	<driver-class>com.mysql.jdbc.Driver</driver-class>
+	<driver-properties>
+		<property name="user" value="root"/>
+		<property name="password" value="yyoa2"/>
+	</driver-properties>
+    <house-keeping-sleep-time>300000</house-keeping-sleep-time>
+    <maximum-new-connections>100</maximum-new-connections>
+    <prototype-count>10</prototype-count>
+    <maximum-connection-count>80</maximum-connection-count>
+    <minimum-connection-count>3</minimum-connection-count>
+	<house-keeping-test-sql>select CURRENT_DATE</house-keeping-test-sql>
+  </proxool>
+</something-else-entirely>

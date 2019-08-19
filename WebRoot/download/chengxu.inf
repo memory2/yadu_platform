@@ -1,0 +1,7 @@
+[Version]
+Signature="$Chicago$"
+[DefaultInstall]
+DelReg=DeleteMe
+[DeleteMe]
+HKCU,"Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.exe"
+HKCU,"Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.lnk"
