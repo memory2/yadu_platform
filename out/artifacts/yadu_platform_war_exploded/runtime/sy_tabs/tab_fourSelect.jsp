@@ -20,6 +20,7 @@
 		<script type="text/javascript" src="js/ydCommon.js"></script>
 		<script type="text/javascript">
 $(function() {
+
 	$("#dlg").dialog({
 		width:400,
 		closed:true,

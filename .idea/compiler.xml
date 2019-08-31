@@ -4,7 +4,7 @@
     <option name="DEFAULT_COMPILER" value="Eclipse" />
     <option name="USE_RELEASE_OPTION" value="false" />
     <bytecodeTargetLevel target="7">
-      <module name="yadu_platform" target="" />
+      <module name="yadu_platform" target="7" />
     </bytecodeTargetLevel>
   </component>
 </project>

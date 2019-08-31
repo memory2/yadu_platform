@@ -1,58 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-  <display-name></display-name>
-  <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
-  <servlet>
-	<servlet-name>ServletConfigurator</servlet-name>
-	<servlet-class>org.logicalcobwebs.proxool.configuration.ServletConfigurator</servlet-class>
-	<init-param>
-		<param-name>xmlFile</param-name>
-		<param-value>WEB-INF/proxool.xml</param-value>
-	</init-param>
-	<load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet>
-   <servlet-name>Admin</servlet-name>
-   <servlet-class>org.logicalcobwebs.proxool.admin.servlet.AdminServlet</servlet-class>
-</servlet>
-<servlet-mapping>
-   <servlet-name>Admin</servlet-name>
-   <url-pattern>/admin.proxool</url-pattern>
-</servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+    <display-name></display-name>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    <servlet>
+        <servlet-name>ServletConfigurator</servlet-name>
+        <servlet-class>org.logicalcobwebs.proxool.configuration.ServletConfigurator</servlet-class>
+        <init-param>
+            <param-name>xmlFile</param-name>
+            <param-value>WEB-INF/proxool.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>Admin</servlet-name>
+        <servlet-class>org.logicalcobwebs.proxool.admin.servlet.AdminServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Admin</servlet-name>
+        <url-pattern>/admin.proxool</url-pattern>
+    </servlet-mapping>
 
-  
-  
 
-  <servlet>
-    <servlet-name>RegisterAction</servlet-name>
-    <servlet-class>org.yadu.action.RegisterAction</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>RegisterAction</servlet-name>
-    <url-pattern>/servlet/RegisterAction</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>Faces Servlet</servlet-name>
-    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.faces</url-pattern>
-  </servlet-mapping>
-  
-   <servlet>
-    <servlet-name>QueryUserAction</servlet-name>
-    <servlet-class>org.yadu.action.QueryUserAction</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>QueryUserAction</servlet-name>
-    <url-pattern>/servlet/QueryUserAction</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
+    <servlet>
+        <servlet-name>RegisterAction</servlet-name>
+        <servlet-class>org.yadu.action.RegisterAction</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterAction</servlet-name>
+        <url-pattern>/servlet/RegisterAction</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.faces</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>QueryUserAction</servlet-name>
+        <servlet-class>org.yadu.action.QueryUserAction</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>QueryUserAction</servlet-name>
+        <url-pattern>/servlet/QueryUserAction</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>
             LoginAction
         </servlet-name>
@@ -64,8 +65,8 @@
         <servlet-name>LoginAction</servlet-name>
         <url-pattern>/servlet/LoginAction</url-pattern>
     </servlet-mapping>
-    
-      <servlet>
+
+    <servlet>
         <servlet-name>
             U8Action
         </servlet-name>
@@ -77,9 +78,9 @@
         <servlet-name>U8Action</servlet-name>
         <url-pattern>/servlet/U8Action</url-pattern>
     </servlet-mapping>
-    
-    
-          <servlet>
+
+
+    <servlet>
         <servlet-name>
             KqAction
         </servlet-name>
@@ -91,8 +92,8 @@
         <servlet-name>KqAction</servlet-name>
         <url-pattern>/servlet/KqAction</url-pattern>
     </servlet-mapping>
-  	
-  	<servlet>
+
+    <servlet>
         <servlet-name>
             FitAction
         </servlet-name>
@@ -104,24 +105,23 @@
         <servlet-name>FitAction</servlet-name>
         <url-pattern>/servlet/FitAction</url-pattern>
     </servlet-mapping>
-    
-    
-    
+
+
     <servlet>
         <servlet-name>
             TreeDataAction
         </servlet-name>
         <servlet-class>
-           org.yadu.action.TreeDataAction
+            org.yadu.action.TreeDataAction
         </servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>TreeDataAction</servlet-name>
         <url-pattern>/servlet/TreeDataAction</url-pattern>
     </servlet-mapping>
-  	
-  
-           <servlet>
+
+
+    <servlet>
         <servlet-name>
             KhAction
         </servlet-name>

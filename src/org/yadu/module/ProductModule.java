@@ -1,90 +1,87 @@
 package org.yadu.module;
 
 public class ProductModule {
-	//"packName":"71","cateName":"72","productName":"81","sizeName":"96","amount":"6","remark":"6666"
-	private String id;
-	
-	private String productNo;
-	
-	private String packName;
-	
-	private String cateName;
-	
-	private String productName;
-	
-	private String sizeName;
-	
-	private String amount;
-	
-	private String remark;
+    //"packName":"71","cateName":"72","productName":"81","sizeName":"96","amount":"6","remark":"6666"
+    private String id;
 
-	
-	
-	public String getProductNo() {
-		return productNo;
-	}
+    private String productNo;
 
-	public void setProductNo(String productNo) {
-		this.productNo = productNo;
-	}
+    private String packName;
 
-	public String getId() {
-		return id;
-	}
+    private String cateName;
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    private String productName;
 
-	public String getPackName() {
-		return packName;
-	}
+    private String sizeName;
 
-	public void setPackName(String packName) {
-		this.packName = packName;
-	}
+    private String amount;
 
-	public String getCateName() {
-		return cateName;
-	}
+    private String remark;
 
-	public void setCateName(String cateName) {
-		this.cateName = cateName;
-	}
 
-	public String getProductName() {
-		return productName;
-	}
+    public String getProductNo() {
+        return productNo;
+    }
 
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
+    public void setProductNo(String productNo) {
+        this.productNo = productNo;
+    }
 
-	public String getSizeName() {
-		return sizeName;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setSizeName(String sizeName) {
-		this.sizeName = sizeName;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public String getAmount() {
-		return amount;
-	}
+    public String getPackName() {
+        return packName;
+    }
 
-	public void setAmount(String amount) {
-		this.amount = amount;
-	}
+    public void setPackName(String packName) {
+        this.packName = packName;
+    }
 
-	public String getRemark() {
-		return remark;
-	}
+    public String getCateName() {
+        return cateName;
+    }
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-	
-	
-	
+    public void setCateName(String cateName) {
+        this.cateName = cateName;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getSizeName() {
+        return sizeName;
+    }
+
+    public void setSizeName(String sizeName) {
+        this.sizeName = sizeName;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
 
 }

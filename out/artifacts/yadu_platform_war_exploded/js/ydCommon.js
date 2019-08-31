@@ -1,390 +1,409 @@
-	function jsEncode(word){
-		function encodeMethod(str){if(str==""){return str;}var base64EncodeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-		var base64DecodeChars = new Array(-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1, -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1);var out, i, len;var c1, c2, c3;len = str.length;i = 0;out = "";
-		while (i < len) {c1 = str.charCodeAt(i++) & 255;
-		   if (i == len) {out += base64EncodeChars.charAt(c1 >> 2);
-		   out += base64EncodeChars.charAt((c1 & 3) << 4);
-		   out += "==";break;}
-		   c2 = str.charCodeAt(i++);
-		   if (i == len) {out += base64EncodeChars.charAt(c1 >> 2);
-		   out += base64EncodeChars.charAt(((c1 & 3) << 4) | ((c2 & 240) >> 4));
-		   out += base64EncodeChars.charAt((c2 & 15) << 2);
-		   out += "=";break;}c3 = str.charCodeAt(i++);
-		   out += base64EncodeChars.charAt(c1 >> 2);
-		   out += base64EncodeChars.charAt(((c1 & 3) << 4) | ((c2 & 240) >> 4));
-		   out += base64EncodeChars.charAt(((c2 & 15) << 2) | ((c3 & 192) >> 6));
-		   out += base64EncodeChars.charAt(c3 & 63);}return out;}
-		var word1 = encodeMethod(word);
-		return "MD5"+word1;
-	}
-	
-	
-	//datagridµ¼³öµ½excel
-	  function ExporterExcel(gridID,gridBT) {
-          //»ñÈ¡DatagrideµÄÁÐ
-          var rows = $("#"+gridID).datagrid('getRows');
-          var columns = $("#"+gridID).datagrid("options").columns[0];
-          var oXL = new ActiveXObject("Excel.Application"); //´´½¨AX¶ÔÏóexcel 
-          var oWB = oXL.Workbooks.Add(); //»ñÈ¡workbook¶ÔÏó 
-          var oSheet = oWB.ActiveSheet; //¼¤»îµ±Ç°sheet
-          //ÉèÖÃ¹¤×÷±¡Ãû³Æ
-          oSheet.name = gridBT;
-          //ÉèÖÃ±íÍ·
-          for (var i = 0; i < columns.length; i++) {
-              oSheet.Cells(1, i+1).value = columns[i].title;
-          }
-          //ÉèÖÃÄÚÈÝ²¿·Ö
-          for (var i = 0; i < rows.length; i++) {
-              //¶¯Ì¬»ñÈ¡Ã¿Ò»ÐÐÃ¿Ò»ÁÐµÄÊý¾ÝÖµ
-              for (var j = 0; j < columns.length; j++) {               
-                  oSheet.Cells(i + 2, j+1).value = rows[i][columns[j].field];
-              }   
-          }              
-          oXL.Visible = true; //ÉèÖÃexcel¿É¼ûÊôÐÔ
-          oXL = null;//ÊÍ·Å¶ÔÏó
-   }
-	  
-	 //datagridÍ¨ÓÃ
-	  function getDataGird(url,gridID,gridBT){
-		  var editRow = undefined;
-	       $('#'+gridID).datagrid({    
-	            url:url,
-	            pagination:true,
-	        	toolbar: [
-	        	  {
-	        		text:'µ¼³ö',
-	        		iconCls: 'icon-dload',
-	        		handler: function(){
-	        			ExporterExcel(gridID,gridBT);
-	        			}
-	        	}
-	        	]
-	        });  
-			  
-		  
-	  }
-	  
-		 //datagridÍ¨ÓÃ
-	  function getDataGird1(url,gridID,gridBT,updUrl,delUrl,width,height){
-		  var editRow = undefined;
-	       $('#'+gridID).datagrid({    
-	            url:url,
-	            pagination:true,
-	        	toolbar: [
-	        	  {
-	        		text:'µ¼³ö',
-	        		iconCls: 'icon-dload',
-	        		handler: function(){
-	        			ExporterExcel(gridID,gridBT);
-	        			}
-	        	},{
-	        		text:'Ìí¼Ó',
-	        		iconCls: 'icon-add',
-	        		handler: function(){
-	        			edit(gridID,gridBT,updUrl,width,height,'add');
-	        			}
-	        	},{
-	        		text:'ÐÞ¸Ä',
-	        		iconCls: 'icon-edit',
-	        		handler: function(){
-	        			edit(gridID,gridBT,updUrl,width,height,'upd');
-	        			}
-	        	},{
-	        		text:'É¾³ý',
-	        		iconCls: 'icon-cancel',
-	        		handler: function(){
-	        			del(gridID,delUrl);
-	        			}
-	        	}
-	        	]
-	        });  
-	        var p = $('#'+gridID).datagrid('getPager');   
-	        $(p).pagination({   
-	            pageSize: 10,//Ã¿Ò³ÏÔÊ¾µÄ¼ÇÂ¼ÌõÊý£¬Ä¬ÈÏÎª10   
-	            pageList: [5,10,15,1000],//¿ÉÒÔÉèÖÃÃ¿Ò³¼ÇÂ¼ÌõÊýµÄÁÐ±í   
-	            beforePageText: 'µÚ',//Ò³ÊýÎÄ±¾¿òÇ°ÏÔÊ¾µÄºº×Ö   
-	            afterPageText: 'Ò³    ¹² {pages} Ò³',   
-	            displayMsg: 'µ±Ç°ÏÔÊ¾ {from} - {to} Ìõ¼ÇÂ¼   ¹² {total} Ìõ¼ÇÂ¼',   
-	        }); 
-			  
-		  
-	  }
-	  
-	  function edit(gridID,gridBT,updUrl,width,height,czlb){
-		  var row;
-		  var href;
-		  var info;
-		  if('add'!=czlb){
-			  row = $('#'+gridID).datagrid('getSelected');
-		      if (czlb!='add'&&!row) {   
-		        	$.messager.alert('ÌáÊ¾', 'ÇëÏÈÑ¡ÖÐÐÐ','info');
-		        	return;
-		       }
-			  href = updUrl+'?zj='+row.id+'&czlb='+czlb;  
-		  }else{
-			  href = updUrl+'?czlb='+czlb;
-		  }
-        	$('#myWindow').window(
-					{
-						title : gridBT,
-						width : width === undefined ? 600 : width,
-						height : height === undefined ? 400 : height,
-						content : '<iframe scrolling="yes" frameborder="0"  src="'
-								+ href
-								+ '" style="width:98%;height:98%;"></iframe>',
-						shadow : false,
-						cache : false,
-						closed : false,
-						collapsible : false,
-						resizable : false,
-						loadingMessage : 'ÕýÔÚ¼ÓÔØÊý¾Ý£¬ÇëÉÔµÈÆ¬¿Ì......'
-					});
-		  
-	  }
-	  
-	  
-	  function del(gridID,delUrl){
-			var row = $('#'+gridID).datagrid('getSelected');
-			if (!row) {   
-				$.messager.alert('ÌáÊ¾', 'ÇëÏÈÑ¡ÖÐÐÐ','info');
-				return;
-			}
-			$.messager.confirm('È·ÈÏ','ÄúÈ·ÈÏÏëÒªÉ¾³ý¼ÇÂ¼Âð£¿',function(r){
-				if (r){
-					var href = delUrl+'&zj='+row.id;
-					$.ajax({  
-					      type:'POST',
-					      url:href,
-					      success: function(data){
-					            	  //alert(data);
-					      if('ok'==data){
-					          alert("É¾³ý³É¹¦£¡");
-					      }else{
-					          alert("É¾³ýÊ§°Ü,ÇëÁªÏµ¹ÜÀíÔ±£¡");
-					      }
-					      cx();
-					     }
-					 }); 
-				}
-			}); 
-	  }
-	  
-	  function setDefaultDate(ksrq,jsrq){
-		  var myDate = new Date();
-		  var y = myDate.getFullYear();
-		  var m = myDate.getMonth()+1;
-		  var d = new Date(y,m,0).getDate();
-		  $("#"+ksrq).datebox('setValue',y+"-"+m+"-01");
-		  $("#"+jsrq).datebox('setValue',y+"-"+m+"-"+d);
-	  }
-	  
-	  function setDefaultTime(ksrq,jsrq){
-		  var myDate = new Date();
-		  var y = myDate.getFullYear();
-		  var m = myDate.getMonth()+1;
-		  var d = myDate.getDate();
-		  var h = myDate.getHours();
-		  var n = myDate.getMinutes();
-		  var s = myDate.getSeconds();
-		  //alert(y+"-"+m+"-"+d+" "+h+":"+n+":"+s);
-		  $("#"+ksrq).datetimebox('setValue',y+"-"+m+"-"+d+" 08:00:00");
-		  $("#"+jsrq).datetimebox('setValue',y+"-"+m+"-"+d+" "+h+":"+n+":"+s);
-	  }
-	  
-	  function setDefaultTime1(rqid){
-		  var myDate = new Date();
-		  var y = myDate.getFullYear();
-		  var m = myDate.getMonth()+1;
-		  var d = myDate.getDate();
-		  var h = myDate.getHours();
-		  var n = myDate.getMinutes();
-		  var s = myDate.getSeconds();
-		  //alert(y+"-"+m+"-"+d+" "+h+":"+n+":"+s);
-		  $("#"+rqid).datetimebox('setValue',y+"-"+m+"-"+d+" "+h+":"+n+":"+s);
-	  }
-	  
-	  function getYear(){
-		  var myDate = new Date();
-		  var y = myDate.getFullYear();
-		  return y;
-	  }
-	  
-	  function getMonth(){
-		  var myDate = new Date();
-		  var m = myDate.getMonth()+1;
-		  m = m<10?'0'+m:m;
-		  return m;
-	  }
-	  
-	  function getTjt(lb,bt,tb,sz){
-		  var content0='<chart caption="';
-		  var content1 = ' baseFontSize="14" showLimits="1" yAxisMaxValue="';
-		  var content = ' yAxisMinValue="1000" name="333" showNames="1" showBorder="0" outCnvBaseFont="»ªÎÄÐÂÎº"  outCnvBaseFontSize="20" bgColor="EEF3FA" canvasBgColor="EEF3FA" formatNumberScale="0" canvasBorderThickness="0"  showValues="1" showYAxisValues="1" showLegend="0"  labelDisplay="STAGGER" showPlotBorder="0" numDivLines="3"  borderThickness ="0" yAxisName="" xAxisName="" numberSuffix="Ôª" plotSpacePercent="50">';
-		  
-		  var sm={};
-		  $.ajax({  
-              type: 'POST',
-              dataType: "json",
-              url:'servlet/OaAction?method='+lb,
-              success: function(data){
-            	  //var d = eval("("+data+")");//Ð§¹ûµÈÍ¬ÓÚ¼ÓdataType
-            	  //alert(JSON.stringify(data[0]));
-            	  var m1 = JSON.stringify(data[0].m1)!=undefined?JSON.stringify(data[0].m1):'"0"';
-            	  var m2 = JSON.stringify(data[0].m2)!=undefined?JSON.stringify(data[0].m2):'"0"';
-            	  var m3 = JSON.stringify(data[0].m3)!=undefined?JSON.stringify(data[0].m3):'"0"';
-            	  var m4 = JSON.stringify(data[0].m4)!=undefined?JSON.stringify(data[0].m4):'"0"';
-            	  var m5 = JSON.stringify(data[0].m5)!=undefined?JSON.stringify(data[0].m5):'"0"';
-            	  
-            	  var m6 = JSON.stringify(data[0].m6)!=undefined?JSON.stringify(data[0].m6):'"0"';
-            	  var m7 = JSON.stringify(data[0].m7)!=undefined?JSON.stringify(data[0].m7):'"0"';
-            	  var m8 = JSON.stringify(data[0].m8)!=undefined?JSON.stringify(data[0].m8):'"0"';
-            	  var m9 = JSON.stringify(data[0].m9)!=undefined?JSON.stringify(data[0].m9):'"0"';
-            	  var m10 = JSON.stringify(data[0].m10)!=undefined?JSON.stringify(data[0].m10):'"0"';
-            	  var m11 = JSON.stringify(data[0].m11)!=undefined?JSON.stringify(data[0].m11):'"0"';
-            	  var m12 = JSON.stringify(data[0].m12)!=undefined?JSON.stringify(data[0].m12):'"0"';
-            	  
-            	  var year =  JSON.stringify(data[0].year).substring(1,5);
-            	  content = content0+year+bt+'"'+content1+sz+'"'+content;
-            	  //alert(content);
-            	  var date=new Date;
-         		  var month=date.getMonth()+1;
-         		  if(year!=date.getFullYear()){
-         			  month=12;
-         		  }
-         		  var char = new Array(m1,m2,m3,m4,m5,m6,m7,m8,m9,m10,m11,m12);
-         		  for(var i=1;i<=month;i++){
-         			 content+='<set label="'+i+'ÔÂ"  value='+char[i-1]+' />'
-         		  }
-            	  //alert(content);
-            	 // if(myChart==null){
-                	  myChart = new FusionCharts("js/tjjs/FusionCharts/"+tb+".swf", "myChartId", "100%", "450");
-                   	  myChart.setXMLData(content+'</chart>');
-                   	  myChart.render("chartContainer"); 
-            	 // }else{
-            		  //$("#chartContainer").show();
-            	 // }
+function jsEncode(word) {
+    function encodeMethod(str) {
+        if (str == "") {
+            return str;
+        }
+        var base64EncodeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+        var base64DecodeChars = new Array(-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1, -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1);
+        var out, i, len;
+        var c1, c2, c3;
+        len = str.length;
+        i = 0;
+        out = "";
+        while (i < len) {
+            c1 = str.charCodeAt(i++) & 255;
+            if (i == len) {
+                out += base64EncodeChars.charAt(c1 >> 2);
+                out += base64EncodeChars.charAt((c1 & 3) << 4);
+                out += "==";
+                break;
+            }
+            c2 = str.charCodeAt(i++);
+            if (i == len) {
+                out += base64EncodeChars.charAt(c1 >> 2);
+                out += base64EncodeChars.charAt(((c1 & 3) << 4) | ((c2 & 240) >> 4));
+                out += base64EncodeChars.charAt((c2 & 15) << 2);
+                out += "=";
+                break;
+            }
+            c3 = str.charCodeAt(i++);
+            out += base64EncodeChars.charAt(c1 >> 2);
+            out += base64EncodeChars.charAt(((c1 & 3) << 4) | ((c2 & 240) >> 4));
+            out += base64EncodeChars.charAt(((c2 & 15) << 2) | ((c3 & 192) >> 6));
+            out += base64EncodeChars.charAt(c3 & 63);
+        }
+        return out;
+    }
 
-              }
-          });
-	  }
-	  
- //µ±Ç°Ê±¼ä
-	    function tick(divId){      
-	    	var today = new Date();
-	    	var ww = today.getDay();      
-	    	if  (ww==0)  ww="ÐÇÆÚÈÕ";      
-	    	if  (ww==1)  ww="ÐÇÆÚÒ»";      
-	    	if  (ww==2)  ww="ÐÇÆÚ¶þ";      
-	    	if  (ww==3)  ww="ÐÇÆÚÈý";      
-	    	if  (ww==4)  ww="ÐÇÆÚËÄ";      
-	    	if  (ww==5)  ww="ÐÇÆÚÎå";      
-	    	if  (ww==6)  ww="ÐÇÆÚÁù";      
-	        $("#"+divId).text(today.toLocaleString()+" "+ww);     
-	    	window.setTimeout("tick('"+divId+"')", 1000);  
-	    }; 
-	    
-	    
-	  
-	  //json×Ö·û´®½âÎö³Ìjson
-	    function strToJson(str){ 
-	    	var json = eval('(' + str + ')'); 
-	    	return json; 
-	    }
-	    
-	  //»ñÈ¡²¿ÃÅÏÂÀ­ÁÐ±í
-	    function getDept(selectid,deptid){
-	    	var theurl="";
-	    	if(deptid.substring(0,2)=="41"){
-	    		theurl = "servlet/KqAction?method=bm_yd&deptid="+deptid;
-	    	}else if(deptid.substring(0,2)=="51"){
-	    		theurl = "servlet/KqAction?method=bm_mdk&deptid="+deptid;
-	    	}else if(deptid.substring(0,2)=="61"){
-	    		theurl = "servlet/KqAction?method=bm_wps&deptid="+deptid;
-	    	}else if(deptid.substring(0,2)=="71"){
-	    		theurl = "servlet/KqAction?method=bm_wpscj&deptid="+deptid;
-	    	}
-			$.ajax({
-				  type : "POST",
-				  async : false,
-				  url : theurl,
-				  success : function(treeData) {
-					    var data = strToJson(treeData);
-					    $('#'+selectid).combotree('loadData',data);
-						$("#"+selectid).combotree({
-					        multiple : false,
-					        onlyLeafCheck : false,//trueÖ»ÓÐ×îÀï²ãÏî¿ÉÑ¡
-					        cascadeCheck : false,
-					    	onSelect : function(node) { 
-						        if(9000000000 == node.id){
-							        //Çå³ýÑ¡ÖÐ
-							        $('#'+selectid).combotree('clear');
-						        }
-						    },
-					        onLoadSuccess : function(node, data1) {
-					        	$("#"+selectid).combotree('tree').tree("collapseAll"); 
-					        }
+    var word1 = encodeMethod(word);
+    return "MD5" + word1;
+}
 
-					    });
-				    }
-				  });
-	    }
-	    
-	    
-	    
-		  //»ñÈ¡ÈËÔ±ÏÂÀ­ÁÐ±í
-	    function getPerson(selectid,deptid){
-	    	var theurl="";
-	    	if(deptid.substring(0,2)=="41"){
-	    		theurl = "servlet/KqAction?method=zd&zdmc=ry_yd&zdlb="+deptid;
-	    	}else if(deptid.substring(0,2)=="51"){
-	    		theurl = "servlet/KqAction?method=zd&zdmc=ry_mdk&zdlb="+deptid;
-	    	}else if(deptid.substring(0,2)=="61"){
-	    		theurl = "servlet/KqAction?method=zd&zdmc=ry_wps&zdlb="+deptid;
-	    	}else if(deptid.substring(0,2)=="71"){
-	    		theurl = "servlet/KqAction?method=zd&zdmc=ry_wpscj&zdlb="+deptid;
-	    	}
-	    	
-			$.ajax({
-				  type : "POST",
-				  async : false,
-				  url : theurl,
-				  success : function(treeData) {
-					  if(treeData!='[]'){
-						    var data = strToJson(treeData);
-						    
-						    $('#'+selectid).combobox({    
-						        data:data,    
-						        valueField:'id',    
-						        textField:'text'   
-						    });
-					  }
- 
-				    }
-				  });
-	    }
-	    
-	    
-	    //»ñÈ¡ÈËÔ±ÁÐ±íÊ±£¬ÑéÖ¤ÊÇ·ñÑ¡ÔñËùÊô²¿ÃÅ
-	    function yzry(deptid,personid){
-        	var bm = $("#"+deptid).combobox('getValue');
-        	if(bm==null||bm==undefined||bm==""){
-        		alert('ÇëÏÈÑ¡ÔñËùÊô²¿ÃÅ!');
-        	}else{
-        		getPerson(personid,bm);
-        	}
-	    }
-	    
-	    
-	    function yzry1(deptid,personid){
-        	var bm = $("#"+deptid).combobox('getValue');
-         		getPerson(personid,bm);
-	    }
-	    
-	    function isEmpty(str){
-	    	if(str==undefined||str==null||str==""){
-	    		return true;
-	    	}
-	    	return false;
-	    }
+
+//datagridï¿½ï¿½ï¿½ï¿½ï¿½ï¿½excel
+function ExporterExcel(gridID, gridBT) {
+    //ï¿½ï¿½È¡Datagrideï¿½ï¿½ï¿½ï¿½
+    var rows = $("#" + gridID).datagrid('getRows');
+    var columns = $("#" + gridID).datagrid("options").columns[0];
+    var oXL = new ActiveXObject("Excel.Application"); //ï¿½ï¿½ï¿½ï¿½AXï¿½ï¿½ï¿½ï¿½excel 
+    var oWB = oXL.Workbooks.Add(); //ï¿½ï¿½È¡workbookï¿½ï¿½ï¿½ï¿½ 
+    var oSheet = oWB.ActiveSheet; //ï¿½ï¿½ï¿½îµ±Ç°sheet
+    //ï¿½ï¿½ï¿½Ã¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    oSheet.name = gridBT;
+    //ï¿½ï¿½ï¿½Ã±ï¿½Í·
+    for (var i = 0; i < columns.length; i++) {
+        oSheet.Cells(1, i + 1).value = columns[i].title;
+    }
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý²ï¿½ï¿½ï¿½
+    for (var i = 0; i < rows.length; i++) {
+        //ï¿½ï¿½Ì¬ï¿½ï¿½È¡Ã¿Ò»ï¿½ï¿½Ã¿Ò»ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+        for (var j = 0; j < columns.length; j++) {
+            oSheet.Cells(i + 2, j + 1).value = rows[i][columns[j].field];
+        }
+    }
+    oXL.Visible = true; //ï¿½ï¿½ï¿½ï¿½excelï¿½É¼ï¿½ï¿½ï¿½ï¿½ï¿½
+    oXL = null;//ï¿½Í·Å¶ï¿½ï¿½ï¿½
+}
+
+//datagridÍ¨ï¿½ï¿½
+function getDataGird(url, gridID, gridBT) {
+    var editRow = undefined;
+    $('#' + gridID).datagrid({
+        url: url,
+        pagination: true,
+        toolbar: [
+            {
+                text: 'ï¿½ï¿½ï¿½ï¿½',
+                iconCls: 'icon-dload',
+                handler: function () {
+                    ExporterExcel(gridID, gridBT);
+                }
+            }
+        ]
+    });
+
+
+}
+
+//datagridÍ¨ï¿½ï¿½
+function getDataGird1(url, gridID, gridBT, updUrl, delUrl, width, height) {
+    var editRow = undefined;
+    $('#' + gridID).datagrid({
+        url: url,
+        pagination: true,
+        toolbar: [
+            {
+                text: 'ï¿½ï¿½ï¿½ï¿½',
+                iconCls: 'icon-dload',
+                handler: function () {
+                    ExporterExcel(gridID, gridBT);
+                }
+            }, {
+                text: 'ï¿½ï¿½ï¿½',
+                iconCls: 'icon-add',
+                handler: function () {
+                    edit(gridID, gridBT, updUrl, width, height, 'add');
+                }
+            }, {
+                text: 'ï¿½Þ¸ï¿½',
+                iconCls: 'icon-edit',
+                handler: function () {
+                    edit(gridID, gridBT, updUrl, width, height, 'upd');
+                }
+            }, {
+                text: 'É¾ï¿½ï¿½',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    del(gridID, delUrl);
+                }
+            }
+        ]
+    });
+    var p = $('#' + gridID).datagrid('getPager');
+    $(p).pagination({
+        pageSize: 10,//Ã¿Ò³ï¿½ï¿½Ê¾ï¿½Ä¼ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Îª10   
+        pageList: [5, 10, 15, 1000],//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿Ò³ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½   
+        beforePageText: 'ï¿½ï¿½',//Ò³ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½Ç°ï¿½ï¿½Ê¾ï¿½Äºï¿½ï¿½ï¿½   
+        afterPageText: 'Ò³    ï¿½ï¿½ {pages} Ò³',
+        displayMsg: 'ï¿½ï¿½Ç°ï¿½ï¿½Ê¾ {from} - {to} ï¿½ï¿½ï¿½ï¿½Â¼   ï¿½ï¿½ {total} ï¿½ï¿½ï¿½ï¿½Â¼',
+    });
+
+
+}
+
+function edit(gridID, gridBT, updUrl, width, height, czlb) {
+    var row;
+    var href;
+    var info;
+    if ('add' != czlb) {
+        row = $('#' + gridID).datagrid('getSelected');
+        if (czlb != 'add' && !row) {
+            $.messager.alert('ï¿½ï¿½Ê¾', 'ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½', 'info');
+            return;
+        }
+        href = updUrl + '?zj=' + row.id + '&czlb=' + czlb;
+    } else {
+        href = updUrl + '?czlb=' + czlb;
+    }
+    $('#myWindow').window(
+        {
+            title: gridBT,
+            width: width === undefined ? 600 : width,
+            height: height === undefined ? 400 : height,
+            content: '<iframe scrolling="yes" frameborder="0"  src="'
+                + href
+                + '" style="width:98%;height:98%;"></iframe>',
+            shadow: false,
+            cache: false,
+            closed: false,
+            collapsible: false,
+            resizable: false,
+            loadingMessage: 'ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½Ôµï¿½Æ¬ï¿½ï¿½......'
+        });
+
+}
+
+
+function del(gridID, delUrl) {
+    var row = $('#' + gridID).datagrid('getSelected');
+    if (!row) {
+        $.messager.alert('ï¿½ï¿½Ê¾', 'ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½', 'info');
+        return;
+    }
+    $.messager.confirm('È·ï¿½ï¿½', 'ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ÒªÉ¾ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½', function (r) {
+        if (r) {
+            var href = delUrl + '&zj=' + row.id;
+            $.ajax({
+                type: 'POST',
+                url: href,
+                success: function (data) {
+                    //alert(data);
+                    if ('ok' == data) {
+                        alert("É¾ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½");
+                    } else {
+                        alert("É¾ï¿½ï¿½Ê§ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½");
+                    }
+                    cx();
+                }
+            });
+        }
+    });
+}
+
+function setDefaultDate(ksrq, jsrq) {
+    var myDate = new Date();
+    var y = myDate.getFullYear();
+    var m = myDate.getMonth() + 1;
+    var d = new Date(y, m, 0).getDate();
+    $("#" + ksrq).datebox('setValue', y + "-" + m + "-01");
+    $("#" + jsrq).datebox('setValue', y + "-" + m + "-" + d);
+}
+
+function setDefaultTime(ksrq, jsrq) {
+    var myDate = new Date();
+    var y = myDate.getFullYear();
+    var m = myDate.getMonth() + 1;
+    var d = myDate.getDate();
+    var h = myDate.getHours();
+    var n = myDate.getMinutes();
+    var s = myDate.getSeconds();
+    //alert(y+"-"+m+"-"+d+" "+h+":"+n+":"+s);
+    $("#" + ksrq).datetimebox('setValue', y + "-" + m + "-" + d + " 08:00:00");
+    $("#" + jsrq).datetimebox('setValue', y + "-" + m + "-" + d + " " + h + ":" + n + ":" + s);
+}
+
+function setDefaultTime1(rqid) {
+    var myDate = new Date();
+    var y = myDate.getFullYear();
+    var m = myDate.getMonth() + 1;
+    var d = myDate.getDate();
+    var h = myDate.getHours();
+    var n = myDate.getMinutes();
+    var s = myDate.getSeconds();
+    //alert(y+"-"+m+"-"+d+" "+h+":"+n+":"+s);
+    $("#" + rqid).datetimebox('setValue', y + "-" + m + "-" + d + " " + h + ":" + n + ":" + s);
+}
+
+function getYear() {
+    var myDate = new Date();
+    var y = myDate.getFullYear();
+    return y;
+}
+
+function getMonth() {
+    var myDate = new Date();
+    var m = myDate.getMonth() + 1;
+    m = m < 10 ? '0' + m : m;
+    return m;
+}
+
+function getTjt(lb, bt, tb, sz) {
+    var content0 = '<chart caption="';
+    var content1 = ' baseFontSize="14" showLimits="1" yAxisMaxValue="';
+    var content = ' yAxisMinValue="1000" name="333" showNames="1" showBorder="0" outCnvBaseFont="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îº"  outCnvBaseFontSize="20" bgColor="EEF3FA" canvasBgColor="EEF3FA" formatNumberScale="0" canvasBorderThickness="0"  showValues="1" showYAxisValues="1" showLegend="0"  labelDisplay="STAGGER" showPlotBorder="0" numDivLines="3"  borderThickness ="0" yAxisName="" xAxisName="" numberSuffix="Ôª" plotSpacePercent="50">';
+
+    var sm = {};
+    $.ajax({
+        type: 'POST',
+        dataType: "json",
+        url: 'servlet/OaAction?method=' + lb,
+        success: function (data) {
+            //var d = eval("("+data+")");//Ð§ï¿½ï¿½ï¿½ï¿½Í¬ï¿½Ú¼ï¿½dataType
+            //alert(JSON.stringify(data[0]));
+            var m1 = JSON.stringify(data[0].m1) != undefined ? JSON.stringify(data[0].m1) : '"0"';
+            var m2 = JSON.stringify(data[0].m2) != undefined ? JSON.stringify(data[0].m2) : '"0"';
+            var m3 = JSON.stringify(data[0].m3) != undefined ? JSON.stringify(data[0].m3) : '"0"';
+            var m4 = JSON.stringify(data[0].m4) != undefined ? JSON.stringify(data[0].m4) : '"0"';
+            var m5 = JSON.stringify(data[0].m5) != undefined ? JSON.stringify(data[0].m5) : '"0"';
+
+            var m6 = JSON.stringify(data[0].m6) != undefined ? JSON.stringify(data[0].m6) : '"0"';
+            var m7 = JSON.stringify(data[0].m7) != undefined ? JSON.stringify(data[0].m7) : '"0"';
+            var m8 = JSON.stringify(data[0].m8) != undefined ? JSON.stringify(data[0].m8) : '"0"';
+            var m9 = JSON.stringify(data[0].m9) != undefined ? JSON.stringify(data[0].m9) : '"0"';
+            var m10 = JSON.stringify(data[0].m10) != undefined ? JSON.stringify(data[0].m10) : '"0"';
+            var m11 = JSON.stringify(data[0].m11) != undefined ? JSON.stringify(data[0].m11) : '"0"';
+            var m12 = JSON.stringify(data[0].m12) != undefined ? JSON.stringify(data[0].m12) : '"0"';
+
+            var year = JSON.stringify(data[0].year).substring(1, 5);
+            content = content0 + year + bt + '"' + content1 + sz + '"' + content;
+            //alert(content);
+            var date = new Date;
+            var month = date.getMonth() + 1;
+            if (year != date.getFullYear()) {
+                month = 12;
+            }
+            var char = new Array(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12);
+            for (var i = 1; i <= month; i++) {
+                content += '<set label="' + i + 'ï¿½ï¿½"  value=' + char[i - 1] + ' />'
+            }
+            //alert(content);
+            // if(myChart==null){
+            myChart = new FusionCharts("js/tjjs/FusionCharts/" + tb + ".swf", "myChartId", "100%", "450");
+            myChart.setXMLData(content + '</chart>');
+            myChart.render("chartContainer");
+            // }else{
+            //$("#chartContainer").show();
+            // }
+
+        }
+    });
+}
+
+//ï¿½ï¿½Ç°Ê±ï¿½ï¿½
+function tick(divId) {
+    var today = new Date();
+    var ww = today.getDay();
+    if (ww == 0) ww = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+    if (ww == 1) ww = "ï¿½ï¿½ï¿½ï¿½Ò»";
+    if (ww == 2) ww = "ï¿½ï¿½ï¿½Ú¶ï¿½";
+    if (ww == 3) ww = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+    if (ww == 4) ww = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+    if (ww == 5) ww = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+    if (ww == 6) ww = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+    $("#" + divId).text(today.toLocaleString() + " " + ww);
+    window.setTimeout("tick('" + divId + "')", 1000);
+};
+
+
+//jsonï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½json
+function strToJson(str) {
+    var json = eval('(' + str + ')');
+    return json;
+}
+
+//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+function getDept(selectid, deptid) {
+    var theurl = "";
+    if (deptid.substring(0, 2) == "41") {
+        theurl = "servlet/KqAction?method=bm_yd&deptid=" + deptid;
+    } else if (deptid.substring(0, 2) == "51") {
+        theurl = "servlet/KqAction?method=bm_mdk&deptid=" + deptid;
+    } else if (deptid.substring(0, 2) == "61") {
+        theurl = "servlet/KqAction?method=bm_wps&deptid=" + deptid;
+    } else if (deptid.substring(0, 2) == "71") {
+        theurl = "servlet/KqAction?method=bm_wpscj&deptid=" + deptid;
+    }
+    $.ajax({
+        type: "POST",
+        async: false,
+        url: theurl,
+        success: function (treeData) {
+            var data = strToJson(treeData);
+            $('#' + selectid).combotree('loadData', data);
+            $("#" + selectid).combotree({
+                multiple: false,
+                onlyLeafCheck: false,//trueÖ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡
+                cascadeCheck: false,
+                onSelect: function (node) {
+                    if (9000000000 == node.id) {
+                        //ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
+                        $('#' + selectid).combotree('clear');
+                    }
+                },
+                onLoadSuccess: function (node, data1) {
+                    $("#" + selectid).combotree('tree').tree("collapseAll");
+                }
+
+            });
+        }
+    });
+}
+
+
+//ï¿½ï¿½È¡ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+function getPerson(selectid, deptid) {
+    var theurl = "";
+    if (deptid.substring(0, 2) == "41") {
+        theurl = "servlet/KqAction?method=zd&zdmc=ry_yd&zdlb=" + deptid;
+    } else if (deptid.substring(0, 2) == "51") {
+        theurl = "servlet/KqAction?method=zd&zdmc=ry_mdk&zdlb=" + deptid;
+    } else if (deptid.substring(0, 2) == "61") {
+        theurl = "servlet/KqAction?method=zd&zdmc=ry_wps&zdlb=" + deptid;
+    } else if (deptid.substring(0, 2) == "71") {
+        theurl = "servlet/KqAction?method=zd&zdmc=ry_wpscj&zdlb=" + deptid;
+    }
+
+    $.ajax({
+        type: "POST",
+        async: false,
+        url: theurl,
+        success: function (treeData) {
+            if (treeData != '[]') {
+                var data = strToJson(treeData);
+
+                $('#' + selectid).combobox({
+                    data: data,
+                    valueField: 'id',
+                    textField: 'text'
+                });
+            }
+
+        }
+    });
+}
+
+
+//ï¿½ï¿½È¡ï¿½ï¿½Ô±ï¿½Ð±ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½Ç·ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+function yzry(deptid, personid) {
+    var bm = $("#" + deptid).combobox('getValue');
+    if (bm == null || bm == undefined || bm == "") {
+        alert('ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!');
+    } else {
+        getPerson(personid, bm);
+    }
+}
+
+
+function yzry1(deptid, personid) {
+    var bm = $("#" + deptid).combobox('getValue');
+    getPerson(personid, bm);
+}
+
+function isEmpty(str) {
+    if (str == undefined || str == null || str == "") {
+        return true;
+    }
+    return false;
+}
 	  
 	  

@@ -1,17 +1,17 @@
 // Small function to verify the type of a variable in easy notation.
 var tmp;
+
 function updatejson(dynamic) {
     var xml = $("#dataxml"),
-    prexml = $("#pre-dataxml"),
-    json = $("#datajson"),
-    prejson = $("#pre-datajson"),
-    res = '',
-    error;
+        prexml = $("#pre-dataxml"),
+        json = $("#datajson"),
+        prejson = $("#pre-datajson"),
+        res = '',
+        error;
 
     try {
         eval("tmp = " + json.val().replace(/\n|\r/ig, '') + ";");
-    }
-    catch (e) {
+    } catch (e) {
         $("td#json .no-error").hide();
         $("td#json .error").show();
         $("td#json").css("border-color", "#F00");
@@ -34,14 +34,14 @@ function updatejson(dynamic) {
     prettyPrint();
 }
 
-function updatexml (dynamic) {
+function updatexml(dynamic) {
     var xml = $("#dataxml"),
-    prexml = $("#pre-dataxml"),
-    datajson = $("#datajson"),
-    predatajson = $("#pre-datajson"),
-    res = '';
+        prexml = $("#pre-dataxml"),
+        datajson = $("#datajson"),
+        predatajson = $("#pre-datajson"),
+        res = '';
 
-    res = JSON.stringify( FusionCharts.transcodeData(xml.val(), 'xml', 'json') );
+    res = JSON.stringify(FusionCharts.transcodeData(xml.val(), 'xml', 'json'));
 
     if (res == '{"text":"Xml error"}') {
         $("td#xml .no-error").hide();
@@ -52,7 +52,7 @@ function updatexml (dynamic) {
     }
 
     eval("res = " + res.replace(/\n|\r/ig, '') + ";");
-    res = JSON.stringify( res, undefined, 2 );
+    res = JSON.stringify(res, undefined, 2);
     datajson.val(res);
     predatajson.html(res);
     prexml.html(xml.val().replace(/\>/ig, '&gt;').replace(/\</ig, '&lt;'));
@@ -75,17 +75,17 @@ var showEditMsg = function (type) {
     //var height = e.pageY;
     if (type == "xml") {
         //$("#edit-msg2").fadeOut('fast');
-        $("#edit-msg").css ({
-            'left' : width/2 - 120,
-            "top": height-5,
+        $("#edit-msg").css({
+            'left': width / 2 - 120,
+            "top": height - 5,
             "display": "block"
         });
     }
     if (type == "json") {
         //$("#edit-msg").fadeOut('fast');
-        $("#edit-msg2").css ({
-            'left' : width/2 + 330,
-            "top": height-5,
+        $("#edit-msg2").css({
+            'left': width / 2 + 330,
+            "top": height - 5,
             "display": "block"
         });
     }
@@ -101,29 +101,29 @@ var hideEditMsg = function (type) {
     }
 }
 
-function stringParser (obj, num) {
+function stringParser(obj, num) {
     if (!num) {
         num = 0;
     }
     var x, str = '', space_count = num * 4, space = '', newline = '';
-    for(x=0; x < space_count; x++) {
-    //space +=' ';
+    for (x = 0; x < space_count; x++) {
+        //space +=' ';
     }
     if (typeof obj === 'object') {
         str += '{';
         for (x in obj) {
             if (obj[x] instanceof Array) {
-                str +='[';
+                str += '[';
                 for (var i in obj[x]) {
-                    str += stringParser (obj[x][i], num + 1) + ',';
+                    str += stringParser(obj[x][i], num + 1) + ',';
                 }
                 str += ']';
-            }else{
+            } else {
                 str += newline + space + x + ': ' + stringParser(obj[x], num + 1) + ',';
             }
         }
         str += newline + space + '}';
-    }else{
+    } else {
         str = "\"" + obj + "\"";
     }
     //console.log (str);

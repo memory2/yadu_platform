@@ -79,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           var gridBT = "打卡记录";
           var xm = '<%=xm%>';
           
-          if(bmdm!='4110000000'){
+          if(bmdm!='4110000000'&&bmdm!='4113000000'){
         	  alert("您无此权限，请联系管理员！");
         	  return;
           }

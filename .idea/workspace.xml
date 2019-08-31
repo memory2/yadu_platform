@@ -1,0 +1,848 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="yadu_platform:war exploded" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bd91363d-0851-44ed-ae85-d9fe7536d25b" name="Default Changelist" comment="初始化">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.wst.common.project.facet.core.prefs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.settings/org.eclipse.wst.common.project.facet.core.prefs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.wst.common.project.facet.core.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.settings/org.eclipse.wst.common.project.facet.core.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.settings/org.jboss.tools.jst.web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.settings/org.jboss.tools.jst.web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/faces-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/faces-config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/proxool.xml" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/proxool.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/css/khcss/body.css" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/css/khcss/body.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/css/khcss/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/css/khcss/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/css/page/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/css/page/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/css/time_css/chinaz.css" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/css/time_css/chinaz.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/css/time_css/history.css" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/css/time_css/history.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/bottom.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/bottom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/datagrid-export.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/datagrid-export.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/easyloader.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/easyloader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/jquery.easyui.mobile.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/jquery.easyui.mobile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-af.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-af.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-am.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-am.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-ar.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-ar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-bg.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-bg.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-ca.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-ca.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-cs.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-cs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-cz.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-cz.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-da.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-da.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-de.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-de.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-el.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-el.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-en.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-en.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-es.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-es.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-fr.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-fr.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-it.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-it.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-jp.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-jp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-ko.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-ko.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-nl.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-nl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-pl.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-pl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-pt_BR.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-pt_BR.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-ru.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-ru.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-sv_SE.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-sv_SE.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-tr.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-tr.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-zh_CN.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-zh_CN.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-zh_TW.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/locale/easyui-lang-zh_TW.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.accordion.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.accordion.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.calendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.calendar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.combo.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.combo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.combobox.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.combobox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.combogrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.combogrid.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.combotree.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.combotree.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.datagrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.datagrid.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.datalist.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.datalist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.datebox.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.datebox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.datetimebox.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.datetimebox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.datetimespinner.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.datetimespinner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.dialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.dialog.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.draggable.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.draggable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.droppable.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.droppable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.filebox.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.filebox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.form.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.linkbutton.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.linkbutton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.menubutton.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.menubutton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.messager.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.messager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.mobile.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.mobile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.numberbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.numberbox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.numberspinner.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.numberspinner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.pagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.pagination.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.panel.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.panel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.parser.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.parser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.progressbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.progressbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.propertygrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.propertygrid.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.resizable.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.resizable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.searchbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.searchbox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.slider.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.slider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.spinner.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.spinner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.splitbutton.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.splitbutton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.switchbutton.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.switchbutton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.tabs.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.tabs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.textbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.textbox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.timespinner.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.timespinner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.tooltip.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.tooltip.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.tree.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.tree.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.treegrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.treegrid.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.validatebox.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.validatebox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.window.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/plugins/jquery.window.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/easyloader.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/easyloader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.accordion.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.accordion.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.calendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.calendar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.combobox.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.combobox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.datebox.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.datebox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.draggable.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.draggable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.droppable.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.droppable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.form.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.linkbutton.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.linkbutton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.parser.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.parser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.progressbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.progressbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.propertygrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.propertygrid.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.resizable.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.resizable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.slider.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.slider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.tabs.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.tabs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.window.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/src/jquery.window.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/themes/color.css" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/themes/color.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/themes/icon.css" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/themes/icon.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/themes/mobile.css" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/themes/mobile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/tools/jquery.tools.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/jquery-easyui-1.4.5/tools/jquery.tools.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/time_js/jquery.slidy.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/time_js/jquery.slidy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/time_js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/time_js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/tjjs/FusionCharts/Data.xml" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/tjjs/FusionCharts/Data.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/tjjs/FusionCharts/firebug-lite.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/tjjs/FusionCharts/firebug-lite.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/tjjs/js/functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/tjjs/js/functions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/tjjs/js/json2.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/tjjs/js/json2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/tjjs/js/prettify.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/tjjs/js/prettify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/txjs/easying.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/txjs/easying.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/txjs/jquery.jMagnify.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/txjs/jquery.jMagnify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/js/ydCommon.js" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/js/ydCommon.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/login/fail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/login/fail.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/login/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/login/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/login/login_kq.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/login/login_kq.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/login/my_login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/login/my_login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/login/success.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/login/success.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/getPwd.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/getPwd.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_Atest.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_Atest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_bgyp.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_bgyp.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ccbx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ccbx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ccxx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ccxx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_dhxx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_dhxx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_dhxx_xx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_dhxx_xx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_dkjl.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_dkjl.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_dljk.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_dljk.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_dnhc.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_dnhc.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_fhjsl.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_fhjsl.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_fit_info.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_fit_info.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_fit_info2.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_fit_info2.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_fit_search.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_fit_search.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_fkxx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_fkxx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_fourSelect.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_fourSelect.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_fybx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_fybx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_gdzcrk.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_gdzcrk.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_gzrz.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_gzrz.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_gzrz_time.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_gzrz_time.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_gzrz_time2.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_gzrz_time2.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_gzrz_xx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_gzrz_xx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_hys.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_hys.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_jbxx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_jbxx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_jkxx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_jkxx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_jsgl.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_jsgl.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_jsgl_xx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_jsgl_xx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_khjcxx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_khjcxx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_khjcxxcx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_khjcxxcx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_khtsxxcx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_khtsxxcx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_khyyxxcx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_khyyxxcx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_kqbq.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_kqbq.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_kqxx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_kqxx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_kqxx2.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_kqxx2.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_kqxx223.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_kqxx223.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_kqxx_cj_wx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_kqxx_cj_wx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_kqxx_wx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_kqxx_wx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_kqxx_wx_old.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_kqxx_wx_old.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_kqxx_yh.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_kqxx_yh.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_mdkkq.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_mdkkq.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_pcxx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_pcxx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_qjxx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_qjxx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_qxgl.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_qxgl.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_qxgl_xx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_qxgl_xx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_qxgs_hk.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_qxgs_hk.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_sbsg.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_sbsg.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_sbxx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_sbxx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_sbxx_xx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_sbxx_xx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_shcydh.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_shcydh.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_team.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_team.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_team_xx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_team_xx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_tskq.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_tskq.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_tskq_xx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_tskq_xx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_tswpcg.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_tswpcg.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_u8_glfx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_u8_glfx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_u8_nlfx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_u8_nlfx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_u8_xlfx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_u8_xlfx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_u8zh.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_u8zh.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_wjsc.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_wjsc.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_wpscjkq.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_wpscjkq.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_wpskq.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_wpskq.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_xssb_fksq.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_xssb_fksq.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_xssb_sjsq.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_xssb_sjsq.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_xssb_zzsq.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_xssb_zzsq.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_xtpqd.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_xtpqd.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ydjkxx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ydjkxx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ydkq.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ydkq.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ydtx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ydtx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ydtx_wx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ydtx_wx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ydtx_xx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ydtx_xx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ydzb.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ydzb.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_yfzx_hkxx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_yfzx_hkxx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_yfzx_wbcg.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_yfzx_wbcg.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ygddsp.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ygddsp.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ylb_ccxx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ylb_ccxx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ylb_cgxx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ylb_cgxx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ylb_hkxx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ylb_hkxx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ylb_kqbq.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ylb_kqbq.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ylb_qjxx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ylb_qjxx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ymzqry.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_ymzqry.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_yqlj.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_yqlj.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_yqlj_ygb.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_yqlj_ygb.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_zjbb.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_zjbb.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_zjsy.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_zjsy.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_zpxq.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tab_zpxq.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tj_tab_sbxx.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tj_tab_sbxx.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tools_calendar.htm" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/sy_tabs/tools_calendar.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebRoot/runtime/wx_index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebRoot/runtime/wx_index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/WEB-INF/classes/org/yadu/jdbc/JdbcFit.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/WEB-INF/classes/org/yadu/jdbc/JdbcFit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/WEB-INF/faces-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/WEB-INF/faces-config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/WEB-INF/proxool.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/WEB-INF/proxool.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/js/bottom.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/js/bottom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/js/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/js/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/js/ydCommon.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/js/ydCommon.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/runtime/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/runtime/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/runtime/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/runtime/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/runtime/sy_tabs/tab_dkjl.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/runtime/sy_tabs/tab_dkjl.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/runtime/sy_tabs/tab_fourSelect.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/runtime/sy_tabs/tab_fourSelect.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/runtime/wx_index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/yadu_platform_war_exploded/runtime/wx_index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/yadu/action/FitAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/yadu/action/FitAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/yadu/action/KhAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/yadu/action/KhAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/yadu/action/KqAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/yadu/action/KqAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/yadu/action/TreeDataAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/yadu/action/TreeDataAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/yadu/action/U8Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/yadu/action/U8Action.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/yadu/dao/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/yadu/dao/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/yadu/dao/NodeIDComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/yadu/dao/NodeIDComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/yadu/excel/POIUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/yadu/excel/POIUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/yadu/excel/Solution_stringarrange.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/yadu/excel/Solution_stringarrange.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/yadu/jdbc/JdbcFit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/yadu/jdbc/JdbcFit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/yadu/jdbc/JdbcKhxx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/yadu/jdbc/JdbcKhxx.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/yadu/jdbc/JdbcKqxx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/yadu/jdbc/JdbcKqxx.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/yadu/jdbc/JdbcKqxx_bak.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/yadu/jdbc/JdbcKqxx_bak.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/yadu/jdbc/JdbcU8xx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/yadu/jdbc/JdbcU8xx.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/yadu/jdbc/JdbcUtilsRy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/yadu/jdbc/JdbcUtilsRy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/yadu/jdbc/JdbcUtilsU8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/yadu/jdbc/JdbcUtilsU8.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/yadu/jdbc/PoolManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/yadu/jdbc/PoolManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/yadu/module/Msg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/yadu/module/Msg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/yadu/module/ProductModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/yadu/module/ProductModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/yadu/service/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/yadu/service/RegisterService.java" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/WebRoot/WEB-INF/classes/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ErrorTreeViewConfiguration">
+    <option name="autoscrollToSource" value="true" />
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="true" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="yadu_platform" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/org/yadu/action/FitAction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="513">
+              <caret line="41" column="11" selection-start-line="41" selection-start-column="11" selection-end-line="41" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/yadu/action/KqAction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="380">
+              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/org/yadu/action/KqAction.java" />
+        <option value="$PROJECT_DIR$/src/org/yadu/jdbc/JdbcFit.java" />
+        <option value="$PROJECT_DIR$/.idea/compiler.xml" />
+        <option value="$PROJECT_DIR$/WebRoot/WEB-INF/proxool.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="577" />
+    <option name="y" value="362" />
+    <option name="width" value="1260" />
+    <option name="height" value="944" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="yadu_platform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yadu_platform" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yadu_platform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yadu_platform" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yadu_platform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yadu_platform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yadu_platform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yadu_platform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="yadu" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yadu_platform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yadu_platform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="yadu" type="462c0819:PsiDirectoryNode" />
+              <item name="action" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1567223601142" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs.protractor.protractor_package" value="" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Problems" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.27471265" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Tomcat 7.0.96" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0.96" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="1.7">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/yadu_platform/runtime/login.jsp" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="yadu_platform:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/yadu_platform" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="Tomcat_7_0_19_yadu_platform" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="63511" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Debug with VisualVM">
+        <option name="DEBUG_PORT" value="57619" />
+        <option name="visualVMId" value="26139568120404" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug with VisualVM">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run with VisualVM">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="yadu_platform:war exploded" />
+        </option>
+      </method>
+    </configuration>
+    <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0.19" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/yadu_platform/" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <file path="$PROJECT_DIR$">
+          <settings>
+            <option name="CONTEXT_PATH" value="/yadu_platform" />
+          </settings>
+        </file>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="_yadu_platform" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="63511" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bd91363d-0851-44ed-ae85-d9fe7536d25b" name="Default Changelist" comment="" />
+      <created>1564812700041</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1564812700041</updated>
+      <workItem from="1564812704520" duration="4363000" />
+      <workItem from="1564818948546" duration="2132000" />
+      <workItem from="1564821100226" duration="81000" />
+      <workItem from="1564821199051" duration="1150000" />
+      <workItem from="1564822368884" duration="3345000" />
+      <workItem from="1564825874819" duration="163000" />
+      <workItem from="1564826183319" duration="133000" />
+      <workItem from="1564826335968" duration="440000" />
+      <workItem from="1564963232272" duration="1773000" />
+      <workItem from="1564965028089" duration="4321000" />
+      <workItem from="1564971804275" duration="1365000" />
+      <workItem from="1564990790404" duration="377000" />
+      <workItem from="1565308747811" duration="652000" />
+      <workItem from="1566175585342" duration="3341000" />
+      <workItem from="1566181002837" duration="9670000" />
+      <workItem from="1566200006407" duration="3919000" />
+      <workItem from="1566351203953" duration="1049000" />
+      <workItem from="1566691559767" duration="621000" />
+      <workItem from="1566801916487" duration="558000" />
+      <workItem from="1566871937829" duration="281000" />
+      <workItem from="1567128763698" duration="334000" />
+      <workItem from="1567157226640" duration="76000" />
+      <workItem from="1567213753598" duration="1055000" />
+    </task>
+    <task id="LOCAL-00001" summary="Second version2.0">
+      <created>1566185679597</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1566185679597</updated>
+    </task>
+    <task id="LOCAL-00002" summary="初始化">
+      <created>1566186711617</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1566186711617</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="14996000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="577" y="362" width="1260" height="944" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4986226" visible="true" weight="0.3261051" />
+      <window_info id="Structure" order="1" sideWeight="0.5013774" side_tool="true" weight="0.25426438" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" sideWeight="0.50080776" side_tool="true" weight="0.25426438" />
+      <window_info id="Web" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8097015" weight="0.2892741" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.8096" weight="0.5466378" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49813333" weight="0.3286334" />
+      <window_info anchor="bottom" id="Application Servers" order="7" sideWeight="0.49173334" weight="0.3264642" />
+      <window_info anchor="bottom" id="Spring" order="8" sideWeight="0.49946696" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49706668" weight="0.3286334" />
+      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.1904" side_tool="true" visible="true" weight="0.39753085" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49226665" weight="0.6062907" />
+      <window_info anchor="bottom" id="Database Changes" order="13" />
+      <window_info anchor="bottom" id="Version Control" order="14" sideWeight="0.4992" weight="0.329718" />
+      <window_info anchor="bottom" id="Java Enterprise" order="15" />
+      <window_info anchor="bottom" id="Run with VisualVM" order="16" />
+      <window_info anchor="bottom" id="Debug with VisualVM" order="17" />
+      <window_info anchor="bottom" id="FindBugs-IDEA" order="18" sideWeight="0.4976" weight="0.329718" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" weight="0.32995737" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Database" order="6" weight="0.32995737" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="JSF" order="9" />
+      <window_info anchor="right" id="Mybatis datasource" order="10" side_tool="true" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Second version2.0" />
+    <MESSAGE value="初始化" />
+    <option name="LAST_COMMIT_MESSAGE" value="初始化" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/servlet-api.jar!/javax/servlet/http/HttpServlet.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3963">
+          <caret line="41" column="37" lean-forward="true" selection-start-line="41" selection-start-column="37" selection-end-line="41" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="29" column="41" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/yadu/jdbc/JdbcUtilsU8.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/yadu/jdbc/JdbcFit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="665">
+          <caret line="57" column="51" selection-start-line="57" selection-start-column="51" selection-end-line="57" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/compiler.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebRoot/WEB-INF/proxool.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" column="62" selection-start-line="13" selection-start-column="62" selection-end-line="13" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/yadu/jdbc/JdbcKqxx.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123006">
+          <caret line="6497" column="19" selection-start-line="6497" selection-start-column="19" selection-end-line="6497" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/yadu/jdbc/JdbcUtilsRy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/yadu/action/KqAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/yadu/action/FitAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="41" column="11" selection-start-line="41" selection-start-column="11" selection-end-line="41" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArquillianSettingsConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.27471265" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>yadu_platform:war exploded</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.27471265" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Detection</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.27471265" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.27471265" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.27471265" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>yadu_platform</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.27471265" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>activation</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.27471265" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
