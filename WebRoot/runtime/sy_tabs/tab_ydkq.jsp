@@ -82,7 +82,7 @@
                 method1('tjkq');
             });
 
-            if (txm == "10665" || txm == "10297" || txm == "11439" || txm == "10005") {//txm=="10297"赵燕
+            if (txm == "10665" || txm == "10297" || txm == "11439" || txm == "10005"|| txm=="10556") {//txm=="10297"赵燕
                 bmdm = "4100000000";
             }
 
@@ -123,7 +123,7 @@
             }
 
             $("#bm").combotree('setValue', bmdm);
-            if (txm != "10554" && txm != "10703") {
+            if (txm!="10556"&&txm != "10554" && txm != "10703") {
                 $("#xm").combobox('setValue', txm);
             }
 
@@ -281,10 +281,11 @@
                                             swsb += "<td class='wqd'>" + s1 + "</td>";//灰色
                                         } else if (s1.substring(0, 1) == '正' || s1 == '因公补签') {
                                             swsb += "<td class='zc'>" + s1 + "</td>";
-                                        } else if (s1 == '事假' || s1 == '婚假' || s1 == '丧假' || s1 == '工伤') {
+                                        } else if (s1 == '事假' || s1 == '婚假' || s1 == '丧假' || s1 == '工伤'||s1=='旷工') {
                                             swsb += "<td class='qj'>" + s1 + "</td>";
                                         } else if (s1 == '出差') {
                                             swsb += "<td class='cc'>" + s1 + "</td>";
+
                                         } else if (s1 == '免签') {
                                             swsb += "<td class='mq'>" + s1 + "</td>";
                                         } else if (s1.substring(0, 1) == '迟' || s1.substring(0, 1) == '早') {

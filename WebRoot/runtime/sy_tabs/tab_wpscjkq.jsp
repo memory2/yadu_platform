@@ -80,7 +80,7 @@
             });
 
 
-            if (bmmc == "信息部" || bmmc == "威浦仕人资行政部") {
+            if (bmmc == "信息部" || bmmc == "威浦仕人资行政部" || bmmc == "威浦仕口罩帽车间" || bmmc == "威浦仕口罩帽车间") {
                 bmdm = "7100000000";
             } else if (txm == "10715") { //10715-邓雪
                 bmdm = "7102000000";
@@ -105,7 +105,6 @@
             } else if (txm == "11153") {//11153-朱梦奇-高分子生产中心-所有车间
                 bmdm = "7103000000";
             }
-
             getDept("bm", bmdm);
             $("#xm").combobox('textbox').bind('focus', function () {
                 yzry("bm", "xm");
@@ -144,7 +143,7 @@
 
             $('#bm').combobox({disabled: true});
             $('#xm').combobox({disabled: true});
-            if ((bmmc == '信息部' || bmmc == '威浦仕人资行政部' || txm == "10715" || txm == "11153" || txm == "11165")) {
+            if ((bmmc == '信息部' || bmmc == '威浦仕人资行政部' || bmmc == "威浦仕口罩帽车间" || txm == "10715" || txm == "11153" || txm == "11165")) {
                 $('#bm').combobox({disabled: false});
                 $('#xm').combobox({disabled: false});
             }
@@ -154,7 +153,7 @@
             }
 
             $("#bm").combotree('setValue', bmdm);
-            if (txm != "11472" && txm != "11159" && txm != "10778" && txm != "10855" && txm != "11402" && txm != "11118" && txm != "10715" && txm != "11320" && txm != "11165" && txm != "11153" && bmmc != "信息部" && bmmc != "人力资源部" && bmmc != "威浦仕人资行政部") {
+            if (txm != "11472" && txm != "11159" && txm != "10778" && txm != "10855" && txm != "11402" && txm != "11118" && txm != "10715" && txm != "11320" && txm != "11165" && txm != "11153" && bmmc != "信息部" && bmmc != "威浦仕口罩帽车间" && bmmc != "人力资源部" && bmmc != "威浦仕人资行政部") {
                 $("#xm").combobox('setValue', txm);
                 cx(getYf());
             }
