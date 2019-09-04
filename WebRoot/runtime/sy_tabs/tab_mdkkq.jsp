@@ -82,7 +82,7 @@
                 method1('tjkq');
             });
 
-            if (bmmc == "信息部" || bmmc == "迈迪科综合办" || txm == "10966" || txm == "11019") {
+            if (bmmc == "信息部" || bmmc == "迈迪科综合办" || txm == "10966" || txm == "11019"||txm=="10556") {
                 bmdm = "5100000000";
             }
 
@@ -114,7 +114,7 @@
             }
 
             $("#bm").combotree('setValue', bmdm);
-            if (txm != "10554" && txm != "10966" && txm != "11019" && bmmc != "信息部" && bmmc != "迈迪科综合办") {
+            if (txm!="10556"&&txm != "10554" && txm != "10966" && txm != "11019" && bmmc != "信息部" && bmmc != "迈迪科综合办") {
                 $("#xm").combobox('setValue', txm);
                 cx(getYf());
             }
