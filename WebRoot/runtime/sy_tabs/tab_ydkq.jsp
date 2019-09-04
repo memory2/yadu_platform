@@ -300,7 +300,7 @@
                                             swxb += "<td class='wqd'>" + s2 + "</td>";//灰色
                                         } else if (s2.substring(0, 1) == '正' || s2 == '因公补签') {
                                             swxb += "<td class='zc'>" + s2 + "</td>";
-                                        } else if (s2 == '事假' || s2 == '婚假' || s2 == '丧假' || s2 == '工伤') {
+                                        } else if (s2 == '事假' || s2 == '婚假' || s2 == '丧假' || s2 == '工伤'||s2=='旷工') {
                                             swxb += "<td class='qj'>" + s2 + "</td>";
                                         } else if (s2 == '出差') {
                                             swxb += "<td class='cc'>" + s2 + "</td>";
@@ -319,7 +319,7 @@
                                             xwsb += "<td class='wqd'>" + s3 + "</td>";//灰色
                                         } else if (s3.substring(0, 1) == '正' || s3 == '因公补签') {
                                             xwsb += "<td class='zc'>" + s3 + "</td>";
-                                        } else if (s3 == '事假' || s3 == '婚假' || s3 == '丧假' || s3 == '工伤') {
+                                        } else if (s3 == '事假' || s3 == '婚假' || s3 == '丧假' || s3 == '工伤'||s3=='旷工') {
                                             xwsb += "<td class='qj'>" + s3 + "</td>";
                                         } else if (s3 == '出差') {
                                             xwsb += "<td class='cc'>" + s3 + "</td>";
@@ -338,7 +338,7 @@
                                             xwxb += "<td class='wqd'>" + s4 + "</td>";//灰色
                                         } else if (s4.substring(0, 1) == '正' || s4 == '因公补签') {
                                             xwxb += "<td class='zc'>" + s4 + "</td>";
-                                        } else if (s4 == '事假' || s4 == '婚假' || s4 == '丧假' || s4 == '工伤') {
+                                        } else if (s4 == '事假' || s4 == '婚假' || s4 == '丧假' || s4 == '工伤'||s4=='旷工') {
                                             xwxb += "<td class='qj'>" + s4 + "</td>";
                                         } else if (s4 == '出差') {
                                             xwxb += "<td class='cc'>" + s4 + "</td>";

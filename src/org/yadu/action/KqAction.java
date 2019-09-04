@@ -1,25 +1,21 @@
 package org.yadu.action;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import net.sf.json.JSONArray;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.yadu.dao.Node;
+import org.yadu.jdbc.JdbcKqxx;
+import org.yadu.untill.CalculationKq;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import net.sf.json.JSONArray;
-
-import org.codehaus.jackson.map.ObjectMapper;
-import org.yadu.dao.Node;
-import org.yadu.jdbc.JdbcKqxx;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class KqAction extends HttpServlet {
 
@@ -151,26 +147,41 @@ public class KqAction extends HttpServlet {
     private void ydkq(HttpServletRequest req, HttpServletResponse resp, String method) throws Exception {
         req.setCharacterEncoding("GBK");
         resp.setContentType("text/html; charset=GBK");
+        CalculationKq ck=new CalculationKq();
         List<Map<String, Object>> list = null;
-        if ("kqxx_yd_pc".equals(method)) {//亚都--行政人员考勤--电脑端
+        List<Map<String, Object>> list1 = null;
+        //亚都--行政人员考勤--电脑端
+        if ("kqxx_yd_pc".equals(method)) {
             list = kq.ydKqxx_pc(req, method);
-        } else if ("kqxx_yd_wx".equals(method)) {//亚都--行政人员考勤--微信端
+        } else if ("kqxx_yd_wx".equals(method)) {
+            //亚都--行政人员考勤--微信端
             list = kq.ydKqxx_wx(req, method);
-        } else if ("kqxx_wps_pc".equals(method)) {//威浦仕--行政人员考勤--电脑端
+        } else if ("kqxx_wps_pc".equals(method)) {
+            //威浦仕--行政人员考勤--电脑端
             list = kq.wpsKqxx_pc(req, method);
-        } else if ("kqxx_wps_wx".equals(method)) {//威浦仕--行政人员考勤--微信端
+        } else if ("kqxx_wps_wx".equals(method)) {
+            //威浦仕--行政人员考勤--微信端
             list = kq.wpsKqxx_wx(req, method);
-        } else if ("kqxx_wpscj_pc".equals(method)) {//威浦仕--车间人员考勤--电脑端
+        } else if ("kqxx_wpscj_pc".equals(method)) {
+            //威浦仕--车间人员考勤--电脑端
             list = kq.wpsCjKqxx_pc(req, method);
-        } else if ("kqxx_wpscj_wx".equals(method)) {//威浦仕--车间人员考勤-微信端
+        } else if ("kqxx_wpscj_wx".equals(method)) {
+            //威浦仕--车间人员考勤-微信端
             list = kq.wpsCjKqxx_wx(req, method);
-        } else if ("kqxx_mdk_pc".equals(method)) {//迈迪科--行政人员考勤--电脑端
+        } else if ("kqxx_mdk_pc".equals(method)) {
+            //迈迪科--行政人员考勤--电脑端
             list = kq.mdkKqxx_pc(req, method);
-        } else if ("kqxx_mdk_wx".equals(method)) {//迈迪科--行政人员考勤--微信端
+        } else if ("kqxx_mdk_wx".equals(method)) {
+            //迈迪科--行政人员考勤--微信端
             list = kq.mdkKqxx_wx(req, method);
         }
-
-        JSONArray jsonArray = JSONArray.fromObject(list);
+        JSONArray jsonArray = null;
+        try {
+            list1=ck.calKq(list,req);
+            jsonArray = JSONArray.fromObject(list1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         PrintWriter out = resp.getWriter();
         //System.out.println("*111***************"+jsonArray.toString());
         out.print(jsonArray.toString());
