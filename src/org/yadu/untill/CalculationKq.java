@@ -49,17 +49,43 @@ public class CalculationKq {
         String time="";
         int intRq=0;
         /**
+         * 部门
+         */
+        String bm="";
+        /**
+         * 姓名
+         */
+        String xm="";
+        /**
+         * 工号
+         */
+        String gh="";
+
+        /**
          *  获取当前时间
          */
         SimpleDateFormat df_rq = new SimpleDateFormat("yyyy-MM-dd");
         String nowData = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         for (int i = 0; i < list.size(); i++) {
-
+            /**
+             * 如果没有填写请假单，人为修改请假天数
+             */
+            float a=0;
+            /**
+             * 请假天数
+             */
+            String qjts="";
+            /**
+             * 旷工天数
+             */
+            float kgts=0;
             List<Map<String, Object>> list2= (List<Map<String, Object>>) list.get(i);
             for (int j = 0; j < list2.size(); j++) {
                 Map<String,Object> map = list2.get(j);
                 rq=map.get("rq").toString();
                 xq=map.get("xq").toString();
+                bm=map.get("bm").toString();
+                gh=map.get("gh").toString();
                 intRq=Integer.parseInt(rq);
                 if(intRq<10){
                     rq1="0"+rq;
@@ -73,30 +99,87 @@ public class CalculationKq {
                     swxb=map.get("swxb").toString();
                     xwsb=map.get("xwsb").toString();
                     xwxb=map.get("xwxb").toString();
+                    xm=map.get("xm").toString();
+                    qjts=map.get("qjts").toString();
+
                     //如果该时间上班，前台则显示无打开记录
                     if(!CalculateHoliday(time) && !"日".equals(xq)){
                         if ("无".equals(swsb)){
+                            kgts+=0.25;
                             map.put("swsb","旷工");
+                            map.put("kgts",kgts);
                         }if ("无".equals(swxb) ){
+                            kgts+=0.25;
                             map.put("swxb","旷工");
+                            map.put("kgts",kgts);
                         }if ("无".equals(xwsb) ){
+                            kgts+=0.25;
                             map.put("xwsb","旷工");
+                            map.put("kgts",kgts);
                         }if("无".equals(xwxb) ){
+                            kgts+=0.25;
                             map.put("xwxb","旷工");
+                            map.put("kgts",kgts);
                         }
                     }
                     if("日".equals(xq)&&CalculateSH(time)){
                         if ("无".equals(swsb)){
+                            kgts+=0.25;
                             map.put("swsb","旷工");
+                            map.put("kgts",kgts);
                         }if ("无".equals(swxb) ){
+                            kgts+=0.25;
                             map.put("swxb","旷工");
+                            map.put("kgts",kgts);
                         }if ("无".equals(xwsb) ){
+                            kgts+=0.25;
                             map.put("xwsb","旷工");
+                            map.put("kgts",kgts);
                         }if("无".equals(xwxb) ){
+                            kgts+=0.25;
                             map.put("xwxb","旷工");
+                            map.put("kgts",kgts);
                         }
                     }
+
+                    //特殊人员特殊日期处理
+                    if("信息部".equals(bm)){
+                       if ("00167".equals(gh)){
+                           boolean flag=false;
+                           String[] holiday = new String[]{"08-13","08-14","08-15","08-16","08-17"};
+                           Calendar now = Calendar.getInstance();
+                           //获取当前年份
+                           int year=now.get(Calendar.YEAR);
+                           List<String> li = new ArrayList<String>();
+                           for (String string : holiday) {
+                               string=year+"-"+string;
+                               li.add(string);
+                           }
+                           if(li.contains(time)){
+                               if ("无".equals(swsb)){
+                                   a+=0.25;
+                                   map.put("swsb","事假");
+                               }if ("无".equals(swxb) ){
+                                   a+=0.25;
+                                   map.put("swxb","事假");
+                               }if ("无".equals(xwsb) ){
+                                   a+=0.25;
+                                   map.put("xwsb","事假");
+                               }if("无".equals(xwxb) ){
+                                   a+=0.25;
+                                   map.put("xwxb","事假");
+                               }
+                               kgts=0;
+                           }
+
+                       }
+                    }
+
                 }
+                if ("00167".equals(gh)){
+                    map.put("qjts",a);
+                }
+                map.put("kgts",kgts);
             }
         }
         return list;
@@ -148,7 +231,12 @@ public class CalculationKq {
         return flag;
     }
 
-    //判读是否为空
+
+    /**
+     * 判读是否为空
+     * @param str
+     * @return
+     */
     private boolean isEmpty(String str) {
         if (str == null || "".equals(str) || str == "undefined" || "无".equals(str)) {
             return true;
@@ -156,7 +244,15 @@ public class CalculationKq {
         return false;
     }
 
-    //日期时间比较大小
+
+    /**
+     * 日期时间比较大小
+     * @param t1
+     * @param t2
+     * @param df
+     * @return
+     * @throws ParseException
+     */
     private long compareTime(String t1, String t2, DateFormat df)
             throws ParseException {
         long diff = 0L;
@@ -165,7 +261,6 @@ public class CalculationKq {
             Date d2 = df.parse(t2);
             diff = d1.getTime() - d2.getTime();
         }
-
         return diff;
     }
 

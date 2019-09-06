@@ -1,29 +1,15 @@
 package org.yadu.jdbc;
 
-import java.io.UnsupportedEncodingException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import org.yadu.dao.Node;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import org.yadu.dao.Node;
+import java.sql.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.*;
 
 public class JdbcKqxx {
     private static final String DRIVER = "com.mysql.jdbc.Driver";
@@ -801,7 +787,7 @@ public class JdbcKqxx {
                     //oa加班
                     //String sql_oajb = "select u.field10 as jbkssj,u.field12 as jbzgs from utm_00156 u where u.field2 = '"+oaryid+"' and u.field10 >= '"+fdate+" 00:00:01' and u.field10 <='"+fdate+" 23:59:59 ' and u.flowid in (select id from document d where d.state = '2')";
                     //  String sql_oajb = "select u.field10 as jbkssj,u.field12 as jbzgs from utm_00156 u,document d where u.field2 = '"+oaryid+"' and u.field10 >= '"+fdate+" 00:00:01' and u.field10 <='"+fdate+" 23:59:59 ' and d.state = '2' and u.flowid = d.id ";
-                    String sql_oajb = "select u.field10 as jbkssj,u.field12 as jbzgs from utm_00156 u,flownode_member d,nodetactics n where u.field2 = '" + oaryid + "' and u.field10 >= '" + fdate + " 00:00:00' and u.field10 <='" + fdate + " 23:59:59 ' and d.entity in ('10665','10005') and d.workflag = '1' and  n.tac_id = '3' and n.attach_info in ('已阅','同意')  and u.flowid = d.doc_id and n.mem_id = d.id";
+                    String sql_oajb = "select u.field10 as jbkssj,u.field12 as jbzgs from utm_00156 u,flownode_member d,nodetactics n where u.field2 = '" + oaryid + "' and u.field10 >= '" + fdate + " 00:00:00' and u.field10 <='" + fdate + " 23:59:59 ' and d.entity in ('10665','10005') and d.workflag = '1' and  n.tac_id = '3' and n.attach_info in ('已阅','同意')  and u.flowid = d.doc_id and n.mem_id = d.id GROUP BY u.field10,u.field12";
                     Statement st_oajb = this.con_oa.createStatement();
                     ResultSet rs_oajb = st_oajb.executeQuery(sql_oajb);
 
@@ -1662,7 +1648,7 @@ public class JdbcKqxx {
 
                     //oa加班
                     // String sql_oajb = "select u.field10 as jbkssj,u.field12 as jbzgs from utm_00156 u,person p, where u.field2 = p.id and p.stuff_id = '"+gh+"' and u.field10 like '"+df_rq.format(date)+"%' and u.flowid in (select id from document d where d.state = '2') ";
-                    String sql_oajb = "select u.field10 as jbkssj,u.field12 as jbzgs from utm_00156 u,person p,flownode_member d,nodetactics n where u.field2 = p.id and p.stuff_id = '" + gh + "' and u.field10 >= '" + fdate + " 00:00:00' and u.field10 <='" + fdate + " 23:59:59 ' and d.entity in ('10665','10005') and d.workflag = '1' and  n.tac_id = '3' and n.attach_info in ('已阅','同意')  and u.flowid = d.doc_id and n.mem_id = d.id";
+                    String sql_oajb = "select u.field10 as jbkssj,u.field12 as jbzgs from utm_00156 u,person p,flownode_member d,nodetactics n where u.field2 = p.id and p.stuff_id = '" + gh + "' and u.field10 >= '" + fdate + " 00:00:00' and u.field10 <='" + fdate + " 23:59:59 ' and d.entity in ('10665','10005') and d.workflag = '1' and  n.tac_id = '3' and n.attach_info in ('已阅','同意')  and u.flowid = d.doc_id and n.mem_id = d.id GROUP BY u.field10,u.field12";
                     //System.out.println("******************"+sql_oajb);
                     Statement st_oajb = this.con_oa.createStatement();
                     ResultSet rs_oajb = st_oajb.executeQuery(sql_oajb);

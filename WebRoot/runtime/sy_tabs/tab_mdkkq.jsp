@@ -82,10 +82,12 @@
                 method1('tjkq');
             });
 
-            if (bmmc == "信息部" || bmmc == "迈迪科综合办" || txm == "10966" || txm == "11019"||txm=="10556") {
+            if (bmmc == "信息部" || bmmc == "迈迪科综合办" || txm == "10966" || txm == "11019") {
                 bmdm = "5100000000";
             }
-
+            if(txm=="10556"){
+                bmdm="5135000000";
+            }
             getDept("bm", bmdm);
             $("#xm").combobox('textbox').bind('focus', function () {
                 yzry("bm", "xm");
