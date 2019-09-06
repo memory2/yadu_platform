@@ -80,11 +80,12 @@
             $('#btn_export_kqxx').bind('click', function () {
                 method1('tjkq');
             });
-
-            if (bmmc == "信息部" || bmmc == "人力资源部" || txm == "10838" || txm == "11048"||txm=="10556") {
+            if (bmmc == "信息部" || bmmc == "人力资源部" || txm == "10838" || txm == "11048") {
                 bmdm = "6100000000";
             }
-
+            if(txm=="10556"){
+                bmdm = "6106000000";
+            }
             getDept("bm", bmdm);
             $("#xm").combobox('textbox').bind('focus', function () {
                 yzry("bm", "xm");
@@ -226,7 +227,7 @@
 
                         var myfj = "";
 
-                        var kqtj = "<table id='tjkq'><tr><td style='font-size:14px;font-weight:bold' colspan=18>威浦仕" + kqy + "考勤汇总表</td></tr><tr><td  class='xh' rowspan=2>序号</td><td class='nr_bt' rowspan=2>部门</td><td class='nr_bt' rowspan=2>工号</td><td class='nr_bt' rowspan=2>姓名</td><td class='nr_bt' colspan=2>出勤天数</td><td class='nr_bt' colspan=6>休假天数</td><td class='nr_bt' rowspan=2>加班小时数</td><td class='nr_bt' colspan=5>迟到、早退、补签次数</td></tr><tr><td class='nr_bt'>应出勤</td><td class='nr_bt'>实际出勤</td><td class='nr_bt'>公司放假</td><td class='nr_bt'>星期日个数</td><td class='nr_bt'>事假</td><td class='nr_bt'>婚假</td><td class='nr_bt'>丧假</td><td class='nr_bt'>工伤</td><td class='nr_bt'>迟到15分钟以内</td><td class='nr_bt'>迟到15分钟以上</td><td class='nr_bt'>早退</td><td class='nr_bt'>补签</td><td class='nr_bt'>合计</td></tr>";
+                        var kqtj = "<table id='tjkq'><tr><td style='font-size:14px;font-weight:bold' colspan=19>威浦仕" + kqy + "考勤汇总表</td></tr><tr><td  class='xh' rowspan=2>序号</td><td class='nr_bt' rowspan=2>部门</td><td class='nr_bt' rowspan=2>工号</td><td class='nr_bt' rowspan=2>姓名</td><td class='nr_bt' colspan=2>出勤天数</td><td class='nr_bt' colspan=7>休假天数</td><td class='nr_bt' rowspan=2>加班小时数</td><td class='nr_bt' colspan=5>迟到、早退、补签次数</td></tr><tr><td class='nr_bt'>应出勤</td><td class='nr_bt'>实际出勤</td><td class='nr_bt'>公司放假</td><td class='nr_bt'>星期日个数</td><td class='nr_bt'>事假</td><td class='nr_bt'>婚假</td><td class='nr_bt'>丧假</td><td class='nr_bt'>工伤</td><td class='nr_bt'>迟到15分钟以内</td><td class='nr_bt'>迟到15分钟以上</td><td class='nr_bt'>早退</td><td class='nr_bt'>补签</td><td class='nr_bt'>合计</td></tr>";
                         var kqnr = "<div id='kqy_tj'>" + kqy + "考勤记录</div>";
                         var mqts = "";
                         var byjb = 0;
@@ -236,6 +237,7 @@
                         var qjts_sj = "";
                         var qjts_gs = "";
                         var bqcs = "";
+                        var kgts = "";
                         var gxts = "";
                         var js = 0;
                         var cfjbms = "";
@@ -255,6 +257,7 @@
                             var cdcs = "";
                             var cdcs_15 = "";
                             var ztcs = "";
+                            //kgts=data[data.length-1]["kgts"];
                             js++;
                             //alert(JSON.stringify(mykq));
                             if (mykq != null && mykq != "" && mykq != undefined) {
@@ -274,7 +277,7 @@
                                             swsb += "<td class='wqd'>" + s1 + "</td>";//灰色
                                         } else if (s1.substring(0, 1) == '正' || s1 == '因公补签') {
                                             swsb += "<td class='zc'>" + s1 + "</td>";
-                                        } else if (s1 == '事假' || s1 == '婚假' || s1 == '丧假' || s1 == '工伤') {
+                                        } else if (s1 == '事假' || s1 == '婚假' || s1 == '丧假' || s1 == '工伤'||s1=='旷工') {
                                             swsb += "<td class='qj'>" + s1 + "</td>";
                                         } else if (s1 == '出差') {
                                             swsb += "<td class='cc'>" + s1 + "</td>";
@@ -292,7 +295,7 @@
                                             swxb += "<td class='wqd'>" + s2 + "</td>";//灰色
                                         } else if (s2.substring(0, 1) == '正' || s2 == '因公补签') {
                                             swxb += "<td class='zc'>" + s2 + "</td>";
-                                        } else if (s2 == '事假' || s2 == '婚假' || s2 == '丧假' || s2 == '工伤') {
+                                        } else if (s2 == '事假' || s2 == '婚假' || s2 == '丧假' || s2 == '工伤'||s2=='旷工') {
                                             swxb += "<td class='qj'>" + s2 + "</td>";
                                         } else if (s2 == '出差') {
                                             swxb += "<td class='cc'>" + s2 + "</td>";
@@ -311,7 +314,7 @@
                                             xwsb += "<td class='wqd'>" + s3 + "</td>";//灰色
                                         } else if (s3.substring(0, 1) == '正' || s3 == '因公补签') {
                                             xwsb += "<td class='zc'>" + s3 + "</td>";
-                                        } else if (s3 == '事假' || s3 == '婚假' || s3 == '丧假' || s3 == '工伤') {
+                                        } else if (s3 == '事假' || s3 == '婚假' || s3 == '丧假' || s3 == '工伤'||s3=='旷工') {
                                             xwsb += "<td class='qj'>" + s3 + "</td>";
                                         } else if (s3 == '出差') {
                                             xwsb += "<td class='cc'>" + s3 + "</td>";
@@ -330,7 +333,7 @@
                                             xwxb += "<td class='wqd'>" + s4 + "</td>";//灰色
                                         } else if (s4.substring(0, 1) == '正' || s4 == '因公补签') {
                                             xwxb += "<td class='zc'>" + s4 + "</td>";
-                                        } else if (s4 == '事假' || s4 == '婚假' || s4 == '丧假' || s4 == '工伤') {
+                                        } else if (s4 == '事假' || s4 == '婚假' || s4 == '丧假' || s4 == '工伤'||s4=='旷工') {
                                             xwxb += "<td class='qj'>" + s4 + "</td>";
                                         } else if (s4 == '出差') {
                                             xwxb += "<td class='cc'>" + s4 + "</td>";
@@ -365,6 +368,7 @@
                                     byjb = kq['byjb'];
                                     gxts = kq['gxts'];
                                     qjts = kq['qjts'];
+                                    kgts = kq['kgts'];
                                     qjts_hj = kq['qjts_hj'];
                                     qjts_sj = kq['qjts_sj'];
                                     qjts_gs = kq['qjts_gs'];
@@ -384,12 +388,12 @@
                             if (xm != "" && xm != null && xm != undefined) {
                                 kqnr += "<table id='ydkq'><tr><td colspan='" + (mykq.length + 1) + "' class='rycs'>No." + js + "、部门：" + bm + "，工号：" + gh + "，姓名：" + xm + "，" + kqy + "应出勤：" + mqts + "天，实际出勤：" + ykqts +
                                     "天，迟到15分钟内" + cdcs + "次，迟到15分钟以上" + cdcs_15 + "次，早退" + ztcs + "次，加班" + byjb + "小时</td></tr><tr>" + xq + "</tr><tr>" + rq + "</tr><tr>" + swsb + "</tr><tr>" + swxb + "</tr><tr>" + xwsb + "</tr><tr>" + xwxb + "</tr><tr>" + jb + "</tr></table><br/>";
-                                kqtj += "<tr><td>" + js + "</td><td>" + bm + "</td><td>" + gh + "</td><td>" + xm + "</td><td>" + mqts + "</td><td>" + ykqts + "</td><td>" + gxts + "</td><td>" + myfj + "</td><td>" + qjts + "</td><td>" + qjts_hj + "</td><td>" + qjts_sj + "</td><td>" + qjts_gs + "</td><td>" + byjb + "</td><td>" + cdcs + "</td><td>" + cdcs_15 + "</td><td>" + ztcs + "</td><td>" + bqcs + "</td><td>" + hjcs + "</td></tr>";
+                                kqtj += "<tr><td>" + js + "</td><td>" + bm + "</td><td>" + gh + "</td><td>" + xm + "</td><td>" + mqts + "</td><td>" + ykqts + "</td><td>" + gxts + "</td><td>" + myfj + "</td><td>" + qjts + "</td><td>"+kgts+ "</td><td>"  + qjts_hj + "</td><td>" + qjts_sj + "</td><td>" + qjts_gs + "</td><td>" + byjb + "</td><td>" + cdcs + "</td><td>" + cdcs_15 + "</td><td>" + ztcs + "</td><td>" + bqcs + "</td><td>" + hjcs + "</td></tr>";
                             } else {
                                 js--;
                             }
                         }
-                        kqtj += "<tr><td colspan=18 class='bzsm'>备注：" + cfjbms + "</td></tr>";
+                        kqtj += "<tr><td colspan=19 class='bzsm'>备注：" + cfjbms + "</td></tr>";
                         $("#dg_kqxx").html(kqnr);
                         $("#tj_kqxx").html(kqtj + "</table>");
                     } else {
