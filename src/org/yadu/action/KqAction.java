@@ -255,11 +255,11 @@ public class KqAction extends HttpServlet {
         if (method.endsWith("jsgl")) {
             if (!"xx_del".equals(method.substring(0, 6))) {
                 list.add(req.getParameter("fid"));
-                list.add(new String(req.getParameter("jsmc").getBytes("ISO-8859-1"), "gb2312"));
-                list.add(new String(req.getParameter("fname").getBytes("ISO-8859-1"), "gb2312"));
+                list.add(new String(req.getParameter("jsmc").getBytes("ISO-8859-1"), "UTF-8"));
+                list.add(new String(req.getParameter("fname").getBytes("ISO-8859-1"), "UTF-8"));
                 list.add(req.getParameter("tb"));
-                list.add(new String(req.getParameter("ymdz").getBytes("ISO-8859-1"), "gb2312"));
-                list.add(new String(req.getParameter("bz").getBytes("ISO-8859-1"), "gb2312"));
+                list.add(new String(req.getParameter("ymdz").getBytes("ISO-8859-1"), "UTF-8"));
+                list.add(new String(req.getParameter("bz").getBytes("ISO-8859-1"), "UTF-8"));
             }
 
             if (!"xx_add".equals(method.substring(0, 6))) {
@@ -277,10 +277,10 @@ public class KqAction extends HttpServlet {
             }
         } else if (method.endsWith("ydtx")) {
             if (!"xx_del".equals(method.substring(0, 6))) {
-                list.add(new String(req.getParameter("bm").getBytes("ISO-8859-1"), "gb2312"));
+                list.add(new String(req.getParameter("bm").getBytes("ISO-8859-1"), "UTF-8"));
                 list.add(req.getParameter("sjhm"));
-                list.add(new String(req.getParameter("lxr").getBytes("ISO-8859-1"), "gb2312"));
-                list.add(new String(req.getParameter("fjh").getBytes("ISO-8859-1"), "gb2312"));
+                list.add(new String(req.getParameter("lxr").getBytes("ISO-8859-1"), "UTF-8"));
+                list.add(new String(req.getParameter("fjh").getBytes("ISO-8859-1"), "UTF-8"));
                 list.add(req.getParameter("gh"));
                 list.add(req.getParameter("dh"));
 
@@ -292,12 +292,12 @@ public class KqAction extends HttpServlet {
         } else if (method.endsWith("tskq")) {
             if (!"xx_del".equals(method.substring(0, 6))) {
                 list.add(req.getParameter("rq"));
-                list.add(new String(req.getParameter("swsb").getBytes("ISO-8859-1"), "gb2312"));
-                list.add(new String(req.getParameter("swxb").getBytes("ISO-8859-1"), "gb2312"));
-                list.add(new String(req.getParameter("xwsb").getBytes("ISO-8859-1"), "gb2312"));
-                list.add(new String(req.getParameter("xwxb").getBytes("ISO-8859-1"), "gb2312"));
+                list.add(new String(req.getParameter("swsb").getBytes("ISO-8859-1"), "UTF-8"));
+                list.add(new String(req.getParameter("swxb").getBytes("ISO-8859-1"), "UTF-8"));
+                list.add(new String(req.getParameter("xwsb").getBytes("ISO-8859-1"), "UTF-8"));
+                list.add(new String(req.getParameter("xwxb").getBytes("ISO-8859-1"), "UTF-8"));
                 list.add(req.getParameter("lb"));
-                list.add(new String(req.getParameter("tname").getBytes("ISO-8859-1"), "gb2312"));
+                list.add(new String(req.getParameter("tname").getBytes("ISO-8859-1"), "UTF-8"));
             }
 
             if (!"xx_add".equals(method.substring(0, 6))) {
@@ -305,8 +305,8 @@ public class KqAction extends HttpServlet {
             }
         } else if (method.endsWith("team")) {
             if (!"xx_del".equals(method.substring(0, 6))) {
-                list.add(new String(req.getParameter("tname").getBytes("ISO-8859-1"), "gb2312"));
-                list.add(new String(req.getParameter("tmember").getBytes("ISO-8859-1"), "gb2312"));
+                list.add(new String(req.getParameter("tname").getBytes("ISO-8859-1"), "UTF-8"));
+                list.add(new String(req.getParameter("tmember").getBytes("ISO-8859-1"), "UTF-8"));
                 list.add(req.getParameter("gslb"));
             }
 

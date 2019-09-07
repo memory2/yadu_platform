@@ -1981,6 +1981,12 @@ public class JdbcKqxx {
 
                                     if (isEmpty((String) map.get("xwxb"))) {
                                         map.put("xwxb", ts_xwxb);
+                                    }else{
+                                        map.put("swsb", ts_swsb);
+                                        wfsswsbwdk = true;
+                                        map.put("swxb", ts_swxb);
+                                        map.put("xwsb", ts_xwsb);
+                                        map.put("xwxb", ts_xwxb);
                                     }
                                 } else if ("fj".equals(ts_lb)) {
                                     String sw1 = (String) map.get("swsb");
@@ -2772,6 +2778,12 @@ public class JdbcKqxx {
                                     }
 
                                     if (isEmpty((String) map.get("xwxb"))) {
+                                        map.put("xwxb", ts_xwxb);
+                                    }else{
+                                        map.put("swsb", ts_swsb);
+                                        wfsswsbwdk = true;
+                                        map.put("swxb", ts_swxb);
+                                        map.put("xwsb", ts_xwsb);
                                         map.put("xwxb", ts_xwxb);
                                     }
                                 } else if ("fj".equals(ts_lb)) {

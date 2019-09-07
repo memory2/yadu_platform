@@ -93,8 +93,7 @@ public class CalculationKq {
                     rq1=rq;
                 }
                 time=yearMonth+"-"+rq1;
-
-                if (compareTime(nowData,time,df_rq)>0){
+                if (compareTime(getLastDay(nowData),time,df_rq)>0){
                     swsb=map.get("swsb").toString();
                     swxb=map.get("swxb").toString();
                     xwsb=map.get("xwsb").toString();
@@ -186,6 +185,8 @@ public class CalculationKq {
     }
 
 
+
+
     /**
      * 特殊节假日时间处理(需要上班，可能加班)
      * @param dataTime
@@ -231,6 +232,29 @@ public class CalculationKq {
         return flag;
     }
 
+
+    /**
+     * 获取前两天
+     * @param time
+     * @return
+     */
+    public static String getLastDay(String time){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        Date date=null;
+        try {
+            date = sdf.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        calendar.setTime(date);
+        int day=calendar.get(Calendar.DATE);
+        //                      此处修改为+1则是获取后一天
+        calendar.set(Calendar.DATE,day-2);
+
+        String lastDay = sdf.format(calendar.getTime());
+        return lastDay;
+    }
 
     /**
      * 判读是否为空
