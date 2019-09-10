@@ -86,6 +86,9 @@
             if (txm == "10665" || txm == "10297" || txm == "11439" || txm == "10005"|| txm=="10269") {//txm=="10297"赵燕
                 bmdm = "4100000000";
             }
+            if(txm == "11048"){ //txm==张海娟
+                bmdm = "4103000000";
+            }
 
             getDept("bm", bmdm);
             $("#xm").combobox('textbox').bind('focus', function () {
@@ -121,12 +124,16 @@
                 $('#bm').combobox({disabled: false});
                 $('#xm').combobox({disabled: false});
             }
+            if(txm == "11048"){
+                $('#xm').combobox({disabled: false});
+            }
             if(txm == "10269"){
                 $("#bm").combotree('setValue', bmmc1);
             }else {
                 $("#bm").combotree('setValue', bmdm);
             }
-            if (txm != "10554" && txm != "10703") {
+            if (txm != "10554" && txm != "10703"&&txm != "11048") {
+
                 $("#xm").combobox('setValue', txm);
             }
             cx(getYf());

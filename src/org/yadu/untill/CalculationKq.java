@@ -170,7 +170,6 @@ public class CalculationKq {
                                }
                                kgts=0;
                            }
-
                        }
                     }
 
