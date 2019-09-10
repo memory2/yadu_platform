@@ -41,6 +41,7 @@
         var txm = '<%=oaryid%>';
         var zwjb = '<%=zwjb%>';
         var bmdm = '<%=bmdm%>';
+        var bmdm1;
         $(function () {
             img = $("#progressImgage");
             mask = $("#maskOfProgressImage");
@@ -80,12 +81,15 @@
             $('#btn_export_kqxx').bind('click', function () {
                 method1('tjkq');
             });
+
+            bmdm1=bmdm;
             if (bmmc == "信息部" || bmmc == "人力资源部" || txm == "10838" || txm == "11048") {
                 bmdm = "6100000000";
             }
             if(txm=="10556"){
                 bmdm = "6106000000";
             }
+
             getDept("bm", bmdm);
             $("#xm").combobox('textbox').bind('focus', function () {
                 yzry("bm", "xm");
@@ -117,7 +121,12 @@
                 $('#xm').combobox({disabled: false});
             }
 
-            $("#bm").combotree('setValue', bmdm);
+            if(txm == "11048"){ //张海娟
+                $("#bm").combotree('setValue', bmdm1);
+            }else{
+                $("#bm").combotree('setValue', bmdm);
+            }
+
             if (txm!="10556"&&txm != "10554" && txm != "10703" && bmmc != "信息部" && bmmc != "人力资源部" && bmmc != "威浦仕人事部") {
                 $("#xm").combobox('setValue', txm);
                 cx(getYf());
