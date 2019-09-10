@@ -860,6 +860,7 @@ public class JdbcKqxx {
                         qjts = (float) (qjts + 0.25D);
                         kqzs = (float) (kqzs - 0.25D);
                     }
+                    //实际出勤=应出勤-公休天数-请假天数-停电天数-因公请假-婚嫁请假-丧假/事假-上午上班忘签到-上午下班忘签到-下午上班忘签到-下午下班忘签到
                     kqzs = myts - gxts - qjts - tdts - qjts_gs - qjts_hj - qjts_sj - swsbwqd - swxbwqd - xwsbwqd - xwxbwqd;
                     //System.out.println(df_rq.format(date)+":"+myts+":"+gxts+":人员姓名："+ryxm+qjts+":"+":"+tdts+":"+qjts_gs+":"+qjts_hj+":"+qjts_sj+":"+swsbwqd+":"+swxbwqd+":"+xwsbwqd+":"+xwxbwqd+"--"+kqzs);
 
