@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -175,13 +176,12 @@ public class KqAction extends HttpServlet {
             list = kq.mdkKqxx_wx(req, method);
         }
         JSONArray jsonArray = null;
-        jsonArray = JSONArray.fromObject(list);
-       /* try {
+        try {
             list1=ck.calKq(list,req);
-
+            jsonArray = JSONArray.fromObject(list1);
         } catch (ParseException e) {
             e.printStackTrace();
-        }*/
+        }
         PrintWriter out = resp.getWriter();
         //System.out.println("*111***************"+jsonArray.toString());
         out.print(jsonArray.toString());

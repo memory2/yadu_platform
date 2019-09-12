@@ -85,6 +85,8 @@
             bmdm1=bmdm;
             if (bmmc == "信息部" || bmmc == "人力资源部" || txm == "10838" || txm == "11048") {
                 bmdm = "6100000000";
+            }else if (txm == "10715") { //10715-邓雪
+                bmdm = "7102000000";
             }
             if(txm=="10556"){
                 bmdm = "6106000000";
@@ -97,6 +99,11 @@
 
             $("#bm").combobox({
                 onChange: function (n, o) {
+                    if (txm == "10715" && $("#bm").combobox('getValue').substring(0, 4) == "7103") {
+                        alert("您无此部门查询权限！");
+                        $("#bm").combotree('setValue', bmdm);
+                        return;
+                    }
                     yzry1("bm", "xm");
                     cx_flag = false;
                     tj_flag = false;
@@ -112,7 +119,7 @@
 
             $('#bm').combobox({disabled: true});
             $('#xm').combobox({disabled: true});
-            if ((bmmc == '信息部' || bmmc == '人力资源部' || txm == "10703" || txm == "10665" || txm == "10269" || txm == "11048"||txm=="10556") || (zwjb != "10012" && zwjb !== "10013" && zwjb !== "10014" && zwjb !== "10016" && zwjb !== "10018" && zwjb !== "10022")) {
+            if ((bmmc == '信息部' || bmmc == '人力资源部' || txm == "10703" || txm == "10715" || txm == "10665" || txm == "10269" || txm == "11048"||txm=="10556") || (zwjb != "10012" && zwjb !== "10013" && zwjb !== "10014" && zwjb !== "10016" && zwjb !== "10018" && zwjb !== "10022")) {
                 $('#bm').combobox({disabled: false});
                 $('#xm').combobox({disabled: false});
             }
@@ -127,7 +134,7 @@
                 $("#bm").combotree('setValue', bmdm);
             }
 
-            if (txm!="10556"&&txm != "10554" && txm != "10703" && bmmc != "信息部" && bmmc != "人力资源部" && bmmc != "威浦仕人事部") {
+            if (txm!="10556"&&txm != "10554" && txm != "10703" && txm != "10715"&& bmmc != "信息部" && bmmc != "人力资源部" && bmmc != "威浦仕人事部") {
                 $("#xm").combobox('setValue', txm);
                 cx(getYf());
             }
@@ -236,7 +243,7 @@
 
                         var myfj = "";
 
-                        var kqtj = "<table id='tjkq'><tr><td style='font-size:14px;font-weight:bold' colspan=19>威浦仕" + kqy + "考勤汇总表</td></tr><tr><td  class='xh' rowspan=2>序号</td><td class='nr_bt' rowspan=2>部门</td><td class='nr_bt' rowspan=2>工号</td><td class='nr_bt' rowspan=2>姓名</td><td class='nr_bt' colspan=2>出勤天数</td><td class='nr_bt' colspan=7>休假天数</td><td class='nr_bt' rowspan=2>加班小时数</td><td class='nr_bt' colspan=5>迟到、早退、补签次数</td></tr><tr><td class='nr_bt'>应出勤</td><td class='nr_bt'>实际出勤</td><td class='nr_bt'>公司放假</td><td class='nr_bt'>星期日个数</td><td class='nr_bt'>事假</td><td class='nr_bt'>婚假</td><td class='nr_bt'>丧假</td><td class='nr_bt'>工伤</td><td class='nr_bt'>迟到15分钟以内</td><td class='nr_bt'>迟到15分钟以上</td><td class='nr_bt'>早退</td><td class='nr_bt'>补签</td><td class='nr_bt'>合计</td></tr>";
+                        var kqtj = "<table id='tjkq'><tr><td style='font-size:14px;font-weight:bold' colspan=19>威浦仕" + kqy + "考勤汇总表</td></tr><tr><td  class='xh' rowspan=2>序号</td><td class='nr_bt' rowspan=2>部门</td><td class='nr_bt' rowspan=2>工号</td><td class='nr_bt' rowspan=2>姓名</td><td class='nr_bt' colspan=2>出勤天数</td><td class='nr_bt' colspan=7>休假天数</td><td class='nr_bt' rowspan=2>加班小时数</td><td class='nr_bt' colspan=5>迟到、早退、补签次数</td></tr><tr><td class='nr_bt'>应出勤</td><td class='nr_bt'>实际出勤</td><td class='nr_bt'>公司放假</td><td class='nr_bt'>星期日个数</td><td class='nr_bt'>事假</td><td class='nr_bt'>旷工</td><td class='nr_bt'>婚假</td><td class='nr_bt'>丧假</td><td class='nr_bt'>工伤</td><td class='nr_bt'>迟到15分钟以内</td><td class='nr_bt'>迟到15分钟以上</td><td class='nr_bt'>早退</td><td class='nr_bt'>补签</td><td class='nr_bt'>合计</td></tr>";
                         var kqnr = "<div id='kqy_tj'>" + kqy + "考勤记录</div>";
                         var mqts = "";
                         var byjb = 0;

@@ -1,6 +1,7 @@
 package org.yadu.jdbc;
 
 import org.yadu.dao.Node;
+import org.yadu.untill.DateUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -1031,9 +1032,10 @@ public class JdbcKqxx {
                     map.put("gh", gh);
                     map.put("bm", dwmc);
                     map.put("xm", ryxm);
-                    if ("»’".equals(df_xq.format(date).substring(2, 3))) {
+                    ydxqt=DateUtil.getMondayNumber(DateUtil.getMonthFirstday(fdate),DateUtil.getMonthlastday(fdate),7);
+                   /* if ("»’".equals(df_xq.format(date).substring(2, 3))) {
                         ydxqt++;
-                    }
+                    }*/
 
                     String dksj = rs_kqjl.getString("dksj");
 
@@ -1983,11 +1985,24 @@ public class JdbcKqxx {
                                     if (isEmpty((String) map.get("xwxb"))) {
                                         map.put("xwxb", ts_xwxb);
                                     }else{
-                                        map.put("swsb", ts_swsb);
-                                        wfsswsbwdk = true;
-                                        map.put("swxb", ts_swxb);
-                                        map.put("xwsb", ts_xwsb);
-                                        map.put("xwxb", ts_xwxb);
+                                        if (!isEmpty((String) map.get("swsb"))) {
+                                            map.put("swsb", ts_swsb);
+                                            tdts = (float) (tdts - 0.25D);
+                                        }
+                                        if (!isEmpty((String) map.get("swxb"))) {
+                                            map.put("swxb", ts_swxb);
+                                            tdts = (float) (tdts - 0.25D);
+                                        }
+
+                                        if (!isEmpty((String) map.get("xwsb"))) {
+                                            map.put("xwsb", ts_xwsb);
+                                            tdts = (float) (tdts - 0.25D);
+                                        }
+
+                                        if (!isEmpty((String) map.get("xwxb"))) {
+                                            map.put("xwxb", ts_xwxb);
+                                            tdts = (float) (tdts - 0.25D);
+                                        }
                                     }
                                 } else if ("fj".equals(ts_lb)) {
                                     String sw1 = (String) map.get("swsb");
@@ -2781,11 +2796,24 @@ public class JdbcKqxx {
                                     if (isEmpty((String) map.get("xwxb"))) {
                                         map.put("xwxb", ts_xwxb);
                                     }else{
-                                        map.put("swsb", ts_swsb);
-                                        wfsswsbwdk = true;
-                                        map.put("swxb", ts_swxb);
-                                        map.put("xwsb", ts_xwsb);
-                                        map.put("xwxb", ts_xwxb);
+                                        if (!isEmpty((String) map.get("swsb"))) {
+                                            map.put("swsb", ts_swsb);
+                                            tdts = (float) (tdts - 0.25D);
+                                        }
+                                        if (!isEmpty((String) map.get("swxb"))) {
+                                            map.put("swxb", ts_swxb);
+                                            tdts = (float) (tdts - 0.25D);
+                                        }
+
+                                        if (!isEmpty((String) map.get("xwsb"))) {
+                                            map.put("xwsb", ts_xwsb);
+                                            tdts = (float) (tdts - 0.25D);
+                                        }
+
+                                        if (!isEmpty((String) map.get("xwxb"))) {
+                                            map.put("xwxb", ts_xwxb);
+                                            tdts = (float) (tdts - 0.25D);
+                                        }
                                     }
                                 } else if ("fj".equals(ts_lb)) {
                                     String sw1 = (String) map.get("swsb");
