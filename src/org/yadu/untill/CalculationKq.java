@@ -59,7 +59,7 @@ public class CalculationKq {
         /**
          * 工号
          */
-        String gh="";
+        String gh;
 
         /**
          *  获取当前时间

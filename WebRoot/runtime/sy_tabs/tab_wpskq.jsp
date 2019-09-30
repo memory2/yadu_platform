@@ -81,9 +81,8 @@
             $('#btn_export_kqxx').bind('click', function () {
                 method1('tjkq');
             });
-
             bmdm1=bmdm;
-            if (bmmc == "信息部" || bmmc == "人力资源部" || txm == "10838" || txm == "11048") {
+            if (bmmc == "信息部" || bmmc == "人力资源部" || txm == "10838" || txm == "11048" || txm=="10269") {
                 bmdm = "6100000000";
             }else if (txm == "10715") { //10715-邓雪
                 bmdm = "7102000000";
@@ -134,7 +133,7 @@
                 $("#bm").combotree('setValue', bmdm);
             }
 
-            if (txm!="10556"&&txm != "10554" && txm != "10703" && txm != "10715"&& bmmc != "信息部" && bmmc != "人力资源部" && bmmc != "威浦仕人事部") {
+            if (txm!="10556"&&txm != "10554" && txm != "10703" && txm != "10715"&& bmmc != "信息部" && bmmc != "人力资源部" && bmmc != "威浦仕人事部"&&txm!="10269") {
                 $("#xm").combobox('setValue', txm);
                 cx(getYf());
             }
