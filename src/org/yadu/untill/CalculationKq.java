@@ -218,7 +218,7 @@ public class CalculationKq {
     public static boolean CalculateHoliday(String dataTime) throws ParseException{
         boolean flag=false;
         //不需要上班日期
-        String[] holiday = new String[]{"09-13","09-14"};
+        String[] holiday = new String[]{"09-13","09-14","10-01","10-02"};
         Calendar now = Calendar.getInstance();
         //获取当前年份
         int year=now.get(Calendar.YEAR);
