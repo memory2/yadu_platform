@@ -82,7 +82,7 @@
                 method1('tjkq');
             });
 
-            if (bmmc == "信息部" || bmmc == "迈迪科综合办" || txm == "10966" || txm == "11019"|| txm=="10269") {
+            if (bmmc == "信息部" || bmmc == "迈迪科综合办"||bmmc == '亚都人资行政部' || txm == "10966" || txm == "11019"|| txm=="10269") {
                 bmdm = "5100000000";
             }
             if(txm=="10556"){
@@ -110,13 +110,13 @@
 
             $('#bm').combobox({disabled: true});
             $('#xm').combobox({disabled: true});
-            if ((bmmc == '信息部' || bmmc == '迈迪科综合办' || txm == "10665" || txm == "10269") || (zwjb != "10012" && zwjb !== "10013" && zwjb !== "10014" && zwjb !== "10016" && zwjb !== "10018" && zwjb !== "10022")) {
+            if ((bmmc == '信息部' || bmmc == '迈迪科综合办'||bmmc == '亚都人资行政部' || txm == "10665" || txm == "10269") || (zwjb != "10012" && zwjb !== "10013" && zwjb !== "10014" && zwjb !== "10016" && zwjb !== "10018" && zwjb !== "10022")) {
                 $('#bm').combobox({disabled: false});
                 $('#xm').combobox({disabled: false});
             }
 
             $("#bm").combotree('setValue', bmdm);
-            if (txm!="10556"&&txm != "10554" && txm != "10966" && txm != "11019" && bmmc != "信息部" && bmmc != "迈迪科综合办"&& txm!="10269") {
+            if (txm!="10556"&&txm != "10554" && txm != "10966" && txm != "11019" && bmmc != "信息部" && bmmc != "迈迪科综合办"&& txm!="10269"&&txm!="11665") {
                 $("#xm").combobox('setValue', txm);
                 cx(getYf());
             }

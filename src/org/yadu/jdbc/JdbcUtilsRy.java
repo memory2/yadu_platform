@@ -1,18 +1,12 @@
 package org.yadu.jdbc;
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import javax.servlet.http.HttpServletRequest;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 public class JdbcUtilsRy {
     //数据库用户名
@@ -196,7 +190,7 @@ public class JdbcUtilsRy {
     }
 
 
-    /**
+    /**1
      * 查询OA表单
      *
      * @param sql

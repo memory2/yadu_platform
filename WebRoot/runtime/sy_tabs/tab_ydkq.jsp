@@ -83,13 +83,15 @@
                 method1('tjkq');
             });
             bmmc1=bmdm;
-            if (txm == "10665" || txm == "10297" || txm == "11439" || txm == "10005"|| txm=="10269") {//txm=="10297"赵燕
+            if (txm == "10665" || txm == "10297" || txm == "11439" || txm == "10005"|| txm=="10269"||txm=="11665") {//txm=="10297"赵燕  txm=="11665" 代瑞金
                 bmdm = "4100000000";
             }
             if(txm == "11048"){ //txm==张海娟
                 bmdm = "4103000000";
             }
-
+            if(txm == "10657"){
+                bmdm="4109000000";
+            }
             getDept("bm", bmdm);
             $("#xm").combobox('textbox').bind('focus', function () {
                 yzry("bm", "xm");
@@ -120,6 +122,7 @@
             });
             $('#bm').combobox({disabled: true});
             $('#xm').combobox({disabled: true});
+
             if ((bmmc == '信息部' || bmmc == '亚都人资行政部' || txm == "10703" || txm == "10665" || txm == "10269" || txm == "10838" ) || (zwjb != "10012" && zwjb !== "10013" && zwjb !== "10014" && zwjb !== "10016" && zwjb !== "10018" && zwjb !== "10022")) {
                 $('#bm').combobox({disabled: false});
                 $('#xm').combobox({disabled: false});
@@ -127,16 +130,20 @@
             if(txm == "11048"){
                 $('#xm').combobox({disabled: false});
             }
-            if(txm == "10269"){
+
+            if(txm == "10269" ||txm =="11665"){
                 $("#bm").combotree('setValue', bmmc1);
             }else {
                 $("#bm").combotree('setValue', bmdm);
             }
-            if (txm != "10554" && txm != "10703"&&txm != "11048") {
+            if (txm != "10554" && txm != "10703"&&txm != "11048"&&txm != "10657") {
 
                 $("#xm").combobox('setValue', txm);
             }
-            cx(getYf());
+            if (txm != "10657"){
+                cx(getYf());
+            }
+
         });
 
 

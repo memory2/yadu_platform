@@ -80,7 +80,7 @@
             });
 
 
-            if (bmmc == "信息部" || bmmc == "威浦仕人资行政部" || bmmc == "威浦仕口罩帽车间" || bmmc == "威浦仕口罩帽车间"|| txm=="10269") {
+            if (bmmc == "信息部" || bmmc == "威浦仕人资行政部"|| bmmc == '亚都人资行政部' || bmmc == "威浦仕口罩帽车间" || bmmc == "威浦仕口罩帽车间"|| txm=="10269") {
                 bmdm = "7100000000";
             } else if (txm == "10715") { //10715-邓雪
                 bmdm = "7102000000";
@@ -106,6 +106,8 @@
                 bmdm = "7103000000";
             } else if (txm == "10948"){ //10948-岳聪慧
                 bmdm = "7101000000";
+            } else if (txm == "11393") { //李薇
+                bmdm = "7102030000";
             }
 
             getDept("bm", bmdm);
@@ -146,17 +148,23 @@
 
             $('#bm').combobox({disabled: true});
             $('#xm').combobox({disabled: true});
-            if ((bmmc == '信息部' || bmmc == '威浦仕人资行政部' || bmmc == "威浦仕口罩帽车间" || txm == "10715" || txm == "11153" || txm == "11165" || txm == "10948"|| txm=="10269")) {
+            if ((bmmc == '信息部' || bmmc == '威浦仕人资行政部' || bmmc == '亚都人资行政部'|| bmmc == "威浦仕口罩帽车间" || txm == "10715" || txm == "11153" || txm == "11165" || txm == "10948"|| txm=="10269")) {
                 $('#bm').combobox({disabled: false});
                 $('#xm').combobox({disabled: false});
             }
 
-            if (txm == "10948" || txm == "10855" || txm == "11402" || txm == "11118" || txm == "11320" || txm == "11159" || txm == "11165" || txm == "11472" || txm == "10778") {
+            if (txm == "10948" || txm == "10855" || txm == "11402" || txm == "11118" || txm == "11320" || txm == "11159" || txm == "11165" || txm == "11472" || txm == "10778"||txm == "11393") {
                 $('#xm').combobox({disabled: false});
             }
 
-            $("#bm").combotree('setValue', bmdm);
-            if (txm != "11472" && txm != "11159" && txm != "10778" && txm != "10855" && txm != "11402" && txm != "11118" &&txm!="10269"&& txm != "10715" && txm != "11320" && txm != "11165" && txm != "11153" && bmmc != "信息部" && bmmc != "威浦仕口罩帽车间" && bmmc != "人力资源部" && bmmc != "威浦仕人资行政部"&&txm != "10948") {
+            if(bmdm=='6102030000'){
+                bmdm=7102030000;
+                $("#bm").combotree('setValue', bmdm);
+            }else {
+                $("#bm").combotree('setValue', bmdm);
+            }
+
+            if (txm != "11472"&&txm != "11665" && txm != "11159" && txm != "10778" && txm != "10855" && txm != "11402" && txm != "11118" &&txm!="10269"&& txm != "10715" && txm != "11320" && txm != "11165" && txm != "11153" && bmmc != "信息部" && bmmc != "威浦仕口罩帽车间" && bmmc != "人力资源部" && bmmc != "威浦仕人资行政部"&&txm != "10948"&&txm != "11393") {
                 $("#xm").combobox('setValue', txm);
                 cx(getYf());
             }

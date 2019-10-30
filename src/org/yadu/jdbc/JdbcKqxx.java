@@ -508,12 +508,12 @@ public class JdbcKqxx {
 
                                     }
 
-                                } else if (compareTime(dk[j], "13:00:00", df_sj) >= 0L && compareTime(dk[j], "13:30:00", df_sj) <= 0L) {
+                                } else if (compareTime(dk[j], "13:00:00", df_sj) >= 0L && compareTime(dk[j], "13:31:00", df_sj) < 0L) {
                                     if (isEmpty((String) map.get("xwsb"))) {
                                         map.put("xwsb", "正常" + dk[j]);
                                         xwsbzcts = (float) (xwsbzcts + 0.25D);
                                     }
-                                } else if (compareTime(dk[j], "13:31:00", df_sj) > 0L && compareTime(dk[j], "13:45:00", df_sj) <= 0L) {
+                                } else if (compareTime(dk[j], "13:31:00", df_sj) >= 0L && compareTime(dk[j], "13:45:00", df_sj) <= 0L) {
                                     if (isEmpty((String) map.get("xwsb"))) {
                                         map.put("xwsb", "迟到" + dk[j]);
                                         cdcs++;
@@ -1392,12 +1392,12 @@ public class JdbcKqxx {
 
                                     }
 
-                                } else if (compareTime(dk[j], "13:31:00", df_sj) <= 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
+                                } else if (compareTime(dk[j], "13:31:00", df_sj) < 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
                                     if (isEmpty((String) map.get("xwsb"))) {
                                         map.put("xwsb", "正常" + dk[j]);
                                         xwsbzcts = (float) (xwsbzcts + 0.25D);
                                     }
-                                } else if (compareTime(dk[j], "13:31:00", df_sj) > 0L && compareTime(dk[j], "13:45:00", df_sj) <= 0L) {
+                                } else if (compareTime(dk[j], "13:31:00", df_sj) >= 0L && compareTime(dk[j], "13:45:00", df_sj) <= 0L) {
                                     if (isEmpty((String) map.get("xwsb"))) {
                                         map.put("xwsb", "迟到" + dk[j]);
                                         cdcs++;
@@ -2218,6 +2218,10 @@ public class JdbcKqxx {
                                             map.put("swxb", "正常" + dk[j]);
                                             swxbzcts = (float) (swxbzcts + 0.25D);
                                             wfsswsbwdk = false;
+                                        } else if (isEmpty((String) map.get("swxb")) && !wfsswsbwdk) {
+                                            map.put("swxb", "正常" + dk[j]);
+                                            swxbzcts = (float) (swxbzcts + 0.25D);
+                                            wfsswsbwdk = false;
                                         } else {
                                             if (isEmpty((String) map.get("xwsb"))) {
                                                 map.put("xwsb", "正常" + dk[j]);
@@ -2302,22 +2306,31 @@ public class JdbcKqxx {
                                         wfsswsbwdk = true;
                                     }
                                 } else if (compareTime(dk[j], "12:00:00", df_sj) >= 0L && compareTime(dk[j], "13:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swxb")) && wfsswsbwdk) {
+                                    if (wpspd1) {
+                                        if (isEmpty((String) map.get("swxb")) && wfsswsbwdk) {
+                                            map.put("swxb", "正常" + dk[j]);
+                                            swxbzcts = (float) (swxbzcts + 0.25D);
+                                            wfsswsbwdk = false;
+                                        }else if (isEmpty((String) map.get("swxb")) && !wfsswsbwdk) {
+                                            map.put("swxb", "正常" + dk[j]);
+                                            swxbzcts = (float) (swxbzcts + 0.25D);
+                                            wfsswsbwdk = false;
+                                        } else {
+                                            if (isEmpty((String) map.get("xwsb"))) {
+                                                map.put("xwsb", "正常" + dk[j]);
+                                                xwsbzcts = (float) (xwsbzcts + 0.25D);
+                                            }
+                                        }
+                                    } else {
                                         map.put("swxb", "正常" + dk[j]);
                                         swxbzcts = (float) (swxbzcts + 0.25D);
-                                        wfsswsbwdk = false;
-                                    } else {
-                                        if (isEmpty((String) map.get("xwsb"))) {
-                                            map.put("xwsb", "正常" + dk[j]);
-                                            xwsbzcts = (float) (xwsbzcts + 0.25D);
-                                        }
                                     }
-                                }else if (compareTime(dk[j], "13:30:00", df_sj) <= 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
+                                }else if (compareTime(dk[j], "13:31:00", df_sj) < 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
                                     if (isEmpty((String) map.get("xwsb"))) {
                                         map.put("xwsb", "正常" + dk[j]);
                                         xwsbzcts = (float) (xwsbzcts + 0.25D);
                                     }
-                                } else if (compareTime(dk[j], "13:31:00", df_sj) > 0L && compareTime(dk[j], "14:00:00", df_sj) <= 0L) {
+                                } else if (compareTime(dk[j], "13:31:00", df_sj) >= 0L && compareTime(dk[j], "14:00:00", df_sj) <= 0L) {
                                     if (isEmpty((String) map.get("xwsb"))) {
                                         map.put("xwsb", "迟到" + dk[j]);
                                         cdcs++;
@@ -2769,7 +2782,6 @@ public class JdbcKqxx {
                     if ("2019-05-01".equals(fdate) || "2019-05-02".equals(fdate) || "2019-05-03".equals(fdate) || (compareTime(fdate, "2019-06-04", df_rq) >= 0L) && dwmc.contains("车间")) {
                         wpspd1 = true;
                     }
-
                     //String sql_oabq = "select u.field4 as bqcx,u.field8 as bqlb from utm_00206 u,person p where u.field1 = p.id and p.stuff_id = '"+gh+"' and u.field2 = '"+df_rq.format(date)+"' and u.flowid in (select id from document d where d.state='2')";
                     String sql_oabq = "select u.field4 as bqcx,u.field8 as bqlb from utm_00206 u,person p,flownode_member d,nodetactics n where u.field1 = p.id and u.flowid = d.doc_id and p.stuff_id = '" + gh + "' and u.field2 = '" + df_rq.format(date) + "' and d.entity in ('10665','10930','11048','10005') and d.workflag = '1' and  n.tac_id = '3' and n.attach_info in ('已阅','同意') and n.mem_id = d.id";
                     Statement st_oabq = this.con_oa.createStatement();
@@ -3079,12 +3091,12 @@ public class JdbcKqxx {
                                     }
 
 
-                                } else if (compareTime(dk[j], "13:31:00", df_sj) <= 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
+                                } else if (compareTime(dk[j], "13:31:00", df_sj) < 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
                                     if (isEmpty((String) map.get("xwsb"))) {
                                         map.put("xwsb", "正常" + dk[j]);
                                         xwsbzcts = (float) (xwsbzcts + 0.25D);
                                     }
-                                } else if (compareTime(dk[j], "13:31:00", df_sj) > 0L && compareTime(dk[j], "13:45:00", df_sj) <= 0L) {
+                                } else if (compareTime(dk[j], "13:31:00", df_sj) >= 0L && compareTime(dk[j], "13:45:00", df_sj) <= 0L) {
                                     if (isEmpty((String) map.get("xwsb"))) {
                                         map.put("xwsb", "迟到" + dk[j]);
                                         cdcs++;
@@ -3150,22 +3162,32 @@ public class JdbcKqxx {
                                         wfsswsbwdk = true;
                                     }
                                 } else if (compareTime(dk[j], "12:00:00", df_sj) >= 0L && compareTime(dk[j], "13:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swxb")) && wfsswsbwdk) {
+                                    if (wpspd1) {
+                                        if (isEmpty((String) map.get("swxb")) && wfsswsbwdk) {
+                                            map.put("swxb", "正常" + dk[j]);
+                                            swxbzcts = (float) (swxbzcts + 0.25D);
+                                            wfsswsbwdk = false;
+                                        }else if (isEmpty((String) map.get("swxb")) && !wfsswsbwdk) {
+                                            map.put("swxb", "正常" + dk[j]);
+                                            swxbzcts = (float) (swxbzcts + 0.25D);
+                                            wfsswsbwdk = false;
+                                        } else {
+                                            if (isEmpty((String) map.get("xwsb"))) {
+                                                map.put("xwsb", "正常" + dk[j]);
+                                                xwsbzcts = (float) (xwsbzcts + 0.25D);
+                                            }
+                                        }
+                                    } else {
                                         map.put("swxb", "正常" + dk[j]);
                                         swxbzcts = (float) (swxbzcts + 0.25D);
-                                        wfsswsbwdk = false;
-                                    } else {
-                                        if (isEmpty((String) map.get("xwsb"))) {
-                                            map.put("xwsb", "正常" + dk[j]);
-                                            xwsbzcts = (float) (xwsbzcts + 0.25D);
-                                        }
                                     }
-                                }else if (compareTime(dk[j], "13:30:00", df_sj) <= 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
+
+                                }else if (compareTime(dk[j], "13:31:00", df_sj) < 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
                                     if (isEmpty((String) map.get("xwsb"))) {
                                         map.put("xwsb", "正常" + dk[j]);
                                         xwsbzcts = (float) (xwsbzcts + 0.25D);
                                     }
-                                }  else if (compareTime(dk[j], "13:31:00", df_sj) > 0L && compareTime(dk[j], "14:15:00", df_sj) <= 0L) {
+                                }  else if (compareTime(dk[j], "13:31:00", df_sj) >= 0L && compareTime(dk[j], "14:15:00", df_sj) <= 0L) {
                                     if (isEmpty((String) map.get("xwsb"))) {
                                         map.put("xwsb", "迟到" + dk[j]);
                                         cdcs++;
@@ -4597,12 +4619,12 @@ public class JdbcKqxx {
                                             xwsbzcts = (float) (xwsbzcts + 0.25D);
                                         }
                                     }
-                                }else if (compareTime(dk[j], "13:30:00", df_sj) <= 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
+                                }else if (compareTime(dk[j], "13:31:00", df_sj) < 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
                                     if (isEmpty((String) map.get("xwsb"))) {
                                         map.put("xwsb", "正常" + dk[j]);
                                         xwsbzcts = (float) (xwsbzcts + 0.25D);
                                     }
-                                }  else if (compareTime(dk[j], "13:30:00", df_sj) > 0L && compareTime(dk[j], "14:15:00", df_sj) <= 0L) {
+                                }  else if (compareTime(dk[j], "13:31:00", df_sj) >=0L && compareTime(dk[j], "14:15:00", df_sj) <= 0L) {
                                     if (isEmpty((String) map.get("xwsb"))) {
                                         map.put("xwsb", "迟到" + dk[j]);
                                         cdcs++;
@@ -5395,12 +5417,12 @@ public class JdbcKqxx {
                                             xwsbzcts = (float) (xwsbzcts + 0.25D);
                                         }
                                     }
-                                } else if (compareTime(dk[j], "13:30:00", df_sj) <= 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
+                                } else if (compareTime(dk[j], "13:31:00", df_sj) < 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
                                     if (isEmpty((String) map.get("xwsb"))) {
                                         map.put("xwsb", "正常" + dk[j]);
                                         xwsbzcts = (float) (xwsbzcts + 0.25D);
                                     }
-                                } else if (compareTime(dk[j], "13:30:00", df_sj) > 0L && compareTime(dk[j], "14:15:00", df_sj) <= 0L) {
+                                } else if (compareTime(dk[j], "13:31:00", df_sj) >= 0L && compareTime(dk[j], "14:15:00", df_sj) <= 0L) {
                                     if (isEmpty((String) map.get("xwsb"))) {
                                         map.put("xwsb", "迟到" + dk[j]);
                                         cdcs++;

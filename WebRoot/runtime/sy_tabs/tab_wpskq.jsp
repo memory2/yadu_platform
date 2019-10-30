@@ -82,7 +82,7 @@
                 method1('tjkq');
             });
             bmdm1=bmdm;
-            if (bmmc == "信息部" || bmmc == "人力资源部" || txm == "10838" || txm == "11048" || txm=="10269") {
+            if (bmmc == "信息部" || bmmc == "人力资源部"||bmmc == '亚都人资行政部' || txm == "10838" || txm == "11048" || txm=="10269") {
                 bmdm = "6100000000";
             }else if (txm == "10715") { //10715-邓雪
                 bmdm = "7102000000";
@@ -118,7 +118,7 @@
 
             $('#bm').combobox({disabled: true});
             $('#xm').combobox({disabled: true});
-            if ((bmmc == '信息部' || bmmc == '人力资源部' || txm == "10703" || txm == "10715" || txm == "10665" || txm == "10269" || txm == "11048"||txm=="10556") || (zwjb != "10012" && zwjb !== "10013" && zwjb !== "10014" && zwjb !== "10016" && zwjb !== "10018" && zwjb !== "10022")) {
+            if ((bmmc == '信息部' || bmmc == '人力资源部' ||bmmc == '亚都人资行政部'|| txm == "10703" || txm == "10715" || txm == "10665" || txm == "10269" || txm == "11048"||txm=="10556") || (zwjb != "10012" && zwjb !== "10013" && zwjb !== "10014" && zwjb !== "10016" && zwjb !== "10018" && zwjb !== "10022")) {
                 $('#bm').combobox({disabled: false});
                 $('#xm').combobox({disabled: false});
             }
@@ -133,7 +133,7 @@
                 $("#bm").combotree('setValue', bmdm);
             }
 
-            if (txm!="10556"&&txm != "10554" && txm != "10703" && txm != "10715"&& bmmc != "信息部" && bmmc != "人力资源部" && bmmc != "威浦仕人事部"&&txm!="10269") {
+            if (txm!="10556"&&txm != "10554" && txm != "10703" && txm != "10715"&& bmmc != "信息部" && bmmc != "人力资源部"&&bmmc != '亚都人资行政部' && bmmc != "威浦仕人事部"&&txm!="10269") {
                 $("#xm").combobox('setValue', txm);
                 cx(getYf());
             }
