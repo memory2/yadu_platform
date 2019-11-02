@@ -1,7 +1,7 @@
-(function($) {
-    $.fn.Slide = function(options) {
+(function ($) {
+    $.fn.Slide = function (options) {
         var opts = $.extend({},
-        $.fn.Slide.deflunt, options);
+            $.fn.Slide.deflunt, options);
         var index = 1;
         var targetLi = $("." + opts.claNav + " li", $(this));
         var clickNext = $("." + opts.claNav + " .next", $(this));
@@ -20,28 +20,28 @@
         } else if (opts.effect == "fade") {
             ContentBox.children().first().css("z-index", "1");
         }
-        return this.each(function() {
+        return this.each(function () {
             var $this = $(this);
-            var doPlay = function() {
+            var doPlay = function () {
                 $.fn.Slide.effect[opts.effect](ContentBox, targetLi, index, slideWH, opts);
                 index++;
                 if (index * opts.steps >= ContentBoxNum) {
                     index = 0;
                 }
             };
-            clickNext.click(function(event) {
+            clickNext.click(function (event) {
                 $.fn.Slide.effectLoop.scroolLeft(ContentBox, targetLi, index, slideWH, opts,
-                function() {
-                    for (var i = 0; i < opts.steps; i++) {
-                        ContentBox.find("li:first", $this).appendTo(ContentBox);
-                    }
-                    ContentBox.css({
-                        "left": "0"
+                    function () {
+                        for (var i = 0; i < opts.steps; i++) {
+                            ContentBox.find("li:first", $this).appendTo(ContentBox);
+                        }
+                        ContentBox.css({
+                            "left": "0"
+                        });
                     });
-                });
                 event.preventDefault();
             });
-            clickPrev.click(function(event) {
+            clickPrev.click(function (event) {
                 for (var i = 0; i < opts.steps; i++) {
                     ContentBox.find("li:last").prependTo(ContentBox);
                 }
@@ -53,28 +53,28 @@
             });
             if (opts.autoPlay) {
                 autoPlay = setInterval(doPlay, opts.timer);
-                ContentBox.hover(function() {
-                    if (autoPlay) {
-                        clearInterval(autoPlay);
-                    }
-                },
-                function() {
-                    if (autoPlay) {
-                        clearInterval(autoPlay);
-                    }
-                    autoPlay = setInterval(doPlay, opts.timer);
-                    if ($("#Html5Video").attr('_isplaying')) {
-                        clearInterval(autoPlay);
-                    }
-                });
+                ContentBox.hover(function () {
+                        if (autoPlay) {
+                            clearInterval(autoPlay);
+                        }
+                    },
+                    function () {
+                        if (autoPlay) {
+                            clearInterval(autoPlay);
+                        }
+                        autoPlay = setInterval(doPlay, opts.timer);
+                        if ($("#Html5Video").attr('_isplaying')) {
+                            clearInterval(autoPlay);
+                        }
+                    });
             }
-           
-            targetLi.click(function() {
+
+            targetLi.click(function () {
                 index = targetLi.index(this);
-                window.setTimeout(function() {
-                    $.fn.Slide.effect[opts.effect](ContentBox, targetLi, index, slideWH, opts);
-                },
-                10);
+                window.setTimeout(function () {
+                        $.fn.Slide.effect[opts.effect](ContentBox, targetLi, index, slideWH, opts);
+                    },
+                    10);
             });
         });
     };
@@ -89,65 +89,65 @@
         steps: 1
     };
     $.fn.Slide.effectLoop = {
-        scroolLeft: function(contentObj, navObj, i, slideW, opts, callback) {
+        scroolLeft: function (contentObj, navObj, i, slideW, opts, callback) {
             contentObj.animate({
-                "left": -i * opts.steps * slideW
-            },
-            opts.speed, callback);
+                    "left": -i * opts.steps * slideW
+                },
+                opts.speed, callback);
             if (navObj) {
                 navObj.eq(i).addClass("on").siblings().removeClass("on");
             }
         },
-        scroolRight: function(contentObj, navObj, i, slideW, opts, callback) {
+        scroolRight: function (contentObj, navObj, i, slideW, opts, callback) {
             contentObj.stop().animate({
-                "left": 0
-            },
-            opts.speed, callback);
+                    "left": 0
+                },
+                opts.speed, callback);
         }
     }
     $.fn.Slide.effect = {
-        fade: function(contentObj, navObj, i, slideW, opts) {
+        fade: function (contentObj, navObj, i, slideW, opts) {
             contentObj.children().eq(i).stop().animate({
-                opacity: 1
-            },
-            opts.speed).css({
+                    opacity: 1
+                },
+                opts.speed).css({
                 "z-index": "1"
             }).siblings().animate({
-                opacity: 0
-            },
-            opts.speed).css({
+                    opacity: 0
+                },
+                opts.speed).css({
                 "z-index": "0"
             });
             navObj.eq(i).addClass("on").siblings().removeClass("on");
         },
-        scroolTxt: function(contentObj, undefined, i, slideH, opts) {
+        scroolTxt: function (contentObj, undefined, i, slideH, opts) {
             contentObj.animate({
-                "margin-top": -opts.steps * slideH
-            },
-            opts.speed,
-            function() {
-                for (var j = 0; j < opts.steps; j++) {
-                    contentObj.find("li:first").appendTo(contentObj);
-                }
-                contentObj.css({
-                    "margin-top": "0"
+                    "margin-top": -opts.steps * slideH
+                },
+                opts.speed,
+                function () {
+                    for (var j = 0; j < opts.steps; j++) {
+                        contentObj.find("li:first").appendTo(contentObj);
+                    }
+                    contentObj.css({
+                        "margin-top": "0"
+                    });
                 });
-            });
         },
-        scroolX: function(contentObj, navObj, i, slideW, opts, callback) {
+        scroolX: function (contentObj, navObj, i, slideW, opts, callback) {
             contentObj.stop().animate({
-                "left": -i * opts.steps * slideW
-            },
-            opts.speed, callback);
+                    "left": -i * opts.steps * slideW
+                },
+                opts.speed, callback);
             if (navObj) {
                 navObj.eq(i).addClass("on").siblings().removeClass("on");
             }
         },
-        scroolY: function(contentObj, navObj, i, slideH, opts) {
+        scroolY: function (contentObj, navObj, i, slideH, opts) {
             contentObj.stop().animate({
-                "top": -i * opts.steps * slideH
-            },
-            opts.speed);
+                    "top": -i * opts.steps * slideH
+                },
+                opts.speed);
             if (navObj) {
                 navObj.eq(i).addClass("on").siblings().removeClass("on");
             }

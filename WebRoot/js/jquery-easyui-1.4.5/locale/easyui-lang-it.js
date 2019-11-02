@@ -22,9 +22,9 @@ $.map(['validatebox', 'textbox', 'filebox', 'searchbox',
     }
 });
 if ($.fn.validatebox) {
-    $.fn.validatebox.defaults.rules.email.message = 'Inserisci un indirizzo email valido.';
-    $.fn.validatebox.defaults.rules.url.message = 'Inserisci un URL valido.';
-    $.fn.validatebox.defaults.rules.length.message = 'Inserisci un valore tra {0} e {1}.';
+    $.fn.validatebox.defaults.rules.email.message = 'Inserisci untill indirizzo email valido.';
+    $.fn.validatebox.defaults.rules.url.message = 'Inserisci untill URL valido.';
+    $.fn.validatebox.defaults.rules.length.message = 'Inserisci untill valore tra {0} e {1}.';
     $.fn.validatebox.defaults.rules.remote.message = 'Aggiusta questo campo.';
 }
 if ($.fn.calendar) {

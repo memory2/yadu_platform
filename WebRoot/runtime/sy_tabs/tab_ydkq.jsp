@@ -12,6 +12,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>人员信息管理</title>
+
     <link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.4.5/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.4.5/themes/icon.css">
     <script type="text/javascript" src="js/jquery-easyui-1.4.5/jquery.min.js"></script>

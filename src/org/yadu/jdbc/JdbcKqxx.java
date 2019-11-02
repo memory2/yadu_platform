@@ -859,7 +859,7 @@ public class JdbcKqxx {
                     if ("2019-04".equals(cxsj)) {
                         mqts = 25.5f;
                     }
-                    if ("2019-05".equals(cxsj)) {
+                    if ("2019-10".equals(cxsj)) {
                         mqts = 25f;
                     }
                     if ("2019-06".equals(cxsj)) {
@@ -1734,7 +1734,7 @@ public class JdbcKqxx {
                     if ("2019-04".equals(cxsj)) {
                         mqts = 25.5f;
                     }
-                    if ("2019-05".equals(cxsj)) {
+                    if ("2019-10".equals(cxsj)) {
                         mqts = 25f;
                     }
                     if ("2019-09".equals(cxsj)) {
@@ -2598,7 +2598,9 @@ public class JdbcKqxx {
                     if ("2018-02".equals(cxsj)) {
                         mqts = myts - 1 - tdts - gxts;
                     }
-
+                    if ("2019-10".equals(cxsj)) {
+                        mqts = 25f;
+                    }
                     float kqzs = 0.0F;
 
                     if (((qjts + "").endsWith(".25")) || ((qjts + "").endsWith(".75"))) {
@@ -3453,7 +3455,9 @@ public class JdbcKqxx {
                     if ("2018-02".equals(cxsj)) {
                         mqts = byts - 1 - tdts - gxts;
                     }
-
+                    if ("2019-10".equals(cxsj)) {
+                        mqts = 25f;
+                    }
                     float kqzs = 0.0F;
 
 
@@ -3807,7 +3811,9 @@ public class JdbcKqxx {
                     if ("2018-02".equals(cxsj)) {
                         mqts = myts - 1 - tdts - gxts;
                     }
-
+                    if ("2019-10".equals(cxsj)) {
+                        mqts = 25f;
+                    }
                     float kqzs = 0.0F;
 
 
@@ -4156,7 +4162,9 @@ public class JdbcKqxx {
                     if ("2018-02".equals(cxsj)) {
                         mqts = byts - 1 - tdts - gxts;
                     }
-
+                    if ("2019-10".equals(cxsj)) {
+                        mqts = 25f;
+                    }
                     float kqzs = 0.0F;
 
                     kqzs = ts - gxts - -qjts - tdts - swsbwqd - xwxbwqd;
@@ -4460,7 +4468,7 @@ public class JdbcKqxx {
                     }
 
                     //×Ü¼àÃâÇ©
-                    if ("02670".equals(gh) || "800070".equals(gh) || "800193".equals(gh) || "800494".equals(gh) || "800157".equals(gh) || "800533".equals(gh)) {
+                    if ("02670".equals(gh) || "800070".equals(gh) || "800193".equals(gh) || "800494".equals(gh) || "800157".equals(gh) || "800533".equals(gh)||"800652".equals(gh)) {
                         zj_flag = true;
                         String currTime = df_rqsj.format(new Date());
                         if (compareTime(currTime, df_rq.format(date) + " 12:00:00", df_rqsj) >= 0L && isEmpty((String) map.get("swxb"))) {
@@ -4950,7 +4958,9 @@ public class JdbcKqxx {
                     if ("2018-02".equals(cxsj)) {
                         mqts = myts - 1 - tdts - gxts;
                     }
-
+                    if ("2019-10".equals(cxsj)) {
+                        mqts = 25f;
+                    }
                     float kqzs = 0.0F;
 
 
@@ -5262,7 +5272,7 @@ public class JdbcKqxx {
                     }
 
                     //×Ü¼àÃâÇ©
-                    if ("02670".equals(gh) || "800070".equals(gh) || "800193".equals(gh) || "800494".equals(gh) || "800157".equals(gh) || "800533".equals(gh)) {
+                    if ("02670".equals(gh) || "800070".equals(gh) || "800193".equals(gh) || "800494".equals(gh) || "800157".equals(gh) || "800533".equals(gh)||"800652".equals(gh)) {
                         zj_flag = true;
                         String currTime = df_rqsj.format(new Date());
                         if (compareTime(currTime, df_rq.format(date) + " 12:00:00", df_rqsj) >= 0L && isEmpty((String) map.get("swxb"))) {
@@ -5956,7 +5966,9 @@ public class JdbcKqxx {
                     if ("2018-02".equals(cxsj)) {
                         mqts = byts - 1 - tdts - gxts;
                     }
-
+                    if ("2019-10".equals(cxsj)) {
+                        mqts = 25f;
+                    }
                     float kqzs = 0.0F;
 
 

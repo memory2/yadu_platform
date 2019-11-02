@@ -40,32 +40,32 @@ function jsEncode(word) {
 }
 
 
-//datagridï¿½ï¿½ï¿½ï¿½ï¿½ï¿½excel
+//datagridµ¼³öµ½excel
 function ExporterExcel(gridID, gridBT) {
-    //ï¿½ï¿½È¡Datagrideï¿½ï¿½ï¿½ï¿½
+    //»ñÈ¡DatagrideµÄÁÐ
     var rows = $("#" + gridID).datagrid('getRows');
     var columns = $("#" + gridID).datagrid("options").columns[0];
-    var oXL = new ActiveXObject("Excel.Application"); //ï¿½ï¿½ï¿½ï¿½AXï¿½ï¿½ï¿½ï¿½excel 
-    var oWB = oXL.Workbooks.Add(); //ï¿½ï¿½È¡workbookï¿½ï¿½ï¿½ï¿½ 
-    var oSheet = oWB.ActiveSheet; //ï¿½ï¿½ï¿½îµ±Ç°sheet
-    //ï¿½ï¿½ï¿½Ã¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    var oXL = new ActiveXObject("Excel.Application"); //´´½¨AX¶ÔÏóexcel 
+    var oWB = oXL.Workbooks.Add(); //»ñÈ¡workbook¶ÔÏó 
+    var oSheet = oWB.ActiveSheet; //¼¤»îµ±Ç°sheet
+    //ÉèÖÃ¹¤×÷±¡Ãû³Æ
     oSheet.name = gridBT;
-    //ï¿½ï¿½ï¿½Ã±ï¿½Í·
+    //ÉèÖÃ±íÍ·
     for (var i = 0; i < columns.length; i++) {
         oSheet.Cells(1, i + 1).value = columns[i].title;
     }
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý²ï¿½ï¿½ï¿½
+    //ÉèÖÃÄÚÈÝ²¿·Ö
     for (var i = 0; i < rows.length; i++) {
-        //ï¿½ï¿½Ì¬ï¿½ï¿½È¡Ã¿Ò»ï¿½ï¿½Ã¿Ò»ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+        //¶¯Ì¬»ñÈ¡Ã¿Ò»ÐÐÃ¿Ò»ÁÐµÄÊý¾ÝÖµ
         for (var j = 0; j < columns.length; j++) {
             oSheet.Cells(i + 2, j + 1).value = rows[i][columns[j].field];
         }
     }
-    oXL.Visible = true; //ï¿½ï¿½ï¿½ï¿½excelï¿½É¼ï¿½ï¿½ï¿½ï¿½ï¿½
-    oXL = null;//ï¿½Í·Å¶ï¿½ï¿½ï¿½
+    oXL.Visible = true; //ÉèÖÃexcel¿É¼ûÊôÐÔ
+    oXL = null;//ÊÍ·Å¶ÔÏó
 }
 
-//datagridÍ¨ï¿½ï¿½
+//datagridÍ¨ÓÃ
 function getDataGird(url, gridID, gridBT) {
     var editRow = undefined;
     $('#' + gridID).datagrid({
@@ -73,7 +73,7 @@ function getDataGird(url, gridID, gridBT) {
         pagination: true,
         toolbar: [
             {
-                text: 'ï¿½ï¿½ï¿½ï¿½',
+                text: 'µ¼³ö',
                 iconCls: 'icon-dload',
                 handler: function () {
                     ExporterExcel(gridID, gridBT);
@@ -85,7 +85,7 @@ function getDataGird(url, gridID, gridBT) {
 
 }
 
-//datagridÍ¨ï¿½ï¿½
+//datagridÍ¨ÓÃ
 function getDataGird1(url, gridID, gridBT, updUrl, delUrl, width, height) {
     var editRow = undefined;
     $('#' + gridID).datagrid({
@@ -93,25 +93,25 @@ function getDataGird1(url, gridID, gridBT, updUrl, delUrl, width, height) {
         pagination: true,
         toolbar: [
             {
-                text: 'ï¿½ï¿½ï¿½ï¿½',
+                text: 'µ¼³ö',
                 iconCls: 'icon-dload',
                 handler: function () {
                     ExporterExcel(gridID, gridBT);
                 }
             }, {
-                text: 'ï¿½ï¿½ï¿½',
+                text: 'Ìí¼Ó',
                 iconCls: 'icon-add',
                 handler: function () {
                     edit(gridID, gridBT, updUrl, width, height, 'add');
                 }
             }, {
-                text: 'ï¿½Þ¸ï¿½',
+                text: 'ÐÞ¸Ä',
                 iconCls: 'icon-edit',
                 handler: function () {
                     edit(gridID, gridBT, updUrl, width, height, 'upd');
                 }
             }, {
-                text: 'É¾ï¿½ï¿½',
+                text: 'É¾³ý',
                 iconCls: 'icon-cancel',
                 handler: function () {
                     del(gridID, delUrl);
@@ -121,11 +121,11 @@ function getDataGird1(url, gridID, gridBT, updUrl, delUrl, width, height) {
     });
     var p = $('#' + gridID).datagrid('getPager');
     $(p).pagination({
-        pageSize: 10,//Ã¿Ò³ï¿½ï¿½Ê¾ï¿½Ä¼ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Îª10   
-        pageList: [5, 10, 15, 1000],//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿Ò³ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½   
-        beforePageText: 'ï¿½ï¿½',//Ò³ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½Ç°ï¿½ï¿½Ê¾ï¿½Äºï¿½ï¿½ï¿½   
-        afterPageText: 'Ò³    ï¿½ï¿½ {pages} Ò³',
-        displayMsg: 'ï¿½ï¿½Ç°ï¿½ï¿½Ê¾ {from} - {to} ï¿½ï¿½ï¿½ï¿½Â¼   ï¿½ï¿½ {total} ï¿½ï¿½ï¿½ï¿½Â¼',
+        pageSize: 10,//Ã¿Ò³ÏÔÊ¾µÄ¼ÇÂ¼ÌõÊý£¬Ä¬ÈÏÎª10   
+        pageList: [5, 10, 15, 1000],//¿ÉÒÔÉèÖÃÃ¿Ò³¼ÇÂ¼ÌõÊýµÄÁÐ±í   
+        beforePageText: 'µÚ',//Ò³ÊýÎÄ±¾¿òÇ°ÏÔÊ¾µÄºº×Ö   
+        afterPageText: 'Ò³    ¹² {pages} Ò³',
+        displayMsg: 'µ±Ç°ÏÔÊ¾ {from} - {to} Ìõ¼ÇÂ¼   ¹² {total} Ìõ¼ÇÂ¼',
     });
 
 
@@ -138,7 +138,7 @@ function edit(gridID, gridBT, updUrl, width, height, czlb) {
     if ('add' != czlb) {
         row = $('#' + gridID).datagrid('getSelected');
         if (czlb != 'add' && !row) {
-            $.messager.alert('ï¿½ï¿½Ê¾', 'ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½', 'info');
+            $.messager.alert('ÌáÊ¾', 'ÇëÏÈÑ¡ÖÐÐÐ', 'info');
             return;
         }
         href = updUrl + '?zj=' + row.id + '&czlb=' + czlb;
@@ -158,7 +158,7 @@ function edit(gridID, gridBT, updUrl, width, height, czlb) {
             closed: false,
             collapsible: false,
             resizable: false,
-            loadingMessage: 'ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½Ôµï¿½Æ¬ï¿½ï¿½......'
+            loadingMessage: 'ÕýÔÚ¼ÓÔØÊý¾Ý£¬ÇëÉÔµÈÆ¬¿Ì......'
         });
 
 }
@@ -167,10 +167,10 @@ function edit(gridID, gridBT, updUrl, width, height, czlb) {
 function del(gridID, delUrl) {
     var row = $('#' + gridID).datagrid('getSelected');
     if (!row) {
-        $.messager.alert('ï¿½ï¿½Ê¾', 'ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½', 'info');
+        $.messager.alert('ÌáÊ¾', 'ÇëÏÈÑ¡ÖÐÐÐ', 'info');
         return;
     }
-    $.messager.confirm('È·ï¿½ï¿½', 'ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ÒªÉ¾ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½', function (r) {
+    $.messager.confirm('È·ÈÏ', 'ÄúÈ·ÈÏÏëÒªÉ¾³ý¼ÇÂ¼Âð£¿', function (r) {
         if (r) {
             var href = delUrl + '&zj=' + row.id;
             $.ajax({
@@ -179,9 +179,9 @@ function del(gridID, delUrl) {
                 success: function (data) {
                     //alert(data);
                     if ('ok' == data) {
-                        alert("É¾ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½");
+                        alert("É¾³ý³É¹¦£¡");
                     } else {
-                        alert("É¾ï¿½ï¿½Ê§ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½");
+                        alert("É¾³ýÊ§°Ü,ÇëÁªÏµ¹ÜÀíÔ±£¡");
                     }
                     cx();
                 }
@@ -240,7 +240,7 @@ function getMonth() {
 function getTjt(lb, bt, tb, sz) {
     var content0 = '<chart caption="';
     var content1 = ' baseFontSize="14" showLimits="1" yAxisMaxValue="';
-    var content = ' yAxisMinValue="1000" name="333" showNames="1" showBorder="0" outCnvBaseFont="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îº"  outCnvBaseFontSize="20" bgColor="EEF3FA" canvasBgColor="EEF3FA" formatNumberScale="0" canvasBorderThickness="0"  showValues="1" showYAxisValues="1" showLegend="0"  labelDisplay="STAGGER" showPlotBorder="0" numDivLines="3"  borderThickness ="0" yAxisName="" xAxisName="" numberSuffix="Ôª" plotSpacePercent="50">';
+    var content = ' yAxisMinValue="1000" name="333" showNames="1" showBorder="0" outCnvBaseFont="»ªÎÄÐÂÎº"  outCnvBaseFontSize="20" bgColor="EEF3FA" canvasBgColor="EEF3FA" formatNumberScale="0" canvasBorderThickness="0"  showValues="1" showYAxisValues="1" showLegend="0"  labelDisplay="STAGGER" showPlotBorder="0" numDivLines="3"  borderThickness ="0" yAxisName="" xAxisName="" numberSuffix="Ôª" plotSpacePercent="50">';
 
     var sm = {};
     $.ajax({
@@ -248,7 +248,7 @@ function getTjt(lb, bt, tb, sz) {
         dataType: "json",
         url: 'servlet/OaAction?method=' + lb,
         success: function (data) {
-            //var d = eval("("+data+")");//Ð§ï¿½ï¿½ï¿½ï¿½Í¬ï¿½Ú¼ï¿½dataType
+            //var d = eval("("+data+")");//Ð§¹ûµÈÍ¬ÓÚ¼ÓdataType
             //alert(JSON.stringify(data[0]));
             var m1 = JSON.stringify(data[0].m1) != undefined ? JSON.stringify(data[0].m1) : '"0"';
             var m2 = JSON.stringify(data[0].m2) != undefined ? JSON.stringify(data[0].m2) : '"0"';
@@ -274,7 +274,7 @@ function getTjt(lb, bt, tb, sz) {
             }
             var char = new Array(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12);
             for (var i = 1; i <= month; i++) {
-                content += '<set label="' + i + 'ï¿½ï¿½"  value=' + char[i - 1] + ' />'
+                content += '<set label="' + i + 'ÔÂ"  value=' + char[i - 1] + ' />'
             }
             //alert(content);
             // if(myChart==null){
@@ -289,29 +289,29 @@ function getTjt(lb, bt, tb, sz) {
     });
 }
 
-//ï¿½ï¿½Ç°Ê±ï¿½ï¿½
+//µ±Ç°Ê±¼ä
 function tick(divId) {
     var today = new Date();
     var ww = today.getDay();
-    if (ww == 0) ww = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
-    if (ww == 1) ww = "ï¿½ï¿½ï¿½ï¿½Ò»";
-    if (ww == 2) ww = "ï¿½ï¿½ï¿½Ú¶ï¿½";
-    if (ww == 3) ww = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
-    if (ww == 4) ww = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
-    if (ww == 5) ww = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
-    if (ww == 6) ww = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+    if (ww == 0) ww = "ÐÇÆÚÈÕ";
+    if (ww == 1) ww = "ÐÇÆÚÒ»";
+    if (ww == 2) ww = "ÐÇÆÚ¶þ";
+    if (ww == 3) ww = "ÐÇÆÚÈý";
+    if (ww == 4) ww = "ÐÇÆÚËÄ";
+    if (ww == 5) ww = "ÐÇÆÚÎå";
+    if (ww == 6) ww = "ÐÇÆÚÁù";
     $("#" + divId).text(today.toLocaleString() + " " + ww);
     window.setTimeout("tick('" + divId + "')", 1000);
 };
 
 
-//jsonï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½json
+//json×Ö·û´®½âÎö³Ìjson
 function strToJson(str) {
     var json = eval('(' + str + ')');
     return json;
 }
 
-//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+//»ñÈ¡²¿ÃÅÏÂÀ­ÁÐ±í
 function getDept(selectid, deptid) {
     var theurl = "";
     if (deptid.substring(0, 2) == "41") {
@@ -332,11 +332,11 @@ function getDept(selectid, deptid) {
             $('#' + selectid).combotree('loadData', data);
             $("#" + selectid).combotree({
                 multiple: false,
-                onlyLeafCheck: false,//trueÖ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡
+                onlyLeafCheck: false,//trueÖ»ÓÐ×îÀï²ãÏî¿ÉÑ¡
                 cascadeCheck: false,
                 onSelect: function (node) {
                     if (9000000000 == node.id) {
-                        //ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
+                        //Çå³ýÑ¡ÖÐ
                         $('#' + selectid).combotree('clear');
                     }
                 },
@@ -350,7 +350,7 @@ function getDept(selectid, deptid) {
 }
 
 
-//ï¿½ï¿½È¡ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+//»ñÈ¡ÈËÔ±ÏÂÀ­ÁÐ±í
 function getPerson(selectid, deptid) {
     var theurl = "";
     if (deptid.substring(0, 2) == "41") {
@@ -383,11 +383,11 @@ function getPerson(selectid, deptid) {
 }
 
 
-//ï¿½ï¿½È¡ï¿½ï¿½Ô±ï¿½Ð±ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½Ç·ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//»ñÈ¡ÈËÔ±ÁÐ±íÊ±£¬ÑéÖ¤ÊÇ·ñÑ¡ÔñËùÊô²¿ÃÅ
 function yzry(deptid, personid) {
     var bm = $("#" + deptid).combobox('getValue');
     if (bm == null || bm == undefined || bm == "") {
-        alert('ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!');
+        alert('ÇëÏÈÑ¡ÔñËùÊô²¿ÃÅ!');
     } else {
         getPerson(personid, bm);
     }

@@ -51,7 +51,7 @@
             }
         },
         /**
-         * Add un-duplicate array item, 'o' parameter is the id field name, if the 'r' object is exists, deny the action.
+         * Add untill-duplicate array item, 'o' parameter is the id field name, if the 'r' object is exists, deny the action.
          */
         addArrayItem: function (a, o, r) {
             var index = this.indexOfArray(a, o, r ? r[o] : undefined);
