@@ -250,7 +250,7 @@ public class KqAction extends HttpServlet {
 
     //增删改通讯录、角色、权限、特殊考勤
     private void upd(HttpServletRequest req, HttpServletResponse resp, String method) throws Exception {
-        resp.setContentType("text/html; charset=utf-8");
+        resp.setContentType("text/html; charset=GBK");
         List list = new ArrayList();
         if (method.endsWith("jsgl")) {
             if (!"xx_del".equals(method.substring(0, 6))) {
@@ -292,12 +292,12 @@ public class KqAction extends HttpServlet {
         } else if (method.endsWith("tskq")) {
             if (!"xx_del".equals(method.substring(0, 6))) {
                 list.add(req.getParameter("rq"));
-                list.add(new String(req.getParameter("swsb").getBytes("ISO-8859-1"), "UTF-8"));
-                list.add(new String(req.getParameter("swxb").getBytes("ISO-8859-1"), "UTF-8"));
-                list.add(new String(req.getParameter("xwsb").getBytes("ISO-8859-1"), "UTF-8"));
-                list.add(new String(req.getParameter("xwxb").getBytes("ISO-8859-1"), "UTF-8"));
+                list.add(new String(req.getParameter("swsb")));
+                list.add(new String(req.getParameter("swxb")));
+                list.add(new String(req.getParameter("xwsb")));
+                list.add(new String(req.getParameter("xwxb")));
                 list.add(req.getParameter("lb"));
-                list.add(new String(req.getParameter("tname").getBytes("ISO-8859-1"), "UTF-8"));
+                list.add(new String(req.getParameter("tname")));
             }
 
             if (!"xx_add".equals(method.substring(0, 6))) {
@@ -305,8 +305,8 @@ public class KqAction extends HttpServlet {
             }
         } else if (method.endsWith("team")) {
             if (!"xx_del".equals(method.substring(0, 6))) {
-                list.add(new String(req.getParameter("tname").getBytes("ISO-8859-1"), "UTF-8"));
-                list.add(new String(req.getParameter("tmember").getBytes("ISO-8859-1"), "UTF-8"));
+                list.add(new String(req.getParameter("tname")));
+                list.add(new String(req.getParameter("tmember")));
                 list.add(req.getParameter("gslb"));
             }
 
