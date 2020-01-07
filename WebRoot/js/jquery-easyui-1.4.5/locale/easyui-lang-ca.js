@@ -23,8 +23,8 @@ $.map(['validatebox', 'textbox', 'filebox', 'searchbox',
 });
 if ($.fn.validatebox) {
     $.fn.validatebox.defaults.rules.email.message = 'Introduïu una adreça de correu electrònic vàlida.';
-    $.fn.validatebox.defaults.rules.url.message = 'Si us plau, introduïu un URL vàlida.';
-    $.fn.validatebox.defaults.rules.length.message = 'Si us plau, introduïu un valor entre {0} i {1}.';
+    $.fn.validatebox.defaults.rules.url.message = 'Si us plau, introduïu untill URL vàlida.';
+    $.fn.validatebox.defaults.rules.length.message = 'Si us plau, introduïu untill valor entre {0} i {1}.';
 }
 if ($.fn.calendar) {
     $.fn.calendar.defaults.weeks = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];

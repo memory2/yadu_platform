@@ -12,6 +12,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>人员信息管理</title>
+
     <link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.4.5/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.4.5/themes/icon.css">
     <script type="text/javascript" src="js/jquery-easyui-1.4.5/jquery.min.js"></script>
@@ -44,6 +45,7 @@
         var zwjb = '<%=zwjb%>';
         var bmdm = '<%=bmdm%>';
         $(function () {
+
             img = $("#progressImgage");
             mask = $("#maskOfProgressImage");
             var cx_flag = false;
@@ -83,13 +85,18 @@
                 method1('tjkq');
             });
             bmmc1=bmdm;
-            if (txm == "10665" || txm == "10297" || txm == "11439" || txm == "10005"|| txm=="10269") {//txm=="10297"赵燕
+            if (txm == "10665" || txm == "10297" || txm == "11439" || txm == "10005"|| txm=="10269"||txm=="11665" ||txm == "11048") {//txm=="10297"赵燕  txm=="11665" 代瑞金  txm==张海娟
                 bmdm = "4100000000";
             }
-            if(txm == "11048"){ //txm==张海娟
-                bmdm = "4103000000";
+            if(txm=="10311"){   // 10311 许志武
+                bmdm="4109060000";
             }
-
+            if(txm=="11594"){ //周志飞
+                bmdm="4121000000";
+            }
+            if(txm == "10657"){
+                bmdm="4109000000";
+            }
             getDept("bm", bmdm);
             $("#xm").combobox('textbox').bind('focus', function () {
                 yzry("bm", "xm");
@@ -120,23 +127,28 @@
             });
             $('#bm').combobox({disabled: true});
             $('#xm').combobox({disabled: true});
-            if ((bmmc == '信息部' || bmmc == '亚都人资行政部' || txm == "10703" || txm == "10665" || txm == "10269" || txm == "10838" ) || (zwjb != "10012" && zwjb !== "10013" && zwjb !== "10014" && zwjb !== "10016" && zwjb !== "10018" && zwjb !== "10022")) {
+
+            if ((bmmc == '信息部' || bmmc == '亚都人资行政部' || txm == "10703" || txm == "10665" || txm == "10269" || txm == "10838" ||txm == "11048") || (zwjb != "10012" && zwjb !== "10013" && zwjb !== "10014" && zwjb !== "10016" && zwjb !== "10018" && zwjb !== "10022")) {
                 $('#bm').combobox({disabled: false});
                 $('#xm').combobox({disabled: false});
             }
-            if(txm == "11048"){
+            if(txm == "11048"||txm=="10311"||txm=="11594"){
                 $('#xm').combobox({disabled: false});
             }
-            if(txm == "10269"){
+
+            if(txm == "10269" ||txm =="11665"){
                 $("#bm").combotree('setValue', bmmc1);
             }else {
                 $("#bm").combotree('setValue', bmdm);
             }
-            if (txm != "10554" && txm != "10703"&&txm != "11048") {
+            if (txm != "10554" && txm != "10703"&&txm != "11048"&&txm != "10657") {
 
                 $("#xm").combobox('setValue', txm);
             }
-            cx(getYf());
+            if (txm != "10657"&&txm != "11048"){
+                cx(getYf());
+            }
+
         });
 
 
@@ -233,7 +245,7 @@
                     mask.show().css("opacity", "0.1");
                 },
                 success: function (data) {
-                    //alert(JSON.stringify(data));
+                    console.info(JSON.stringify(data));
                     //var jsonData  = JSON.stringify(data[0]);
                     //$("#dg_kqxx").html(JSON.stringify(data));
                     if (data.length > 0) {

@@ -24,7 +24,7 @@ $.map(['validatebox', 'textbox', 'filebox', 'searchbox',
 if ($.fn.validatebox) {
     $.fn.validatebox.defaults.rules.email.message = 'Por favor ingrese una direcci&oacute;n de correo v&aacute;lida.';
     $.fn.validatebox.defaults.rules.url.message = 'Por favor ingrese una URL v&aacute;lida.';
-    $.fn.validatebox.defaults.rules.length.message = 'Por favor ingrese un valor entre {0} y {1}.';
+    $.fn.validatebox.defaults.rules.length.message = 'Por favor ingrese untill valor entre {0} y {1}.';
     $.fn.validatebox.defaults.rules.remote.message = 'Por favor corrija este campo.';
 }
 if ($.fn.calendar) {

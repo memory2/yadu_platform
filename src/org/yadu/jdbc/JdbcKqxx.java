@@ -5,6 +5,7 @@ import org.yadu.untill.DateUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.net.URLDecoder;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -107,7 +108,7 @@ public class JdbcKqxx {
 
 
         //根据页面查询条件查询OA人员
-        String sql_oary = "select p.stuff_id  as gh,p.per_sort as ryxh,b.bmmc,p.truename as ryxm,p.id as oaryid from person p,t_ydbm b where p.isaway = '0' and b.oa_bmid = p.dep_id  and p.id!='10554' " + whereSql_oary;
+        String sql_oary = "select p.stuff_id  as gh,p.per_sort as ryxh,b.bmmc,b.bmid,p.truename as ryxm,p.id as oaryid from person p,t_ydbm b where p.isaway = '0' and b.oa_bmid = p.dep_id  and p.id!='10554' " + whereSql_oary;
         Statement st_oary = this.con_oa.createStatement();
         ResultSet rs_oary = st_oary.executeQuery(sql_oary);
 
@@ -124,6 +125,7 @@ public class JdbcKqxx {
             String ryxm = rs_oary.getString("ryxm");
             String oaryid = rs_oary.getString("oaryid");
             String ryxh = rs_oary.getString("ryxh");
+            String bmid = rs_oary.getString("bmid");
             whereSql_kqjl = " where e.employeeCode in ('" + gh_int + "','" + ryxh + "')";
 
             int cdcs = 0;
@@ -177,6 +179,7 @@ public class JdbcKqxx {
                     map.put("xm", ryxm);
                     map.put("gh", gh);
                     map.put("bm", bmmc);
+                    map.put("bmid",bmid);
                     if ("日".equals(df_xq.format(date).substring(2, 3))) {
                         ydxqt++;
                     }
@@ -188,7 +191,7 @@ public class JdbcKqxx {
                     ResultSet rs_tskq = st_tskq.executeQuery(Sql_tskq);
                     //System.out.println(Sql_tskq);
                     while (rs_tskq.next()) {
-                        String ts_lb = rs_tskq.getString("lb"); //停电放假tdfj/停电补签tdbq/放假fj/喜宴xy
+                        String ts_lb  = rs_tskq.getString("lb"); //停电放假tdfj/停电补签tdbq/放假fj/喜宴xy
                         String ts_rq = rs_tskq.getString("rq");
                         String ts_member = rs_tskq.getString("tmember");
                         String ts_swsb = rs_tskq.getString("swsb");
@@ -380,192 +383,378 @@ public class JdbcKqxx {
                         }
                     }
 
-
-                    if (!isEmpty(dksj)) {
-                        String[] dk = dksj.split(",");
-
-                        for (int j = 0; j < dk.length; j++) { // begin 循环每天的打卡记录
-                            if (isSummer(fdate, df_rq)) { //begin 亚都夏季打卡时间
-                                if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
-                                        map.put("swsb", "正常" + dk[j]);
-                                        swsbzcts = (float) (swsbzcts + 0.25D);
-                                    }
-                                } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
-                                        map.put("swsb", "迟到" + dk[j]);
-                                        cdcs++;
-                                        swsbcdts = (float) (swsbcdts + 0.25D);
-                                    }
-                                } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
-                                        map.put("swsb", "迟到" + dk[j]);
-                                        cdcs_15++;
-                                        swsbcdts_15 = (float) (swsbcdts_15 + 0.25D);
-                                    }
-                                } else if (compareTime(dk[j], "12:00:00", df_sj) >= 0L && compareTime(dk[j], "13:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swxb"))) {
-                                        map.put("swxb", "正常" + dk[j]);
-                                        swxbzcts = (float) (swxbzcts + 0.25D);
-                                    }
-                                } else if (compareTime(dk[j], "11:00:00", df_sj) >= 0L && compareTime(dk[j], "12:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swxb"))) {
-                                        map.put("swxb", "早退" + dk[j]);
-                                        ztcs++;
-                                        swxbztts = (float) (swxbztts + 0.25D);
-                                    }
-
-                                } else if (compareTime(dk[j], "14:01:00", df_sj) <= 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
-                                        map.put("xwsb", "正常" + dk[j]);
-                                        xwsbzcts = (float) (xwsbzcts + 0.25D);
-                                    }
-                                } else if (compareTime(dk[j], "14:01:00", df_sj) > 0L && compareTime(dk[j], "14:15:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
-                                        map.put("xwsb", "迟到" + dk[j]);
-                                        cdcs++;
-                                        xwsbcdts = (float) (xwsbcdts + 0.25D);
-                                    }
-
-                                } else if (compareTime(dk[j], "14:15:00", df_sj) > 0L && compareTime(dk[j], "15:30:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
-                                        map.put("xwsb", "迟到" + dk[j]);
-                                        cdcs_15++;
-                                        xwsbcdts_15 = (float) (xwsbcdts_15 + 0.25D);
-                                    }
-
-                                } else if (compareTime(dk[j], "18:00:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
-                                        map.put("xwxb", "正常" + dk[j]);
-                                        xwxbzcts = (float) (xwxbzcts + 0.25D);
-                                    }
-                                } else if (compareTime(dk[j], "18:00:00", df_sj) < 0L && compareTime(dk[j], "16:30:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
-                                        map.put("xwxb", "早退" + dk[j]);
-                                        ztcs++;
-                                        xwxbztts = (float) (xwxbztts + 0.25D);
-                                    }
-                                }
-
-                                if (isEmpty((String) map.get("swsb"))) {
-                                    map.put("swsb", "无");
-                                }
-                                if (isEmpty((String) map.get("swxb"))) {
-                                    map.put("swxb", "无");
-                                }
-                                if (isEmpty((String) map.get("xwsb"))) {
-                                    map.put("xwsb", "无");
-                                }
-                                if (isEmpty((String) map.get("xwxb"))) {
-                                    map.put("xwxb", "无");
-                                }
-
-                            } else { // end 亚都夏季打卡时间/begin 亚都冬季打卡时间
-
-                                if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
-                                        map.put("swsb", "正常" + dk[j]);
-                                        swsbzcts = (float) (swsbzcts + 0.25D);
-                                    }
-                                } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
-                                        map.put("swsb", "迟到" + dk[j]);
-                                        cdcs++;
-                                        swsbcdts = (float) (swsbcdts + 0.25D);
-                                    }
-                                } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
-                                        map.put("swsb", "迟到" + dk[j]);
-                                        cdcs_15++;
-                                        swsbcdts_15 = (float) (swsbcdts_15 + 0.25D);
-                                    }
-                                } else if (compareTime(dk[j], "12:00:00", df_sj) >= 0L && compareTime(dk[j], "13:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swxb"))) {
-                                        map.put("swxb", "正常" + dk[j]);
-                                        swxbzcts = (float) (swxbzcts + 0.25D);
-                                    }
-                                } else if (compareTime(dk[j], "11:30:00", df_sj) >= 0L && compareTime(dk[j], "12:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swxb"))) {
-                                        if ("2019-04-29".equals(fdate)) {//运动会提前下班
-                                            map.put("swxb", "正常" + dk[j]);
-                                            swxbzcts = (float) (swxbzcts + 0.25D);
-                                        } else {
-                                            map.put("swxb", "早退" + dk[j]);
-                                            ztcs++;
-                                            swxbztts = (float) (swxbztts + 0.25D);
-                                        }
-
-                                    }
-
-                                } else if (compareTime(dk[j], "13:31:00", df_sj) <= 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
-                                        map.put("xwsb", "正常" + dk[j]);
-                                        xwsbzcts = (float) (xwsbzcts + 0.25D);
-                                    }
-                                } else if (compareTime(dk[j], "13:31:00", df_sj) > 0L && compareTime(dk[j], "13:45:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
-                                        map.put("xwsb", "迟到" + dk[j]);
-                                        cdcs++;
-                                        xwsbcdts = (float) (xwsbcdts + 0.25D);
-                                    }
-
-                                } else if (compareTime(dk[j], "13:45:00", df_sj) > 0L && compareTime(dk[j], "15:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
-                                        map.put("xwsb", "迟到" + dk[j]);
-                                        cdcs_15++;
-                                        xwsbcdts_15 = (float) (xwsbcdts_15 + 0.25D);
-                                    }
-
-                                } else if (compareTime(dk[j], "17:30:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
-                                        map.put("xwxb", "正常" + dk[j]);
-                                        xwxbzcts = (float) (xwxbzcts + 0.25D);
-                                    }
-                                } else if (compareTime(dk[j], "17:30:00", df_sj) < 0L && compareTime(dk[j], "15:00:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
-                                        if ("2019-01-28".equals(fdate) || "2019-01-31".equals(fdate) || "2019-02-19".equals(fdate)) {//祭灶提前下班
-                                            map.put("xwxb", "正常" + dk[j]);
-                                            xwxbzcts = (float) (xwxbzcts + 0.25D);
-                                        } else {
-                                            map.put("xwxb", "早退" + dk[j]);
-                                            ztcs++;
-                                            xwxbztts = (float) (xwxbztts + 0.25D);
-                                        }
-
-                                    }
-                                }
-
-                                if (isEmpty((String) map.get("swsb"))) {
-                                    map.put("swsb", "无");
-                                }
-                                if (isEmpty((String) map.get("swxb"))) {
-                                    map.put("swxb", "无");
-                                }
-                                if (isEmpty((String) map.get("xwsb"))) {
-                                    map.put("xwsb", "无");
-                                }
-                                if (isEmpty((String) map.get("xwxb"))) {
-                                    map.put("xwxb", "无");
-                                }
-
-                            }// end 亚都冬季打卡时间
-
-                        } // end 循环每天的打卡记录
-
-                    } else {   // end 判断打卡时间是否为空
-                        if ((isEmpty((String) map.get("swsb")))) {
-                            map.put("swsb", "无");
-                        }
-                        if ((isEmpty((String) map.get("swxb")))) {
-                            map.put("swxb", "无");
-                        }
-                        if ((isEmpty((String) map.get("xwsb")))) {
-                            map.put("xwsb", "无");
-                        }
-                        if ((isEmpty((String) map.get("xwxb")))) {
-                            map.put("xwxb", "无");
-                        }
+                    String Sql_tskq1 = "select t.rq,t.swsb,t.swxb,t.xwsb,t.xwxb,t.lb,t1.tmember from t_team_tskq t,t_team t1 where t.teamid = t1.id  and t1.gslb='41' and t.rq= '" + fdate + "'";
+                    Statement st_tskq1 = this.con_oa.createStatement();
+                    ResultSet rs_tskq1 = st_tskq1.executeQuery(Sql_tskq1);
+                    //System.out.println(Sql_tskq);
+                    String ts_member1="";
+                    String ts_lb1="";
+                    String ts_rq1="";
+                    while (rs_tskq1.next()) {
+                        //停电放假tdfj/停电补签tdbq/放假fj/喜宴xy
+                         ts_lb1 = rs_tskq1.getString("lb");
+                         ts_rq1 = rs_tskq1.getString("rq");
+                         ts_member1 = rs_tskq1.getString("tmember");
                     }
+
+                        if (!isEmpty(dksj)) {
+                            String[] dk = dksj.split(",");
+
+                            for (int j = 0; j < dk.length; j++) { // begin 循环每天的打卡记录
+                                if (isSummer(fdate, df_rq)) { //begin 亚都夏季打卡时间
+                                    if("4121000001".equals(bmid)){
+                                        if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.5D);
+                                                }
+                                                map.put("swsb", "正常" + dk[j]);
+                                                swsbzcts = (float) (swsbzcts + 0.5D);
+                                            }
+                                        } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.5D);
+                                                }
+                                                map.put("swsb", "迟到" + dk[j]);
+                                                cdcs++;
+                                                swsbcdts = (float) (swsbcdts + 0.5D);
+                                            }
+                                        } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.5D);
+                                                }
+                                                map.put("swsb", "迟到" + dk[j]);
+                                                cdcs_15++;
+                                                swsbcdts_15 = (float) (swsbcdts_15 + 0.5D);
+                                            }
+                                        } else if (compareTime(dk[j], "17:00:00", df_sj) >= 0L) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.5D);
+                                                }
+                                                map.put("xwxb", "正常" + dk[j]);
+                                                xwxbzcts = (float) (xwxbzcts + 0.5D);
+                                            }
+                                        } else if (compareTime(dk[j], "17:00:00", df_sj) < 0L && compareTime(dk[j], "15:00:00", df_sj) >= 0L) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.5D);
+                                                }
+                                                if ("2019-01-28".equals(fdate) || "2019-01-31".equals(fdate) || "2019-02-19".equals(fdate)) {//祭灶提前下班
+                                                    map.put("xwxb", "正常" + dk[j]);
+                                                    xwxbzcts = (float) (xwxbzcts + 0.5D);
+                                                } else {
+                                                    map.put("xwxb", "早退" + dk[j]);
+                                                    ztcs++;
+                                                    xwxbztts = (float) (xwxbztts + 0.5D);
+                                                }
+
+                                            }
+                                        }
+                                        if (isEmpty((String) map.get("swsb"))) {
+                                            map.put("swsb", "无");
+                                        }
+                                        if (isEmpty((String) map.get("swxb"))) {
+                                            map.put("swxb", "无");
+                                        }
+                                        if (isEmpty((String) map.get("xwsb"))) {
+                                            map.put("xwsb", "无");
+                                        }
+                                        if (isEmpty((String) map.get("xwxb"))) {
+                                            map.put("xwxb", "无");
+                                        }
+                                    }else {
+                                        if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
+                                            if (isEmpty((String) map.get("swsb"))) {
+                                                map.put("swsb", "正常" + dk[j]);
+                                                swsbzcts = (float) (swsbzcts + 0.25D);
+                                            }
+                                        } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
+                                            if (isEmpty((String) map.get("swsb"))) {
+                                                map.put("swsb", "迟到" + dk[j]);
+                                                cdcs++;
+                                                swsbcdts = (float) (swsbcdts + 0.25D);
+                                            }
+                                        } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
+                                            if (isEmpty((String) map.get("swsb"))) {
+                                                map.put("swsb", "迟到" + dk[j]);
+                                                cdcs_15++;
+                                                swsbcdts_15 = (float) (swsbcdts_15 + 0.25D);
+                                            }
+                                        } else if (compareTime(dk[j], "12:00:00", df_sj) >= 0L && compareTime(dk[j], "13:00:00", df_sj) < 0L) {
+                                            if (isEmpty((String) map.get("swxb"))) {
+                                                map.put("swxb", "正常" + dk[j]);
+                                                swxbzcts = (float) (swxbzcts + 0.25D);
+                                            }
+                                        } else if (compareTime(dk[j], "11:00:00", df_sj) >= 0L && compareTime(dk[j], "12:00:00", df_sj) < 0L) {
+                                            if (isEmpty((String) map.get("swxb"))) {
+                                                map.put("swxb", "早退" + dk[j]);
+                                                ztcs++;
+                                                swxbztts = (float) (swxbztts + 0.25D);
+                                            }
+
+                                        } else if (compareTime(dk[j], "14:01:00", df_sj) <= 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
+                                            if (isEmpty((String) map.get("xwsb"))) {
+                                                map.put("xwsb", "正常" + dk[j]);
+                                                xwsbzcts = (float) (xwsbzcts + 0.25D);
+                                            }
+                                        } else if (compareTime(dk[j], "14:01:00", df_sj) > 0L && compareTime(dk[j], "14:15:00", df_sj) <= 0L) {
+                                            if (isEmpty((String) map.get("xwsb"))) {
+                                                map.put("xwsb", "迟到" + dk[j]);
+                                                cdcs++;
+                                                xwsbcdts = (float) (xwsbcdts + 0.25D);
+                                            }
+
+                                        } else if (compareTime(dk[j], "14:15:00", df_sj) > 0L && compareTime(dk[j], "15:30:00", df_sj) < 0L) {
+                                            if (isEmpty((String) map.get("xwsb"))) {
+                                                map.put("xwsb", "迟到" + dk[j]);
+                                                cdcs_15++;
+                                                xwsbcdts_15 = (float) (xwsbcdts_15 + 0.25D);
+                                            }
+
+                                        }else if("601083".equals(gh)||"600913".equals(gh)){
+                                            if (compareTime(dk[j], "17:30:00", df_sj) >= 0L){
+                                                map.put("xwxb", "正常" + dk[j]);
+                                                xwxbzcts = (float) (xwxbzcts + 0.25D);
+                                            }
+                                        }else if (compareTime(dk[j], "18:00:00", df_sj) >= 0L) {
+                                            if (isEmpty((String) map.get("xwxb"))) {
+                                                map.put("xwxb", "正常" + dk[j]);
+                                                xwxbzcts = (float) (xwxbzcts + 0.25D);
+                                            }
+                                        } else if (compareTime(dk[j], "18:00:00", df_sj) < 0L && compareTime(dk[j], "16:30:00", df_sj) >= 0L) {
+                                            if (isEmpty((String) map.get("xwxb"))) {
+                                                if ("2019-09-12".equals(fdate)) {//中秋节下班
+                                                    map.put("xwxb", "正常" + dk[j]);
+                                                    xwxbzcts = (float) (xwxbzcts + 0.25D);
+                                                }else{
+                                                    map.put("xwxb", "早退" + dk[j]);
+                                                    ztcs++;
+                                                    xwxbztts = (float) (xwxbztts + 0.25D);
+                                                }
+
+                                            }
+                                        }
+
+                                        if (isEmpty((String) map.get("swsb"))) {
+                                            map.put("swsb", "无");
+                                        }
+                                        if (isEmpty((String) map.get("swxb"))) {
+                                            map.put("swxb", "无");
+                                        }
+                                        if (isEmpty((String) map.get("xwsb"))) {
+                                            map.put("xwsb", "无");
+                                        }
+                                        if (isEmpty((String) map.get("xwxb"))) {
+                                            map.put("xwxb", "无");
+                                        }
+                                    }
+                                } else { // end 亚都夏季打卡时间/begin 亚都冬季打卡时间
+                                    if("4121000001".equals(bmid)){
+                                        if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.5D);
+                                                }
+                                                map.put("swsb", "正常" + dk[j]);
+                                                swsbzcts = (float) (swsbzcts + 0.5D);
+                                            }
+                                        } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.5D);
+                                                }
+                                                map.put("swsb", "迟到" + dk[j]);
+                                                cdcs++;
+                                                swsbcdts = (float) (swsbcdts + 0.5D);
+                                            }
+                                        } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.5D);
+                                                }
+                                                map.put("swsb", "迟到" + dk[j]);
+                                                cdcs_15++;
+                                                swsbcdts_15 = (float) (swsbcdts_15 + 0.5D);
+                                            }
+                                        } else if (compareTime(dk[j], "17:00:00", df_sj) >= 0L) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.5D);
+                                                }
+                                                map.put("xwxb", "正常" + dk[j]);
+                                                xwxbzcts = (float) (xwxbzcts + 0.5D);
+                                            }
+                                        } else if (compareTime(dk[j], "17:00:00", df_sj) < 0L && compareTime(dk[j], "15:00:00", df_sj) >= 0L) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.5D);
+                                                }
+                                                if ("2019-01-28".equals(fdate) || "2019-01-31".equals(fdate) || "2019-02-19".equals(fdate)) {//祭灶提前下班
+                                                    map.put("xwxb", "正常" + dk[j]);
+                                                    xwxbzcts = (float) (xwxbzcts + 0.5D);
+                                                } else {
+                                                    map.put("xwxb", "早退" + dk[j]);
+                                                    ztcs++;
+                                                    xwxbztts = (float) (xwxbztts + 0.5D);
+                                                }
+
+                                            }
+                                        }
+                                        if (isEmpty((String) map.get("swsb"))) {
+                                            map.put("swsb", "无");
+                                        }
+                                        if (isEmpty((String) map.get("swxb"))) {
+                                            map.put("swxb", "无");
+                                        }
+                                        if (isEmpty((String) map.get("xwsb"))) {
+                                            map.put("xwsb", "无");
+                                        }
+                                        if (isEmpty((String) map.get("xwxb"))) {
+                                            map.put("xwxb", "无");
+                                        }
+                                    }else{
+                                        if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.25D);
+                                                }
+                                                map.put("swsb", "正常" + dk[j]);
+                                                swsbzcts = (float) (swsbzcts + 0.25D);
+                                            }
+                                        } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.25D);
+                                                }
+                                                map.put("swsb", "迟到" + dk[j]);
+                                                cdcs++;
+                                                swsbcdts = (float) (swsbcdts + 0.25D);
+                                            }
+                                        } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.25D);
+                                                }
+                                                map.put("swsb", "迟到" + dk[j]);
+                                                cdcs_15++;
+                                                swsbcdts_15 = (float) (swsbcdts_15 + 0.25D);
+                                            }
+                                        } else if (compareTime(dk[j], "12:00:00", df_sj) >= 0L && compareTime(dk[j], "13:00:00", df_sj) < 0L) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.25D);
+                                                }
+                                                map.put("swxb", "正常" + dk[j]);
+                                                swxbzcts = (float) (swxbzcts + 0.25D);
+                                            }
+                                        } else if (compareTime(dk[j], "11:30:00", df_sj) >= 0L && compareTime(dk[j], "12:00:00", df_sj) < 0L) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.25D);
+                                                }
+                                                if ("2019-04-29".equals(fdate)) {//运动会提前下班
+                                                    map.put("swxb", "正常" + dk[j]);
+                                                    swxbzcts = (float) (swxbzcts + 0.25D);
+                                                } else {
+                                                    map.put("swxb", "早退" + dk[j]);
+                                                    ztcs++;
+                                                    swxbztts = (float) (swxbztts + 0.25D);
+                                                }
+
+                                            }
+
+                                        } else if (compareTime(dk[j], "13:00:00", df_sj) >= 0L && compareTime(dk[j], "13:31:00", df_sj) < 0L) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.25D);
+                                                }
+                                                map.put("xwsb", "正常" + dk[j]);
+                                                xwsbzcts = (float) (xwsbzcts + 0.25D);
+                                            }
+                                        } else if (compareTime(dk[j], "13:31:00", df_sj) >= 0L && compareTime(dk[j], "13:45:00", df_sj) <= 0L) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.25D);
+                                                }
+                                                map.put("xwsb", "迟到" + dk[j]);
+                                                cdcs++;
+                                                xwsbcdts = (float) (xwsbcdts + 0.25D);
+                                            }
+
+                                        } else if (compareTime(dk[j], "13:45:00", df_sj) > 0L && compareTime(dk[j], "15:00:00", df_sj) < 0L) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.25D);
+                                                }
+                                                map.put("xwsb", "迟到" + dk[j]);
+                                                cdcs_15++;
+                                                xwsbcdts_15 = (float) (xwsbcdts_15 + 0.25D);
+                                            }
+
+                                        } else if (compareTime(dk[j], "17:30:00", df_sj) >= 0L) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.25D);
+                                                }
+                                                map.put("xwxb", "正常" + dk[j]);
+                                                xwxbzcts = (float) (xwxbzcts + 0.25D);
+                                            }
+                                        } else if (compareTime(dk[j], "17:30:00", df_sj) < 0L && compareTime(dk[j], "15:00:00", df_sj) >= 0L) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.25D);
+                                                }
+                                                if ("2019-01-28".equals(fdate) || "2019-01-31".equals(fdate) || "2019-02-19".equals(fdate)) {//祭灶提前下班
+                                                    map.put("xwxb", "正常" + dk[j]);
+                                                    xwxbzcts = (float) (xwxbzcts + 0.25D);
+                                                } else {
+                                                    map.put("xwxb", "早退" + dk[j]);
+                                                    ztcs++;
+                                                    xwxbztts = (float) (xwxbztts + 0.25D);
+                                                }
+
+                                            }
+                                        }
+                                        if (isEmpty((String) map.get("swsb"))) {
+                                            map.put("swsb", "无");
+                                        }
+                                        if (isEmpty((String) map.get("swxb"))) {
+                                            map.put("swxb", "无");
+                                        }
+                                        if (isEmpty((String) map.get("xwsb"))) {
+                                            map.put("xwsb", "无");
+                                        }
+                                        if (isEmpty((String) map.get("xwxb"))) {
+                                            map.put("xwxb", "无");
+                                        }
+                                    }
+
+
+
+                                }// end 亚都冬季打卡时间
+
+                            } // end 循环每天的打卡记录
+
+                        } else {   // end 判断打卡时间是否为空
+                            if ((isEmpty((String) map.get("swsb")))) {
+                                map.put("swsb", "无");
+                            }
+                            if ((isEmpty((String) map.get("swxb")))) {
+                                map.put("swxb", "无");
+                            }
+                            if ((isEmpty((String) map.get("xwsb")))) {
+                                map.put("xwsb", "无");
+                            }
+                            if ((isEmpty((String) map.get("xwxb")))) {
+                                map.put("xwxb", "无");
+                            }
+                        }
+
+
+
 
 
                     map.put("cdcs", Integer.valueOf(cdcs));
@@ -581,7 +770,10 @@ public class JdbcKqxx {
                         String bkcx = rs_oabq.getString("bqcx");
                         String bqlb = rs_oabq.getString("bqlb");
                         if ("0".equals(bkcx)) {
-                            if ((isEmpty((String) map.get("swsb"))) || ("无".equals((String) map.get("swsb")))) {
+                            if ((isEmpty((String) map.get("swsb"))) || ("无".equals((String) map.get("swsb")))||("元旦放假".equals((String) map.get("swsb")))) {
+                               if(("元旦放假".equals((String) map.get("swsb")))){
+                                   gxts = (float) (gxts - 0.25D);
+                               }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("swsb", "因公补签");
@@ -591,7 +783,10 @@ public class JdbcKqxx {
                                 }
                             }
                         } else if ("1".equals(bkcx)) {
-                            if ((isEmpty((String) map.get("swxb"))) || ("无".equals((String) map.get("swxb")))) {
+                            if ((isEmpty((String) map.get("swxb"))) || ("无".equals((String) map.get("swxb")))||("元旦放假".equals((String) map.get("swxb")))) {
+                                if(("元旦放假".equals((String) map.get("swxb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("swxb", "因公补签");
@@ -601,7 +796,10 @@ public class JdbcKqxx {
                                 }
                             }
                         } else if ("2".equals(bkcx)) {
-                            if ((isEmpty((String) map.get("xwsb"))) || ("无".equals((String) map.get("xwsb")))) {
+                            if ((isEmpty((String) map.get("xwsb"))) || ("无".equals((String) map.get("xwsb"))) ||("元旦放假".equals((String) map.get("xwsb"))) ) {
+                                if(("元旦放假".equals((String) map.get("xwsb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("xwsb", "因公补签");
@@ -611,7 +809,10 @@ public class JdbcKqxx {
                                 }
                             }
                         } else if ("3".equals(bkcx)) {
-                            if ((isEmpty((String) map.get("xwxb"))) || ("无".equals((String) map.get("xwxb")))) {
+                            if ((isEmpty((String) map.get("xwxb"))) || ("无".equals((String) map.get("xwxb")))|| ("元旦放假".equals((String) map.get("xwxb"))) ) {
+                                if(("元旦放假".equals((String) map.get("xwxb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("xwxb", "因公补签");
@@ -656,6 +857,8 @@ public class JdbcKqxx {
                                 xwbt = true;
                             } else if ("0".equals(kssj) && "1".equals(jssj)) { //上下午请一天假
                                 sxw = true;
+                            }else if ("2".equals(kssj) && "2".equals(jssj)) { //上下午请一天假
+                                sxw = true;
                             }
                         } else {
                             if ("0".equals(kssj) && "0".equals(jssj)) { //全天+上午请假
@@ -666,6 +869,8 @@ public class JdbcKqxx {
                                 dgqt = true;
                             } else if ("1".equals(kssj) && "0".equals(jssj)) { //下午+上午
                                 xwsw = true;
+                            }else if ("2".equals(kssj) && "2".equals(jssj)) { //上下午请一天假
+                                sxw = true;
                             }
                         }
 
@@ -843,16 +1048,21 @@ public class JdbcKqxx {
 
                     map.put("gxts", Float.valueOf(gxts));
 
-
                     float mqts = myts - ydxqt - tdts - gxts;
                     if ("2019-04".equals(cxsj)) {
                         mqts = 25.5f;
                     }
-                    if ("2019-05".equals(cxsj)) {
+                    if ("2019-10".equals(cxsj)) {
                         mqts = 25f;
                     }
                     if ("2019-06".equals(cxsj)) {
                         mqts = 24f;
+                    }
+                    if ("2019-09".equals(cxsj)) {
+                        mqts = 25f;
+                    }
+                    if ("2020-01".equals(cxsj)) {
+                        mqts = 27f;
                     }
                     // System.out.println(mqts+"--"+myts+"--"+tdts+"--"+gxts);
                     float kqzs = 0.0F;
@@ -861,16 +1071,14 @@ public class JdbcKqxx {
                         qjts = (float) (qjts + 0.25D);
                         kqzs = (float) (kqzs - 0.25D);
                     }
-                    //实际出勤=应出勤-公休天数-请假天数-停电天数-因公请假-婚嫁请假-丧假/事假-上午上班忘签到-上午下班忘签到-下午上班忘签到-下午下班忘签到
-                    kqzs = myts - gxts - qjts - tdts - qjts_gs - qjts_hj - qjts_sj - swsbwqd - swxbwqd - xwsbwqd - xwxbwqd;
-                    //System.out.println(df_rq.format(date)+":"+myts+":"+gxts+":人员姓名："+ryxm+qjts+":"+":"+tdts+":"+qjts_gs+":"+qjts_hj+":"+qjts_sj+":"+swsbwqd+":"+swxbwqd+":"+xwsbwqd+":"+xwxbwqd+"--"+kqzs);
 
                     if ((kqzs + "").endsWith(".25")) {
                         kqzs = (float) Math.floor(kqzs);
                     } else if ((kqzs + "").endsWith(".75")) {
                         kqzs = (float) ((float) Math.floor(kqzs) + 0.5D);
                     }
-
+                    //实际出勤=应出勤-公休天数-请假天数-停电天数-因公请假-婚嫁请假-丧假/事假-上午上班忘签到-上午下班忘签到-下午上班忘签到-下午下班忘签到
+                    kqzs = myts - gxts - qjts - tdts - qjts_gs - qjts_hj - qjts_sj - swsbwqd - swxbwqd - xwsbwqd - xwxbwqd;
                     if (kqzs < 0.0F) {
                         kqzs = 0.0F;
                     }
@@ -1253,175 +1461,345 @@ public class JdbcKqxx {
 
                     }
 
+                    String Sql_tskq1 = "select t.rq,t.swsb,t.swxb,t.xwsb,t.xwxb,t.lb,t1.tmember from t_team_tskq t,t_team t1 where t.teamid = t1.id  and t1.gslb='41' and t.rq= '" + fdate + "'";
+                    Statement st_tskq1 = this.con_oa.createStatement();
+                    ResultSet rs_tskq1 = st_tskq1.executeQuery(Sql_tskq1);
+                    //System.out.println(Sql_tskq);
+                    String ts_member1="";
+                    String ts_lb1="";
+                    String ts_rq1="";
+                    while (rs_tskq1.next()) {
+                        //停电放假tdfj/停电补签tdbq/放假fj/喜宴xy
+                        ts_lb1 = rs_tskq1.getString("lb");
+                        ts_rq1 = rs_tskq1.getString("rq");
+                        ts_member1 = rs_tskq1.getString("tmember");
+                    }
 
                     if (!isEmpty(dksj)) {
                         String[] dk = dksj.split(",");
 
                         for (int j = 0; j < dk.length; j++) { // begin 循环每天的打卡记录
                             if (isSummer(df_rq.format(date), df_rq)) { //begin 亚都夏季打卡时间
-                                if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
-                                        map.put("swsb", "正常" + dk[j]);
-                                        swsbzcts = (float) (swsbzcts + 0.25D);
+                                if("080802".equals(dwid)){
+                                    if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
+                                        if (isEmpty((String) map.get("swsb"))) {
+                                            map.put("swsb", "正常" + dk[j]);
+                                            swsbzcts = (float) (swsbzcts + 0.5D);
+                                        }
+                                    } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
+                                        if (isEmpty((String) map.get("swsb"))) {
+                                            map.put("swsb", "迟到" + dk[j]);
+                                            cdcs++;
+                                            swsbcdts = (float) (swsbcdts + 0.5D);
+                                        }
+                                    } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
+                                        if (isEmpty((String) map.get("swsb"))) {
+                                            map.put("swsb", "迟到" + dk[j]);
+                                            cdcs_15++;
+                                            swsbcdts_15 = (float) (swsbcdts_15 + 0.5D);
+                                        }
+                                    } else if (compareTime(dk[j], "17:00:00", df_sj) >= 0L) {
+                                        if (isEmpty((String) map.get("xwxb"))) {
+                                            map.put("xwxb", "正常" + dk[j]);
+                                            xwxbzcts = (float) (xwxbzcts + 0.5D);
+                                        }
+                                    } else if (compareTime(dk[j], "17:00:00", df_sj) < 0L && compareTime(dk[j], "16:30:00", df_sj) >= 0L) {
+                                        if (isEmpty((String) map.get("xwxb"))) {
+                                            if ("2019-09-12".equals(fdate)) {//中秋节下班
+                                                map.put("xwxb", "正常" + dk[j]);
+                                                xwxbzcts = (float) (xwxbzcts + 0.5D);
+                                            }else{
+                                                map.put("xwxb", "早退" + dk[j]);
+                                                ztcs++;
+                                                xwxbztts = (float) (xwxbztts + 0.5D);
+                                            }
+                                        }
                                     }
-                                } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
+
                                     if (isEmpty((String) map.get("swsb"))) {
-                                        map.put("swsb", "迟到" + dk[j]);
-                                        cdcs++;
-                                        swsbcdts = (float) (swsbcdts + 0.25D);
+                                        map.put("swsb", "无");
                                     }
-                                } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
-                                        map.put("swsb", "迟到" + dk[j]);
-                                        cdcs_15++;
-                                        swsbcdts_15 = (float) (swsbcdts_15 + 0.25D);
-                                    }
-                                } else if (compareTime(dk[j], "12:00:00", df_sj) >= 0L && compareTime(dk[j], "13:00:00", df_sj) < 0L) {
                                     if (isEmpty((String) map.get("swxb"))) {
-                                        map.put("swxb", "正常" + dk[j]);
-                                        swxbzcts = (float) (swxbzcts + 0.25D);
+                                        map.put("swxb", "无");
                                     }
-                                } else if (compareTime(dk[j], "11:00:00", df_sj) >= 0L && compareTime(dk[j], "12:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swxb"))) {
-                                        map.put("swxb", "早退" + dk[j]);
-                                        ztcs++;
-                                        swxbztts = (float) (swxbztts + 0.25D);
-                                    }
-
-                                } else if (compareTime(dk[j], "14:01:00", df_sj) <= 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
                                     if (isEmpty((String) map.get("xwsb"))) {
-                                        map.put("xwsb", "正常" + dk[j]);
-                                        xwsbzcts = (float) (xwsbzcts + 0.25D);
+                                        map.put("xwsb", "无");
                                     }
-                                } else if (compareTime(dk[j], "14:01:00", df_sj) > 0L && compareTime(dk[j], "14:15:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
-                                        map.put("xwsb", "迟到" + dk[j]);
-                                        cdcs++;
-                                        xwsbcdts = (float) (xwsbcdts + 0.25D);
-                                    }
-
-                                } else if (compareTime(dk[j], "14:15:00", df_sj) > 0L && compareTime(dk[j], "15:30:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
-                                        map.put("xwsb", "迟到" + dk[j]);
-                                        cdcs_15++;
-                                        xwsbcdts_15 = (float) (xwsbcdts_15 + 0.25D);
-                                    }
-
-                                } else if (compareTime(dk[j], "18:00:00", df_sj) >= 0L) {
                                     if (isEmpty((String) map.get("xwxb"))) {
-                                        map.put("xwxb", "正常" + dk[j]);
-                                        xwxbzcts = (float) (xwxbzcts + 0.25D);
+                                        map.put("xwxb", "无");
                                     }
-                                } else if (compareTime(dk[j], "18:00:00", df_sj) < 0L && compareTime(dk[j], "16:30:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
-                                        map.put("xwxb", "早退" + dk[j]);
-                                        ztcs++;
-                                        xwxbztts = (float) (xwxbztts + 0.25D);
-                                    }
-                                }
-
-                                if (isEmpty((String) map.get("swsb"))) {
-                                    map.put("swsb", "无");
-                                }
-                                if (isEmpty((String) map.get("swxb"))) {
-                                    map.put("swxb", "无");
-                                }
-                                if (isEmpty((String) map.get("xwsb"))) {
-                                    map.put("xwsb", "无");
-                                }
-                                if (isEmpty((String) map.get("xwxb"))) {
-                                    map.put("xwxb", "无");
-                                }
-
-                            } else { // end 亚都夏季打卡时间/begin 亚都冬季打卡时间
-
-                                if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
-                                        map.put("swsb", "正常" + dk[j]);
-                                        swsbzcts = (float) (swsbzcts + 0.25D);
-                                    }
-                                } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
-                                        map.put("swsb", "迟到" + dk[j]);
-                                        cdcs++;
-                                        swsbcdts = (float) (swsbcdts + 0.25D);
-                                    }
-                                } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
-                                        map.put("swsb", "迟到" + dk[j]);
-                                        cdcs_15++;
-                                        swsbcdts_15 = (float) (swsbcdts_15 + 0.25D);
-                                    }
-                                } else if (compareTime(dk[j], "12:00:00", df_sj) >= 0L && compareTime(dk[j], "13:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swxb"))) {
-                                        map.put("swxb", "正常" + dk[j]);
-                                        swxbzcts = (float) (swxbzcts + 0.25D);
-                                    }
-                                } else if (compareTime(dk[j], "11:30:00", df_sj) >= 0L && compareTime(dk[j], "12:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swxb"))) {
-
-                                        if ("2019-04-29".equals(fdate)) {//运动会提前下班
+                                }else{
+                                    if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
+                                        if (isEmpty((String) map.get("swsb"))) {
+                                            map.put("swsb", "正常" + dk[j]);
+                                            swsbzcts = (float) (swsbzcts + 0.25D);
+                                        }
+                                    } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
+                                        if (isEmpty((String) map.get("swsb"))) {
+                                            map.put("swsb", "迟到" + dk[j]);
+                                            cdcs++;
+                                            swsbcdts = (float) (swsbcdts + 0.25D);
+                                        }
+                                    } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
+                                        if (isEmpty((String) map.get("swsb"))) {
+                                            map.put("swsb", "迟到" + dk[j]);
+                                            cdcs_15++;
+                                            swsbcdts_15 = (float) (swsbcdts_15 + 0.25D);
+                                        }
+                                    } else if (compareTime(dk[j], "12:00:00", df_sj) >= 0L && compareTime(dk[j], "13:00:00", df_sj) < 0L) {
+                                        if (isEmpty((String) map.get("swxb"))) {
                                             map.put("swxb", "正常" + dk[j]);
                                             swxbzcts = (float) (swxbzcts + 0.25D);
-                                        } else {
+                                        }
+                                    } else if (compareTime(dk[j], "11:00:00", df_sj) >= 0L && compareTime(dk[j], "12:00:00", df_sj) < 0L) {
+                                        if (isEmpty((String) map.get("swxb"))) {
                                             map.put("swxb", "早退" + dk[j]);
                                             ztcs++;
                                             swxbztts = (float) (swxbztts + 0.25D);
                                         }
 
-                                    }
+                                    } else if (compareTime(dk[j], "14:01:00", df_sj) <= 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
+                                        if (isEmpty((String) map.get("xwsb"))) {
+                                            map.put("xwsb", "正常" + dk[j]);
+                                            xwsbzcts = (float) (xwsbzcts + 0.25D);
+                                        }
+                                    } else if (compareTime(dk[j], "14:01:00", df_sj) > 0L && compareTime(dk[j], "14:15:00", df_sj) <= 0L) {
+                                        if (isEmpty((String) map.get("xwsb"))) {
+                                            map.put("xwsb", "迟到" + dk[j]);
+                                            cdcs++;
+                                            xwsbcdts = (float) (xwsbcdts + 0.25D);
+                                        }
 
-                                } else if (compareTime(dk[j], "13:31:00", df_sj) <= 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
-                                        map.put("xwsb", "正常" + dk[j]);
-                                        xwsbzcts = (float) (xwsbzcts + 0.25D);
-                                    }
-                                } else if (compareTime(dk[j], "13:31:00", df_sj) > 0L && compareTime(dk[j], "13:45:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
-                                        map.put("xwsb", "迟到" + dk[j]);
-                                        cdcs++;
-                                        xwsbcdts = (float) (xwsbcdts + 0.25D);
-                                    }
+                                    } else if (compareTime(dk[j], "14:15:00", df_sj) > 0L && compareTime(dk[j], "15:30:00", df_sj) < 0L) {
+                                        if (isEmpty((String) map.get("xwsb"))) {
+                                            map.put("xwsb", "迟到" + dk[j]);
+                                            cdcs_15++;
+                                            xwsbcdts_15 = (float) (xwsbcdts_15 + 0.25D);
+                                        }
 
-                                } else if (compareTime(dk[j], "13:45:00", df_sj) > 0L && compareTime(dk[j], "15:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
-                                        map.put("xwsb", "迟到" + dk[j]);
-                                        cdcs_15++;
-                                        xwsbcdts_15 = (float) (xwsbcdts_15 + 0.25D);
-                                    }
-
-                                } else if (compareTime(dk[j], "17:30:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
-                                        map.put("xwxb", "正常" + dk[j]);
-                                        xwxbzcts = (float) (xwxbzcts + 0.25D);
-                                    }
-                                } else if (compareTime(dk[j], "17:30:00", df_sj) < 0L && compareTime(dk[j], "15:00:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
-                                        if ("2019-01-28".equals(fdate) || "2019-01-31".equals(fdate) || "2019-02-19".equals(fdate)) {//祭灶提前下班
+                                    } else if (compareTime(dk[j], "18:00:00", df_sj) >= 0L) {
+                                        if (isEmpty((String) map.get("xwxb"))) {
                                             map.put("xwxb", "正常" + dk[j]);
                                             xwxbzcts = (float) (xwxbzcts + 0.25D);
-                                        } else {
-                                            map.put("xwxb", "早退" + dk[j]);
-                                            ztcs++;
-                                            xwxbztts = (float) (xwxbztts + 0.25D);
+                                        }
+                                    } else if (compareTime(dk[j], "18:00:00", df_sj) < 0L && compareTime(dk[j], "16:30:00", df_sj) >= 0L) {
+
+
+                                        if (isEmpty((String) map.get("xwxb"))) {
+                                            if ("2019-09-12".equals(fdate)) {//中秋节下班
+                                                map.put("xwxb", "正常" + dk[j]);
+                                                xwxbzcts = (float) (xwxbzcts + 0.25D);
+                                            }else{
+                                                map.put("xwxb", "早退" + dk[j]);
+                                                ztcs++;
+                                                xwxbztts = (float) (xwxbztts + 0.25D);
+                                            }
                                         }
                                     }
 
-
+                                    if (isEmpty((String) map.get("swsb"))) {
+                                        map.put("swsb", "无");
+                                    }
+                                    if (isEmpty((String) map.get("swxb"))) {
+                                        map.put("swxb", "无");
+                                    }
+                                    if (isEmpty((String) map.get("xwsb"))) {
+                                        map.put("xwsb", "无");
+                                    }
+                                    if (isEmpty((String) map.get("xwxb"))) {
+                                        map.put("xwxb", "无");
+                                    }
                                 }
 
-                                if (isEmpty((String) map.get("swsb"))) {
-                                    map.put("swsb", "无");
+
+                            } else { // end 亚都夏季打卡时间/begin 亚都冬季打卡时间
+                                if("080802".equals(dwid)){
+                                    if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
+                                        if (dk[j].length()>0) {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.5D);
+                                            }
+                                            map.put("swsb", "正常" + dk[j]);
+                                            swsbzcts = (float) (swsbzcts + 0.5D);
+                                        }
+                                    } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
+                                        if (dk[j].length()>0) {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.5D);
+                                            }
+                                            map.put("swsb", "迟到" + dk[j]);
+                                            cdcs++;
+                                            swsbcdts = (float) (swsbcdts + 0.5D);
+                                        }
+                                    } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
+                                        if (dk[j].length()>0) {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.5D);
+                                            }
+
+                                            map.put("swsb", "迟到" + dk[j]);
+                                            cdcs_15++;
+                                            swsbcdts_15 = (float) (swsbcdts_15 + 0.5D);
+                                        }
+                                    }  else if (compareTime(dk[j], "17:00:00", df_sj) >= 0L) {
+                                        if (dk[j].length()>0) {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.5D);
+                                            }
+                                            map.put("xwxb", "正常" + dk[j]);
+                                            xwxbzcts = (float) (xwxbzcts + 0.5D);
+                                        }
+                                    } else if (compareTime(dk[j], "17:00:00", df_sj) < 0L && compareTime(dk[j], "15:00:00", df_sj) >= 0L) {
+                                        if (dk[j].length()>0) {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.5D);
+                                            }
+                                            if ("2019-01-28".equals(fdate) || "2019-01-31".equals(fdate) || "2019-02-19".equals(fdate)) {//祭灶提前下班
+                                                map.put("xwxb", "正常" + dk[j]);
+                                                xwxbzcts = (float) (xwxbzcts + 0.5D);
+                                            } else {
+                                                map.put("xwxb", "早退" + dk[j]);
+                                                ztcs++;
+                                                xwxbztts = (float) (xwxbztts + 0.5D);
+                                            }
+                                        }
+
+
+                                    }
+
+                                    if (isEmpty((String) map.get("swsb"))) {
+                                        map.put("swsb", "无");
+                                    }
+                                    if (isEmpty((String) map.get("swxb"))) {
+                                        map.put("swxb", "无");
+                                    }
+                                    if (isEmpty((String) map.get("xwsb"))) {
+                                        map.put("xwsb", "无");
+                                    }
+                                    if (isEmpty((String) map.get("xwxb"))) {
+                                        map.put("xwxb", "无");
+                                    }
+                                }else{
+                                    if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
+                                        if (dk[j].length()>0) {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.25D);
+                                            }
+                                            map.put("swsb", "正常" + dk[j]);
+                                            swsbzcts = (float) (swsbzcts + 0.25D);
+                                        }
+                                    } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
+                                        if (dk[j].length()>0) {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.25D);
+                                            }
+                                            map.put("swsb", "迟到" + dk[j]);
+                                            cdcs++;
+                                            swsbcdts = (float) (swsbcdts + 0.25D);
+                                        }
+                                    } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
+                                        if (dk[j].length()>0) {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.25D);
+                                            }
+
+                                            map.put("swsb", "迟到" + dk[j]);
+                                            cdcs_15++;
+                                            swsbcdts_15 = (float) (swsbcdts_15 + 0.25D);
+                                        }
+                                    } else if (compareTime(dk[j], "12:00:00", df_sj) >= 0L && compareTime(dk[j], "13:00:00", df_sj) < 0L) {
+                                        if (dk[j].length()>0) {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.25D);
+                                            }
+
+                                            map.put("swxb", "正常" + dk[j]);
+                                            swxbzcts = (float) (swxbzcts + 0.25D);
+                                        }
+                                    } else if (compareTime(dk[j], "11:30:00", df_sj) >= 0L && compareTime(dk[j], "12:00:00", df_sj) < 0L) {
+                                        if (dk[j].length()>0) {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.25D);
+                                            }
+                                            if ("2019-04-29".equals(fdate)) {//运动会提前下班
+                                                map.put("swxb", "正常" + dk[j]);
+                                                swxbzcts = (float) (swxbzcts + 0.25D);
+                                            } else {
+                                                map.put("swxb", "早退" + dk[j]);
+                                                ztcs++;
+                                                swxbztts = (float) (swxbztts + 0.25D);
+                                            }
+
+                                        }
+
+                                    } else if (compareTime(dk[j], "13:31:00", df_sj) < 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
+                                        if (dk[j].length()>0) {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.25D);
+                                            }
+                                            map.put("xwsb", "正常" + dk[j]);
+                                            xwsbzcts = (float) (xwsbzcts + 0.25D);
+                                        }
+                                    } else if (compareTime(dk[j], "13:31:00", df_sj) >= 0L && compareTime(dk[j], "13:45:00", df_sj) <= 0L) {
+                                        if (dk[j].length()>0) {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.25D);
+                                            }
+                                            map.put("xwsb", "迟到" + dk[j]);
+                                            cdcs++;
+                                            xwsbcdts = (float) (xwsbcdts + 0.25D);
+                                        }
+
+                                    } else if (compareTime(dk[j], "13:45:00", df_sj) > 0L && compareTime(dk[j], "15:00:00", df_sj) < 0L) {
+                                        if (dk[j].length()>0) {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.25D);
+                                            }
+                                            map.put("xwsb", "迟到" + dk[j]);
+                                            cdcs_15++;
+                                            xwsbcdts_15 = (float) (xwsbcdts_15 + 0.25D);
+                                        }
+
+                                    } else if (compareTime(dk[j], "17:30:00", df_sj) >= 0L) {
+                                        if (dk[j].length()>0) {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.25D);
+                                            }
+                                            map.put("xwxb", "正常" + dk[j]);
+                                            xwxbzcts = (float) (xwxbzcts + 0.25D);
+                                        }
+                                    } else if (compareTime(dk[j], "17:30:00", df_sj) < 0L && compareTime(dk[j], "15:00:00", df_sj) >= 0L) {
+                                        if (dk[j].length()>0) {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.25D);
+                                            }
+                                            if ("2019-01-28".equals(fdate) || "2019-01-31".equals(fdate) || "2019-02-19".equals(fdate)) {//祭灶提前下班
+                                                map.put("xwxb", "正常" + dk[j]);
+                                                xwxbzcts = (float) (xwxbzcts + 0.25D);
+                                            } else {
+                                                map.put("xwxb", "早退" + dk[j]);
+                                                ztcs++;
+                                                xwxbztts = (float) (xwxbztts + 0.25D);
+                                            }
+                                        }
+
+
+                                    }
+
+                                    if (isEmpty((String) map.get("swsb"))) {
+                                        map.put("swsb", "无");
+                                    }
+                                    if (isEmpty((String) map.get("swxb"))) {
+                                        map.put("swxb", "无");
+                                    }
+                                    if (isEmpty((String) map.get("xwsb"))) {
+                                        map.put("xwsb", "无");
+                                    }
+                                    if (isEmpty((String) map.get("xwxb"))) {
+                                        map.put("xwxb", "无");
+                                    }
                                 }
-                                if (isEmpty((String) map.get("swxb"))) {
-                                    map.put("swxb", "无");
-                                }
-                                if (isEmpty((String) map.get("xwsb"))) {
-                                    map.put("xwsb", "无");
-                                }
-                                if (isEmpty((String) map.get("xwxb"))) {
-                                    map.put("xwxb", "无");
-                                }
+
 
                             }// end 亚都冬季打卡时间
 
@@ -1455,7 +1833,10 @@ public class JdbcKqxx {
                         String bkcx = rs_oabq.getString("bqcx");
                         String bqlb = rs_oabq.getString("bqlb");
                         if ("0".equals(bkcx)) {
-                            if ((isEmpty((String) map.get("swsb"))) || ("无".equals((String) map.get("swsb")))) {
+                            if ((isEmpty((String) map.get("swsb"))) || ("无".equals((String) map.get("swsb")))||("元旦放假".equals((String) map.get("swsb")))) {
+                                if(("元旦放假".equals((String) map.get("swsb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("swsb", "因公补签");
@@ -1465,7 +1846,10 @@ public class JdbcKqxx {
                                 }
                             }
                         } else if ("1".equals(bkcx)) {
-                            if ((isEmpty((String) map.get("swxb"))) || ("无".equals((String) map.get("swxb")))) {
+                            if ((isEmpty((String) map.get("swxb"))) || ("无".equals((String) map.get("swxb")))||("元旦放假".equals((String) map.get("swxb"))) ) {
+                                if(("元旦放假".equals((String) map.get("swxb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("swxb", "因公补签");
@@ -1475,7 +1859,10 @@ public class JdbcKqxx {
                                 }
                             }
                         } else if ("2".equals(bkcx)) {
-                            if ((isEmpty((String) map.get("xwsb"))) || ("无".equals((String) map.get("xwsb")))) {
+                            if ((isEmpty((String) map.get("xwsb"))) || ("无".equals((String) map.get("xwsb")))||("元旦放假".equals((String) map.get("xwsb")))) {
+                                if(("元旦放假".equals((String) map.get("xwsb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("xwsb", "因公补签");
@@ -1485,7 +1872,13 @@ public class JdbcKqxx {
                                 }
                             }
                         } else if ("3".equals(bkcx)) {
-                            if ((isEmpty((String) map.get("xwxb"))) || ("无".equals((String) map.get("xwxb")))) {
+                            if ((isEmpty((String) map.get("xwxb"))) || ("无".equals((String) map.get("xwxb")))|| ("元旦放假".equals((String) map.get("xwxb")))) {
+                                if(("元旦放假".equals((String) map.get("xwxb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
+                                if(("元旦放假".equals((String) map.get("xwxb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("xwxb", "因公补签");
@@ -1526,6 +1919,8 @@ public class JdbcKqxx {
                             } else if ("1".equals(kssj) && "1".equals(jssj)) { //下午请半天假
                                 xwbt = true;
                             } else if ("0".equals(kssj) && "1".equals(jssj)) { //上下午请一天假
+                                sxw = true;
+                            }else if ("2".equals(kssj) && "2".equals(jssj)) { //上下午请一天假
                                 sxw = true;
                             }
                         } else {
@@ -1713,8 +2108,14 @@ public class JdbcKqxx {
                     if ("2019-04".equals(cxsj)) {
                         mqts = 25.5f;
                     }
-                    if ("2019-05".equals(cxsj)) {
+                    if ("2019-10".equals(cxsj)) {
                         mqts = 25f;
+                    }
+                    if ("2019-12".equals(cxsj)) {
+                        mqts = 26f;
+                    }
+                    if ("2020-01".equals(cxsj)) {
+                        mqts = 27f;
                     }
                     float kqzs = 0.0F;
 
@@ -1815,7 +2216,7 @@ public class JdbcKqxx {
 
 
         //根据页面查询条件查询OA人员
-        String sql_oary = "select p.stuff_id  as gh,p.per_sort as ryxh,b.bmmc,p.truename as ryxm,p.id as oaryid from person p,t_wpsbm b where p.isaway = '0' and b.oa_bmid = p.dep_id  and p.id!='10554' " + whereSql_oary;
+        String sql_oary = "select p.stuff_id  as gh,p.per_sort as ryxh,b.bmmc,b.bmid,p.truename as ryxm,p.id as oaryid from person p,t_wpsbm b where p.isaway = '0' and b.oa_bmid = p.dep_id  and p.id!='10554' " + whereSql_oary;
         Statement st_oary = this.con_oa.createStatement();
         ResultSet rs_oary = st_oary.executeQuery(sql_oary);
 
@@ -1832,6 +2233,7 @@ public class JdbcKqxx {
             String ryxm = rs_oary.getString("ryxm");
             String oaryid = rs_oary.getString("oaryid");
             String ryxh = rs_oary.getString("ryxh");
+            String bmid = rs_oary.getString("bmid");
             whereSql_kqjl = " where e.employeeCode in ('" + gh_int + "','" + ryxh + "')";
 
             int cdcs = 0;
@@ -1859,6 +2261,7 @@ public class JdbcKqxx {
             float xwxbztts = 0.0F;
             float mqcs = 0.0F;
             float bqts = 0.0F;
+            float tdjb = 0.0F;
             float tdts = 0.0F;
             float swsbwqd = 0.0F;
             float swxbwqd = 0.0F;
@@ -1866,10 +2269,14 @@ public class JdbcKqxx {
             float xwxbwqd = 0.0F;
             int wpsxqt = 0;
             boolean zj_flag = false;
+
+            String time = "2019-12-04 00:00:00";
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date1 = format.parse(time);
             for (int i = 1; i <= myts; i++) {
                 Date date = df_rq.parse(cxsj + "-" + i);
                 String fdate = df_rq.format(date);
-
+                int compareTo = date.compareTo(date1);
                 //查询每个人每天的考勤记录
                 String Sql_kqjl = "select e.employeeCode as kqh,group_concat(right(t.CardTime,8)) as dksj from kqz_employee e left join  kqz_card t on (e.EmployeeID=t.EmployeeID) and  t.CardTime >= '" + fdate + " 00:00:01' and t.cardtime <= '" + fdate + " 23:59:59' " + whereSql_kqjl;
 
@@ -1885,9 +2292,11 @@ public class JdbcKqxx {
                     map.put("xm", ryxm);
                     map.put("gh", gh);
                     map.put("bm", bmmc);
-                    if ("日".equals(df_xq.format(date).substring(2, 3))) {
+
+                    wpsxqt=DateUtil.getMondayNumber(DateUtil.getMonthFirstday(fdate),DateUtil.getMonthlastday(fdate),7);
+                    /*if ("日".equals(df_xq.format(date).substring(2, 3))) {
                         wpsxqt++;
-                    }
+                    }*/
 
                     String dksj = rs_kqjl.getString("dksj");
                     boolean wfsswsbwdk = false;
@@ -1906,7 +2315,10 @@ public class JdbcKqxx {
                         String bkcx = rs_oabq.getString("bqcx");
                         String bqlb = rs_oabq.getString("bqlb");
                         if ("0".equals(bkcx)) {
-                            if (isEmpty((String) map.get("swsb"))) {
+                            if (isEmpty((String) map.get("swsb")) ||("元旦放假".equals((String) map.get("swsb"))) ) {
+                                if(("元旦放假".equals((String) map.get("swsb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("swsb", "因公补签");
@@ -1917,7 +2329,10 @@ public class JdbcKqxx {
                             }
                             wfsswsbwdk = true;
                         } else if ("1".equals(bkcx)) {
-                            if (isEmpty((String) map.get("swxb"))) {
+                            if (isEmpty((String) map.get("swxb"))||("元旦放假".equals((String) map.get("swxb")))) {
+                                if(("元旦放假".equals((String) map.get("swxb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("swxb", "因公补签");
@@ -1928,7 +2343,10 @@ public class JdbcKqxx {
                             }
                             wfsswsbwdk = true;
                         } else if ("2".equals(bkcx)) {
-                            if (isEmpty((String) map.get("xwsb"))) {
+                            if (isEmpty((String) map.get("xwsb"))||("元旦放假".equals((String) map.get("xwsb")))) {
+                                if(("元旦放假".equals((String) map.get("xwsb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("xwsb", "因公补签");
@@ -1938,7 +2356,10 @@ public class JdbcKqxx {
                                 }
                             }
                         } else if ("3".equals(bkcx)) {
-                            if (isEmpty((String) map.get("xwxb"))) {
+                            if (isEmpty((String) map.get("xwxb"))||("元旦放假".equals((String) map.get("xwxb")))) {
+                                if(("元旦放假".equals((String) map.get("xwxb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("xwxb", "因公补签");
@@ -1985,23 +2406,45 @@ public class JdbcKqxx {
                                     if (isEmpty((String) map.get("xwxb"))) {
                                         map.put("xwxb", ts_xwxb);
                                     }else{
-                                        if (!isEmpty((String) map.get("swsb"))) {
+                                        if (((String) map.get("swsb")).indexOf("补签")>0) {
+                                            map.put("swsb", map.get("swsb"));
+                                        }else{
+                                            if(ts_swsb.indexOf("加班")>0){
+                                                tdjb = (float) (tdjb + 0.25D);
+                                            }
                                             map.put("swsb", ts_swsb);
-                                            tdts = (float) (tdts - 0.25D);
+                                           // tdts = (float) (tdts + 0.25D);
                                         }
-                                        if (!isEmpty((String) map.get("swxb"))) {
+                                        if (((String) map.get("swxb")).indexOf("补签")>0) {
+                                            map.put("swxb", map.get("swxb"));
+                                        }else{
+                                            if(ts_swxb.indexOf("加班")>0){
+                                                tdjb = (float) (tdjb + 0.25D);
+                                            }
                                             map.put("swxb", ts_swxb);
-                                            tdts = (float) (tdts - 0.25D);
+                                          //  tdts = (float) (tdts + 0.25D);
                                         }
 
-                                        if (!isEmpty((String) map.get("xwsb"))) {
+                                        if (((String) map.get("xwsb")).indexOf("补签")>0) {
+                                            map.put("xwsb", map.get("xwsb"));
+
+                                        }else{
+                                            if(ts_xwsb.indexOf("加班")>0){
+                                                tdjb = (float) (tdjb + 0.25D);
+                                            }
                                             map.put("xwsb", ts_xwsb);
-                                            tdts = (float) (tdts - 0.25D);
+                                           // tdts = (float) (tdts + 0.25D);
                                         }
 
-                                        if (!isEmpty((String) map.get("xwxb"))) {
+                                        if (((String) map.get("xwxb")).indexOf("补签")>0) {
+                                            map.put("xwxb",  map.get("xwxb"));
+
+                                        }else{
+                                            if(ts_xwxb.indexOf("加班")>0){
+                                                tdjb = (float) (tdjb + 0.25D);
+                                            }
                                             map.put("xwxb", ts_xwxb);
-                                            tdts = (float) (tdts - 0.25D);
+                                           // tdts = (float) (tdts + 0.25D);
                                         }
                                     }
                                 } else if ("fj".equals(ts_lb)) {
@@ -2137,6 +2580,20 @@ public class JdbcKqxx {
 
                     }
 
+                    String Sql_tskq1 = "select t.rq,t.swsb,t.swxb,t.xwsb,t.xwxb,t.lb,t1.tmember from t_team_tskq t,t_team t1 where t.teamid = t1.id  and t1.gslb='61' and t.rq= '" + df_rq.format(date) + "'";                    Statement st_tskq1 = this.con_oa.createStatement();
+                    ResultSet rs_tskq1 = st_tskq1.executeQuery(Sql_tskq1);
+                    //System.out.println(Sql_tskq);
+                    String ts_member1="";
+                    String ts_lb1="";
+                    String ts_rq1="";
+                    while (rs_tskq1.next()) {
+                        //停电放假tdfj/停电补签tdbq/放假fj/喜宴xy
+                        ts_lb1 = rs_tskq1.getString("lb");
+                        ts_rq1 = rs_tskq1.getString("rq");
+                        ts_member1 = rs_tskq1.getString("tmember");
+                    }
+
+
 
                     if (!isEmpty(dksj)) {
                         String[] dk = dksj.split(",");
@@ -2144,20 +2601,29 @@ public class JdbcKqxx {
                         for (int j = 0; j < dk.length; j++) { // begin 循环每天的打卡记录
                             if (isSummer(fdate, df_rq)) { //begin 威浦仕夏季打卡时间
                                 if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("swsb", "正常" + dk[j]);
                                         swsbzcts = (float) (swsbzcts + 0.25D);
                                         wfsswsbwdk = true;
                                     }
                                 } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("swsb", "迟到" + dk[j]);
                                         cdcs++;
                                         swsbcdts = (float) (swsbcdts + 0.25D);
                                         wfsswsbwdk = true;
                                     }
                                 } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("swsb", "迟到" + dk[j]);
                                         cdcs_15++;
                                         swsbcdts_15 = (float) (swsbcdts_15 + 0.25D);
@@ -2165,51 +2631,87 @@ public class JdbcKqxx {
                                     }
                                 } else if (compareTime(dk[j], "12:00:00", df_sj) >= 0L && compareTime(dk[j], "13:00:00", df_sj) < 0L) {
                                     if (wpspd1) {
-                                        if (isEmpty((String) map.get("swxb")) && wfsswsbwdk) {
+                                        if (dk[j].length()>0 && wfsswsbwdk) {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.5D);
+                                            }
+                                            map.put("swxb", "正常" + dk[j]);
+                                            swxbzcts = (float) (swxbzcts + 0.25D);
+                                            wfsswsbwdk = false;
+                                        } else if (dk[j].length()>0 && !wfsswsbwdk) {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.5D);
+                                            }
                                             map.put("swxb", "正常" + dk[j]);
                                             swxbzcts = (float) (swxbzcts + 0.25D);
                                             wfsswsbwdk = false;
                                         } else {
-                                            if (isEmpty((String) map.get("xwsb"))) {
+                                            if (dk[j].length()>0) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.5D);
+                                                }
                                                 map.put("xwsb", "正常" + dk[j]);
                                                 xwsbzcts = (float) (xwsbzcts + 0.25D);
                                             }
                                         }
                                     } else {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("swxb", "正常" + dk[j]);
                                         swxbzcts = (float) (swxbzcts + 0.25D);
                                     }
 
 
-                                } else if (compareTime(dk[j], "13:31:00", df_sj) <= 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
+                                } else if (compareTime(dk[j], "13:31:00", df_sj) < 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("xwsb", "正常" + dk[j]);
                                         xwsbzcts = (float) (xwsbzcts + 0.25D);
                                     }
-                                } else if (compareTime(dk[j], "13:31:00", df_sj) > 0L && compareTime(dk[j], "13:45:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
+                                } else if (compareTime(dk[j], "13:31:00", df_sj) >= 0L && compareTime(dk[j], "13:45:00", df_sj) <= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("xwsb", "迟到" + dk[j]);
                                         cdcs++;
                                         xwsbcdts = (float) (xwsbcdts + 0.25D);
                                     }
 
                                 } else if (compareTime(dk[j], "13:45:00", df_sj) > 0L && compareTime(dk[j], "15:30:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("xwsb", "迟到" + dk[j]);
                                         cdcs_15++;
                                         xwsbcdts_15 = (float) (xwsbcdts_15 + 0.25D);
                                     }
 
                                 } else if (compareTime(dk[j], "17:35:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("xwxb", "正常" + dk[j]);
                                         xwxbzcts = (float) (xwxbzcts + 0.25D);
                                     }
                                 } else if (compareTime(dk[j], "17:35:00", df_sj) < 0L && compareTime(dk[j], "16:30:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
-                                        map.put("xwxb", "早退" + dk[j]);
-                                        ztcs++;
-                                        xwxbztts = (float) (xwxbztts + 0.25D);
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
+                                        if ("2019-09-12".equals(fdate)) {//中秋节下班
+                                            map.put("xwxb", "正常" + dk[j]);
+                                            xwxbzcts = (float) (xwxbzcts + 0.25D);
+                                        }else{
+                                            map.put("xwxb", "早退" + dk[j]);
+                                            ztcs++;
+                                            xwxbztts = (float) (xwxbztts + 0.25D);
+                                        }
                                     }
                                 }
 
@@ -2227,57 +2729,131 @@ public class JdbcKqxx {
                                 }
                             } else { // end 威浦仕夏季打卡/冬季考勤
                                 if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
                                         map.put("swsb", "正常" + dk[j]);
                                         swsbzcts = (float) (swsbzcts + 0.25D);
                                         wfsswsbwdk = true;
                                     }
                                 } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("swsb", "迟到" + dk[j]);
                                         cdcs++;
                                         swsbcdts = (float) (swsbcdts + 0.25D);
                                         wfsswsbwdk = true;
                                     }
                                 } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("swsb", "迟到" + dk[j]);
                                         cdcs_15++;
                                         swsbcdts_15 = (float) (swsbcdts_15 + 0.25D);
                                         wfsswsbwdk = true;
                                     }
-                                } else if (compareTime(dk[j], "12:00:00", df_sj) >= 0L && compareTime(dk[j], "13:01:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swxb")) && wfsswsbwdk) {
-                                        map.put("swxb", "正常" + dk[j]);
-                                        swxbzcts = (float) (swxbzcts + 0.25D);
-                                        wfsswsbwdk = false;
-                                    } else {
-                                        if (isEmpty((String) map.get("xwsb"))) {
-                                            map.put("xwsb", "正常" + dk[j]);
-                                            xwsbzcts = (float) (xwsbzcts + 0.25D);
+                                } else if (compareTime(dk[j], "12:00:00", df_sj) >= 0L && compareTime(dk[j], "13:00:00", df_sj) < 0L) {
+                                     if(compareTo<0){
+                                         if (wpspd1) {
+                                             if (dk[j].length()>0 && wfsswsbwdk) {
+                                                 if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                     gxts = (float) (gxts - 0.5D);
+                                                 }
+                                                 map.put("swxb", "正常" + dk[j]);
+                                                 swxbzcts = (float) (swxbzcts + 0.25D);
+                                                 wfsswsbwdk = false;
+                                             }else if (dk[j].length()>0 && !wfsswsbwdk) {
+                                                 if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                     gxts = (float) (gxts - 0.5D);
+                                                 }
+                                                 map.put("swxb", "正常" + dk[j]);
+                                                 swxbzcts = (float) (swxbzcts + 0.25D);
+                                                 wfsswsbwdk = false;
+                                             } else {
+                                                 if (dk[j].length()>0) {
+                                                     if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                         gxts = (float) (gxts - 0.5D);
+                                                     }
+                                                     map.put("xwsb", "正常" + dk[j]);
+                                                     xwsbzcts = (float) (xwsbzcts + 0.25D);
+                                                 }
+                                             }
+                                         } else {
+                                             if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                 gxts = (float) (gxts - 0.5D);
+                                             }
+                                             map.put("swxb", "正常" + dk[j]);
+                                             swxbzcts = (float) (swxbzcts + 0.25D);
+                                         }
+                                     }else{
+                                         if (wpspd1) {
+                                             if (dk[j].length()>0 && wfsswsbwdk) {
+                                                 if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                     gxts = (float) (gxts - 0.5D);
+                                                 }
+                                                 map.put("swxb", "正常" + dk[j]);
+                                                 swxbzcts = (float) (swxbzcts + 0.25D);
+                                                 wfsswsbwdk = false;
+                                             }else if (dk[j].length()>0 && !wfsswsbwdk) {
+                                                 if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                     gxts = (float) (gxts - 0.5D);
+                                                 }
+                                                 map.put("swxb", "正常" + dk[j]);
+                                                 swxbzcts = (float) (swxbzcts + 0.25D);
+                                                 wfsswsbwdk = false;
+                                             }
+                                         } else {
+                                             if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                 gxts = (float) (gxts - 0.5D);
+                                             }
+                                             map.put("swxb", "正常" + dk[j]);
+                                             swxbzcts = (float) (swxbzcts + 0.25D);
+                                         }
+                                     }
+
+                                }else if (compareTime(dk[j], "13:31:00", df_sj) < 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
                                         }
+                                        map.put("xwsb", "正常" + dk[j]);
+                                        xwsbzcts = (float) (xwsbzcts + 0.25D);
                                     }
-                                } else if (compareTime(dk[j], "13:01:00", df_sj) > 0L && compareTime(dk[j], "13:15:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
+                                } else if (compareTime(dk[j], "13:31:00", df_sj) >= 0L && compareTime(dk[j], "14:00:00", df_sj) <= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("xwsb", "迟到" + dk[j]);
                                         cdcs++;
                                         xwsbcdts = (float) (xwsbcdts + 0.25D);
                                     }
 
-                                } else if (compareTime(dk[j], "13:15:00", df_sj) > 0L && compareTime(dk[j], "14:30:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
+                                } else if (compareTime(dk[j], "14:01:00", df_sj) > 0L && compareTime(dk[j], "14:30:00", df_sj) < 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("xwsb", "迟到" + dk[j]);
                                         cdcs_15++;
                                         xwsbcdts_15 = (float) (xwsbcdts_15 + 0.25D);
                                     }
 
-                                } else if (compareTime(dk[j], "17:05:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
+                                } else if (compareTime(dk[j], "17:30:00", df_sj) >= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("xwxb", "正常" + dk[j]);
                                         xwxbzcts = (float) (xwxbzcts + 0.25D);
                                     }
-                                } else if (compareTime(dk[j], "17:05:00", df_sj) < 0L && compareTime(dk[j], "16:30:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
+                                } else if (compareTime(dk[j], "17:30:00", df_sj) < 0L && compareTime(dk[j], "16:30:00", df_sj) >= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("xwxb", "早退" + dk[j]);
                                         ztcs++;
                                         xwxbztts = (float) (xwxbztts + 0.25D);
@@ -2347,6 +2923,8 @@ public class JdbcKqxx {
                             } else if ("1".equals(kssj) && "1".equals(jssj)) { //下午请半天假
                                 xwbt = true;
                             } else if ("0".equals(kssj) && "1".equals(jssj)) { //上下午请一天假
+                                sxw = true;
+                            }else if ("2".equals(kssj) && "2".equals(jssj)) { //上下午请一天假
                                 sxw = true;
                             }
                         } else {
@@ -2525,14 +3103,22 @@ public class JdbcKqxx {
                     if ("2018-02".equals(cxsj)) {
                         mqts = myts - 1 - tdts - gxts;
                     }
-
+                    if ("2019-10".equals(cxsj)) {
+                        mqts = 25f;
+                    }
+                    if ("2019-12".equals(cxsj)) {
+                        mqts = 26f;
+                    }
+                    if ("2020-01".equals(cxsj)) {
+                        mqts = 27f;
+                    }
                     float kqzs = 0.0F;
 
                     if (((qjts + "").endsWith(".25")) || ((qjts + "").endsWith(".75"))) {
                         qjts = (float) (qjts + 0.25D);
                         kqzs = (float) (kqzs - 0.25D);
                     }
-                    kqzs = myts - gxts - qjts - tdts - qjts_gs - qjts_hj - qjts_sj - swsbwqd - swxbwqd - xwsbwqd - xwxbwqd;
+                    kqzs = myts - gxts - qjts - tdts - qjts_gs - qjts_hj - qjts_sj - swsbwqd - swxbwqd - xwsbwqd - xwxbwqd+tdjb;
                     //System.out.println(df_rq.format(date)+":"+myts+"::"+gxts+"::"+qjts+":"+":"+tdts+":"+qjts_gs+":"+qjts_hj+":"+qjts_sj+":"+swsbwqd+":"+swxbwqd+":"+xwsbwqd+":"+xwxbwqd+"--"+kqzs);
 
                     if ((kqzs + "").endsWith(".25")) {
@@ -2669,18 +3255,21 @@ public class JdbcKqxx {
             float xwxbztts = 0.0F;
             float mqcs = 0.0F;
             float bqts = 0.0F;
+            float tdjb = 0.0F;
             float tdts = 0.0F;
             float swsbwqd = 0.0F;
             float swxbwqd = 0.0F;
             float xwsbwqd = 0.0F;
             float xwxbwqd = 0.0F;
             boolean zj_flag = false;
-
+            String time = "2019-12-04 00:00:00";
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date1 = format.parse(time);
             //System.out.println(ts);
             for (int i = 1; i <= ts; i++) {
                 Date date = df_rq.parse(cxsj + "-" + i);
                 String fdate = df_rq.format(date);
-
+                int compareTo = date.compareTo(date1);
                 //查询每个人每天的考勤记录
                 String Sql_kqjl = "select e.employeeCode as kqh,e.employeeName as xm,group_concat(right(t.CardTime,8)) as dksj from kqz_employee e left join  kqz_card t on (e.EmployeeID=t.EmployeeID) and  t.CardTime >= '" + fdate + " 00:00:01' and t.cardtime <= '" + fdate + " 23:59:59' " + whereSql_kqjl;
                 //System.out.println(Sql_kqjl);
@@ -2708,7 +3297,6 @@ public class JdbcKqxx {
                     if ("2019-05-01".equals(fdate) || "2019-05-02".equals(fdate) || "2019-05-03".equals(fdate) || (compareTime(fdate, "2019-06-04", df_rq) >= 0L) && dwmc.contains("车间")) {
                         wpspd1 = true;
                     }
-
                     //String sql_oabq = "select u.field4 as bqcx,u.field8 as bqlb from utm_00206 u,person p where u.field1 = p.id and p.stuff_id = '"+gh+"' and u.field2 = '"+df_rq.format(date)+"' and u.flowid in (select id from document d where d.state='2')";
                     String sql_oabq = "select u.field4 as bqcx,u.field8 as bqlb from utm_00206 u,person p,flownode_member d,nodetactics n where u.field1 = p.id and u.flowid = d.doc_id and p.stuff_id = '" + gh + "' and u.field2 = '" + df_rq.format(date) + "' and d.entity in ('10665','10930','11048','10005') and d.workflag = '1' and  n.tac_id = '3' and n.attach_info in ('已阅','同意') and n.mem_id = d.id";
                     Statement st_oabq = this.con_oa.createStatement();
@@ -2717,7 +3305,10 @@ public class JdbcKqxx {
                         String bkcx = rs_oabq.getString("bqcx");
                         String bqlb = rs_oabq.getString("bqlb");
                         if ("0".equals(bkcx)) {
-                            if ((isEmpty((String) map.get("swsb"))) || ("无".equals((String) map.get("swsb")))) {
+                            if ((isEmpty((String) map.get("swsb"))) || ("无".equals((String) map.get("swsb")))||("元旦放假".equals((String) map.get("swsb")))) {
+                                if(("元旦放假".equals((String) map.get("swsb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("swsb", "因公补签");
@@ -2728,7 +3319,10 @@ public class JdbcKqxx {
                             }
                             wfsswsbwdk = true;
                         } else if ("1".equals(bkcx)) {
-                            if ((isEmpty((String) map.get("swxb"))) || ("无".equals((String) map.get("swxb")))) {
+                            if ((isEmpty((String) map.get("swxb"))) || ("无".equals((String) map.get("swxb")))||("元旦放假".equals((String) map.get("swxb")))) {
+                                if(("元旦放假".equals((String) map.get("swxb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("swxb", "因公补签");
@@ -2739,7 +3333,10 @@ public class JdbcKqxx {
                             }
                             wfsswsbwdk = true;
                         } else if ("2".equals(bkcx)) {
-                            if ((isEmpty((String) map.get("xwsb"))) || ("无".equals((String) map.get("xwsb")))) {
+                            if ((isEmpty((String) map.get("xwsb"))) || ("无".equals((String) map.get("xwsb")))||("元旦放假".equals((String) map.get("xwsb")))) {
+                                if(("元旦放假".equals((String) map.get("xwsb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("xwsb", "因公补签");
@@ -2749,7 +3346,10 @@ public class JdbcKqxx {
                                 }
                             }
                         } else if ("3".equals(bkcx)) {
-                            if ((isEmpty((String) map.get("xwxb"))) || ("无".equals((String) map.get("xwxb")))) {
+                            if ((isEmpty((String) map.get("xwxb"))) || ("无".equals((String) map.get("xwxb")))||("元旦放假".equals((String) map.get("xwxb")))) {
+                                if(("元旦放假".equals((String) map.get("xwxb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("xwxb", "因公补签");
@@ -2796,23 +3396,47 @@ public class JdbcKqxx {
                                     if (isEmpty((String) map.get("xwxb"))) {
                                         map.put("xwxb", ts_xwxb);
                                     }else{
-                                        if (!isEmpty((String) map.get("swsb"))) {
+                                        if (((String) map.get("swsb")).indexOf("补签")>0) {
+                                            map.put("swsb", map.get("swsb"));
+
+                                        }else{
+                                            if(ts_swsb.indexOf("加班")>0){
+                                                tdjb = (float) (tdjb + 0.25D);
+                                            }
                                             map.put("swsb", ts_swsb);
-                                            tdts = (float) (tdts - 0.25D);
+                                            // tdts = (float) (tdts + 0.25D);
                                         }
-                                        if (!isEmpty((String) map.get("swxb"))) {
+                                        if (((String) map.get("swxb")).indexOf("补签")>0) {
+                                            map.put("swxb", map.get("swxb"));
+
+                                        }else{
+                                            if(ts_swxb.indexOf("加班")>0){
+                                                tdjb = (float) (tdjb + 0.25D);
+                                            }
                                             map.put("swxb", ts_swxb);
-                                            tdts = (float) (tdts - 0.25D);
+                                            //  tdts = (float) (tdts + 0.25D);
                                         }
 
-                                        if (!isEmpty((String) map.get("xwsb"))) {
+                                        if (((String) map.get("xwsb")).indexOf("补签")>0) {
+                                            map.put("xwsb", map.get("xwsb"));
+
+                                        }else{
+                                            if(ts_xwsb.indexOf("加班")>0){
+                                                tdjb = (float) (tdjb + 0.25D);
+                                            }
                                             map.put("xwsb", ts_xwsb);
-                                            tdts = (float) (tdts - 0.25D);
+                                            // tdts = (float) (tdts + 0.25D);
                                         }
 
-                                        if (!isEmpty((String) map.get("xwxb"))) {
+                                        if (((String) map.get("xwxb")).indexOf("补签")>0) {
+                                            map.put("xwxb",  map.get("xwxb"));
+
+                                        }else{
+                                            if(ts_xwxb.indexOf("加班")>0){
+                                                tdjb = (float) (tdjb + 0.25D);
+                                            }
                                             map.put("xwxb", ts_xwxb);
-                                            tdts = (float) (tdts - 0.25D);
+                                            // tdts = (float) (tdts + 0.25D);
                                         }
                                     }
                                 } else if ("fj".equals(ts_lb)) {
@@ -2949,7 +3573,19 @@ public class JdbcKqxx {
 
                     }
 
-
+                    String Sql_tskq1 = "select t.rq,t.swsb,t.swxb,t.xwsb,t.xwxb,t.lb,t1.tmember from t_team_tskq t,t_team t1 where t.teamid = t1.id  and t1.gslb='61' and t.rq= '" + df_rq.format(date) + "'";
+                    Statement st_tskq1 = this.con_oa.createStatement();
+                    ResultSet rs_tskq1 = st_tskq1.executeQuery(Sql_tskq1);
+                    //System.out.println(Sql_tskq);
+                    String ts_member1="";
+                    String ts_lb1="";
+                    String ts_rq1="";
+                    while (rs_tskq1.next()) {
+                        //停电放假tdfj/停电补签tdbq/放假fj/喜宴xy
+                        ts_lb1 = rs_tskq1.getString("lb");
+                        ts_rq1 = rs_tskq1.getString("rq");
+                        ts_member1 = rs_tskq1.getString("tmember");
+                    }
                     if (!isEmpty(dksj)) {
                         String[] dk = dksj.split(",");
 
@@ -2976,12 +3612,12 @@ public class JdbcKqxx {
                                         wfsswsbwdk = true;
                                     }
                                 } else if (compareTime(dk[j], "12:00:00", df_sj) >= 0L && compareTime(dk[j], "13:00:00", df_sj) < 0L) {
-                                    if (!wpspd1) {
-                                        map.put("swxb", "正常" + dk[j]);
-                                        swxbzcts = (float) (swxbzcts + 0.25D);
-                                    } else {
-
+                                    if (wpspd1) {
                                         if (isEmpty((String) map.get("swxb")) && wfsswsbwdk) {
+                                            map.put("swxb", "正常" + dk[j]);
+                                            swxbzcts = (float) (swxbzcts + 0.25D);
+                                            wfsswsbwdk = false;
+                                        } else if (isEmpty((String) map.get("swxb")) && !wfsswsbwdk) {
                                             map.put("swxb", "正常" + dk[j]);
                                             swxbzcts = (float) (swxbzcts + 0.25D);
                                             wfsswsbwdk = false;
@@ -2991,15 +3627,17 @@ public class JdbcKqxx {
                                                 xwsbzcts = (float) (xwsbzcts + 0.25D);
                                             }
                                         }
+                                    } else {
+                                        map.put("swxb", "正常" + dk[j]);
+                                        swxbzcts = (float) (swxbzcts + 0.25D);
                                     }
 
-
-                                } else if (compareTime(dk[j], "13:31:00", df_sj) <= 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
+                                } else if (compareTime(dk[j], "13:31:00", df_sj) < 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
                                     if (isEmpty((String) map.get("xwsb"))) {
                                         map.put("xwsb", "正常" + dk[j]);
                                         xwsbzcts = (float) (xwsbzcts + 0.25D);
                                     }
-                                } else if (compareTime(dk[j], "13:31:00", df_sj) > 0L && compareTime(dk[j], "13:45:00", df_sj) <= 0L) {
+                                } else if (compareTime(dk[j], "13:31:00", df_sj) >= 0L && compareTime(dk[j], "13:45:00", df_sj) <= 0L) {
                                     if (isEmpty((String) map.get("xwsb"))) {
                                         map.put("xwsb", "迟到" + dk[j]);
                                         cdcs++;
@@ -3020,9 +3658,14 @@ public class JdbcKqxx {
                                     }
                                 } else if (compareTime(dk[j], "17:35:00", df_sj) < 0L && compareTime(dk[j], "16:00:00", df_sj) >= 0L) {
                                     if (isEmpty((String) map.get("xwxb"))) {
-                                        map.put("xwxb", "早退" + dk[j]);
-                                        ztcs++;
-                                        xwxbztts = (float) (xwxbztts + 0.25D);
+                                        if ("2019-09-12".equals(fdate)) {//中秋节下班
+                                            map.put("xwxb", "正常" + dk[j]);
+                                            xwxbzcts = (float) (xwxbzcts + 0.25D);
+                                        }else{
+                                            map.put("xwxb", "早退" + dk[j]);
+                                            ztcs++;
+                                            xwxbztts = (float) (xwxbztts + 0.25D);
+                                        }
                                     }
                                 }
 
@@ -3040,57 +3683,134 @@ public class JdbcKqxx {
                                 }
                             } else { // end 威浦仕夏季打卡/冬季考勤
                                 if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.25D);
+                                        }
                                         map.put("swsb", "正常" + dk[j]);
                                         swsbzcts = (float) (swsbzcts + 0.25D);
                                         wfsswsbwdk = true;
                                     }
                                 } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.25D);
+                                        }
                                         map.put("swsb", "迟到" + dk[j]);
                                         cdcs++;
                                         swsbcdts = (float) (swsbcdts + 0.25D);
                                         wfsswsbwdk = true;
                                     }
                                 } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.25D);
+                                        }
                                         map.put("swsb", "迟到" + dk[j]);
                                         cdcs_15++;
                                         swsbcdts_15 = (float) (swsbcdts_15 + 0.25D);
                                         wfsswsbwdk = true;
                                     }
-                                } else if (compareTime(dk[j], "12:00:00", df_sj) >= 0L && compareTime(dk[j], "13:01:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swxb")) && wfsswsbwdk) {
-                                        map.put("swxb", "正常" + dk[j]);
-                                        swxbzcts = (float) (swxbzcts + 0.25D);
-                                        wfsswsbwdk = false;
-                                    } else {
-                                        if (isEmpty((String) map.get("xwsb"))) {
-                                            map.put("xwsb", "正常" + dk[j]);
-                                            xwsbzcts = (float) (xwsbzcts + 0.25D);
+                                } else if (compareTime(dk[j], "12:00:00", df_sj) >= 0L && compareTime(dk[j], "13:00:00", df_sj) < 0L) {
+                                    if(compareTo<0){
+                                        if (wpspd1) {
+                                            if (dk[j].length()>0 && wfsswsbwdk) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.25D);
+                                                }
+                                                map.put("swxb", "正常" + dk[j]);
+                                                swxbzcts = (float) (swxbzcts + 0.25D);
+                                                wfsswsbwdk = false;
+                                            }else if (dk[j].length()>0 && !wfsswsbwdk) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.25D);
+                                                }
+                                                map.put("swxb", "正常" + dk[j]);
+                                                swxbzcts = (float) (swxbzcts + 0.25D);
+                                                wfsswsbwdk = false;
+                                            } else {
+                                                if (dk[j].length()>0) {
+                                                    if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                        gxts = (float) (gxts - 0.25D);
+                                                    }
+                                                    map.put("xwsb", "正常" + dk[j]);
+                                                    xwsbzcts = (float) (xwsbzcts + 0.25D);
+                                                }
+                                            }
+                                        } else {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.25D);
+                                            }
+                                            map.put("swxb", "正常" + dk[j]);
+                                            swxbzcts = (float) (swxbzcts + 0.25D);
+                                        }
+                                    }else{
+                                        if (wpspd1) {
+                                            if (dk[j].length()>0 && wfsswsbwdk) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.25D);
+                                                }
+                                                map.put("swxb", "正常" + dk[j]);
+                                                swxbzcts = (float) (swxbzcts + 0.25D);
+                                                wfsswsbwdk = false;
+                                            }else if (dk[j].length()>0 && !wfsswsbwdk) {
+                                                if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                    gxts = (float) (gxts - 0.25D);
+                                                }
+                                                map.put("swxb", "正常" + dk[j]);
+                                                swxbzcts = (float) (swxbzcts + 0.25D);
+                                                wfsswsbwdk = false;
+                                            }
+                                        } else {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.25D);
+                                            }
+                                            map.put("swxb", "正常" + dk[j]);
+                                            swxbzcts = (float) (swxbzcts + 0.25D);
                                         }
                                     }
-                                } else if (compareTime(dk[j], "13:01:00", df_sj) > 0L && compareTime(dk[j], "13:15:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
+
+                                }else if (compareTime(dk[j], "13:31:00", df_sj) < 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.25D);
+                                        }
+                                        map.put("xwsb", "正常" + dk[j]);
+                                        xwsbzcts = (float) (xwsbzcts + 0.25D);
+                                    }
+                                }  else if (compareTime(dk[j], "13:31:00", df_sj) >= 0L && compareTime(dk[j], "14:15:00", df_sj) <= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.25D);
+                                        }
                                         map.put("xwsb", "迟到" + dk[j]);
                                         cdcs++;
                                         xwsbcdts = (float) (xwsbcdts + 0.25D);
                                     }
 
-                                } else if (compareTime(dk[j], "13:15:00", df_sj) > 0L && compareTime(dk[j], "14:30:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
+                                } else if (compareTime(dk[j], "14:15:00", df_sj) > 0L && compareTime(dk[j], "14:30:00", df_sj) < 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.25D);
+                                        }
                                         map.put("xwsb", "迟到" + dk[j]);
                                         cdcs_15++;
                                         xwsbcdts_15 = (float) (xwsbcdts_15 + 0.25D);
                                     }
 
-                                } else if (compareTime(dk[j], "17:05:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
+                                } else if (compareTime(dk[j], "17:30:00", df_sj) >= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.25D);
+                                        }
                                         map.put("xwxb", "正常" + dk[j]);
                                         xwxbzcts = (float) (xwxbzcts + 0.25D);
                                     }
-                                } else if (compareTime(dk[j], "17:05:00", df_sj) < 0L && compareTime(dk[j], "16:00:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
+                                } else if (compareTime(dk[j], "17:30:00", df_sj) < 0L && compareTime(dk[j], "16:00:00", df_sj) >= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.25D);
+                                        }
                                         map.put("xwxb", "早退" + dk[j]);
                                         ztcs++;
                                         xwxbztts = (float) (xwxbztts + 0.25D);
@@ -3159,6 +3879,8 @@ public class JdbcKqxx {
                             } else if ("1".equals(kssj) && "1".equals(jssj)) { //下午请半天假
                                 xwbt = true;
                             } else if ("0".equals(kssj) && "1".equals(jssj)) { //上下午请一天假
+                                sxw = true;
+                            }else if ("2".equals(kssj) && "2".equals(jssj)) { //上下午请一天假
                                 sxw = true;
                             }
                         } else {
@@ -3336,7 +4058,16 @@ public class JdbcKqxx {
                     if ("2018-02".equals(cxsj)) {
                         mqts = byts - 1 - tdts - gxts;
                     }
+                    if ("2019-10".equals(cxsj)) {
+                        mqts = 25f;
+                    }
 
+                    if ("2019-12".equals(cxsj)) {
+                        mqts = 26f;
+                    }
+                    if ("2020-01".equals(cxsj)) {
+                        mqts = 27f;
+                    }
                     float kqzs = 0.0F;
 
 
@@ -3344,7 +4075,7 @@ public class JdbcKqxx {
                         qjts = (float) (qjts + 0.25D);
                         kqzs = (float) (kqzs - 0.25D);
                     }
-                    kqzs = ts - gxts - qjts - tdts - qjts_gs - qjts_hj - qjts_sj - swsbwqd - swxbwqd - xwsbwqd - xwxbwqd;
+                    kqzs = ts - gxts - qjts - tdts - qjts_gs - qjts_hj - qjts_sj - swsbwqd - swxbwqd - xwsbwqd - xwxbwqd+tdjb;
                     //System.out.println(df_rq.format(date)+":"+myts+":"+gxts+":"+qjts+":"+":"+tdts+":"+qjts_gs+":"+qjts_hj+":"+qjts_sj+":"+swsbwqd+":"+swxbwqd+":"+xwsbwqd+":"+xwxbwqd+"--"+kqzs);
 
                     if ((kqzs + "").endsWith(".25")) {
@@ -3432,7 +4163,7 @@ public class JdbcKqxx {
 
 
         //根据页面查询条件查询U8车间人员
-        String sql_u8ry = "select p.jobNumber  as gh,b.bmmc,p.cpsn_name as ryxm,p.cpsn_num as u8ryid from hr_hi_person p,t_wpscjbm b where p.rEmployState = '10' and b.u8bmid = p.cdept_num  " + whereSql_u8ry;
+        String sql_u8ry = "select p.jobNumber  as gh,b.bmmc,b.bmid,p.cpsn_name as ryxm,p.cpsn_num as u8ryid from hr_hi_person p,t_wpscjbm b where p.rEmployState = '10' and b.u8bmid = p.cdept_num  " + whereSql_u8ry;
         Statement st_u8ry = this.con_u8_009.createStatement();
         ResultSet rs_u8ry = st_u8ry.executeQuery(sql_u8ry);
 
@@ -3446,6 +4177,7 @@ public class JdbcKqxx {
             String gh = rs_u8ry.getString("gh");
             int gh_int = Integer.parseInt(gh);
             String bmmc = rs_u8ry.getString("bmmc");
+            String bmid = rs_u8ry.getString("bmid");
             String ryxm = rs_u8ry.getString("ryxm");
             String u8ryid = rs_u8ry.getString("u8ryid");
             whereSql_kqjl = " where e.employeeCode = '" + gh_int + "'";
@@ -3501,6 +4233,7 @@ public class JdbcKqxx {
                     map.put("xm", ryxm);
                     map.put("gh", gh);
                     map.put("bm", bmmc);
+                    map.put("bmid",bmid);
                     if ("日".equals(df_xq.format(date).substring(2, 3))) {
                         wpsxqt++;
                     }
@@ -3558,38 +4291,56 @@ public class JdbcKqxx {
 
                     }
 
+                    String Sql_tskq1 = "select t.rq,t.swsb,t.swxb,t.xwsb,t.xwxb,t.lb,t1.tmember from t_team_tskq t,t_team t1 where t.teamid = t1.id  and t1.gslb='71' and t.rq= '" + df_rq.format(date) + "'";
+                    Statement st_tskq1 = this.con_oa.createStatement();
+                    ResultSet rs_tskq1 = st_tskq.executeQuery(Sql_tskq1);
+                    String ts_member1="";
+                    String ts_lb1="";
+                    String ts_rq1="";
+                    while (rs_tskq1.next()) {
+                        //停电放假tdfj/停电补签tdbq/放假fj/喜宴xy
+                        ts_lb1 = rs_tskq1.getString("lb");
+                        ts_rq1 = rs_tskq1.getString("rq");
+                        ts_member1 = rs_tskq1.getString("tmember");
+                    }
+
                     if (!isEmpty(dksj)) {
                         String[] dk = dksj.split(",");
 
                         for (int j = 0; j < dk.length; j++) { // begin 循环每天的打卡记录
                             if (isSummer(fdate, df_rq)) { //begin 威浦仕夏季打卡时间
                                 if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
                                         map.put("swsb", "正常" + dk[j]);
                                         swsbzcts = (float) (swsbzcts + 0.5D);
                                     }
                                 } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
                                         map.put("swsb", "迟到" + dk[j]);
                                         cdcs++;
                                         swsbcdts = (float) (swsbcdts + 0.5D);
                                     }
                                 } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
                                         map.put("swsb", "迟到" + dk[j]);
                                         cdcs_15++;
                                         swsbcdts_15 = (float) (swsbcdts_15 + 0.5D);
                                     }
                                 } else if (compareTime(dk[j], "17:35:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
+                                    if (dk[j].length()>0) {
                                         map.put("xwxb", "正常" + dk[j]);
                                         xwxbzcts = (float) (xwxbzcts + 0.5D);
                                     }
                                 } else if (compareTime(dk[j], "17:35:00", df_sj) < 0L && compareTime(dk[j], "16:30:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
-                                        map.put("xwxb", "早退" + dk[j]);
-                                        ztcs++;
-                                        xwxbztts = (float) (xwxbztts + 0.5D);
+                                    if (dk[j].length()>0) {
+                                        if ("2019-09-12".equals(fdate)) {//中秋节下班
+                                            map.put("xwxb", "正常" + dk[j]);
+                                            xwxbzcts = (float) (xwxbzcts + 0.25D);
+                                        }else{
+                                            map.put("xwxb", "早退" + dk[j]);
+                                            ztcs++;
+                                            xwxbztts = (float) (xwxbztts + 0.25D);
+                                        }
                                     }
                                 }
 
@@ -3607,29 +4358,44 @@ public class JdbcKqxx {
                                 }
                             } else { // end 威浦仕夏季打卡/冬季考勤
                                 if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("swsb", "正常" + dk[j]);
                                         swsbzcts = (float) (swsbzcts + 0.5D);
                                     }
                                 } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("swsb", "迟到" + dk[j]);
                                         cdcs++;
                                         swsbcdts = (float) (swsbcdts + 0.5D);
                                     }
                                 } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("swsb", "迟到" + dk[j]);
                                         cdcs_15++;
                                         swsbcdts_15 = (float) (swsbcdts_15 + 0.5D);
                                     }
-                                } else if (compareTime(dk[j], "17:05:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
+                                } else if (compareTime(dk[j], "17:30:00", df_sj) >= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("xwxb", "正常" + dk[j]);
                                         xwxbzcts = (float) (xwxbzcts + 0.5D);
                                     }
-                                } else if (compareTime(dk[j], "17:05:00", df_sj) < 0L && compareTime(dk[j], "16:30:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
+                                } else if (compareTime(dk[j], "17:30:00", df_sj) < 0L && compareTime(dk[j], "16:30:00", df_sj) >= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("xwxb", "早退" + dk[j]);
                                         ztcs++;
                                         xwxbztts = (float) (xwxbztts + 0.5D);
@@ -3685,7 +4451,9 @@ public class JdbcKqxx {
                     if ("2018-02".equals(cxsj)) {
                         mqts = myts - 1 - tdts - gxts;
                     }
-
+                    if ("2019-10".equals(cxsj)) {
+                        mqts = 25f;
+                    }
                     float kqzs = 0.0F;
 
 
@@ -3903,6 +4671,20 @@ public class JdbcKqxx {
 
                     }
 
+                    String Sql_tskq1 = "select t.rq,t.swsb,t.swxb,t.xwsb,t.xwxb,t.lb,t1.tmember from t_team_tskq t,t_team t1 where t.teamid = t1.id  and t1.gslb='71' and t.rq= '" + df_rq.format(date) + "'";
+                    Statement st_tskq1 = this.con_oa.createStatement();
+                    ResultSet rs_tskq1 = st_tskq.executeQuery(Sql_tskq1);
+                    String ts_member1="";
+                    String ts_lb1="";
+                    String ts_rq1="";
+                    while (rs_tskq1.next()) {
+                        //停电放假tdfj/停电补签tdbq/放假fj/喜宴xy
+                        ts_lb1 = rs_tskq1.getString("lb");
+                        ts_rq1 = rs_tskq1.getString("rq");
+                        ts_member1 = rs_tskq1.getString("tmember");
+                    }
+
+
                     if (!isEmpty(dksj)) {
                         String[] dk = dksj.split(",");
 
@@ -3952,32 +4734,52 @@ public class JdbcKqxx {
                                 }
                             } else { // end 威浦仕夏季打卡/冬季考勤
                                 if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("swsb", "正常" + dk[j]);
                                         swsbzcts = (float) (swsbzcts + 0.5D);
                                     }
                                 } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("swsb", "迟到" + dk[j]);
                                         cdcs++;
                                         swsbcdts = (float) (swsbcdts + 0.5D);
                                     }
                                 } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("swsb", "迟到" + dk[j]);
                                         cdcs_15++;
                                         swsbcdts_15 = (float) (swsbcdts_15 + 0.5D);
                                     }
-                                } else if (compareTime(dk[j], "17:05:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
+                                } else if (compareTime(dk[j], "17:30:00", df_sj) >= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("xwxb", "正常" + dk[j]);
                                         xwxbzcts = (float) (xwxbzcts + 0.5D);
                                     }
-                                } else if (compareTime(dk[j], "17:05:00", df_sj) < 0L && compareTime(dk[j], "16:30:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
-                                        map.put("xwxb", "早退" + dk[j]);
-                                        ztcs++;
-                                        xwxbztts = (float) (xwxbztts + 0.5D);
+                                } else if (compareTime(dk[j], "17:30:00", df_sj) < 0L && compareTime(dk[j], "16:30:00", df_sj) >= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
+                                        if ("2019-09-12".equals(fdate)) {//中秋节下班
+                                            map.put("xwxb", "正常" + dk[j]);
+                                            xwxbzcts = (float) (xwxbzcts + 0.25D);
+                                        }else{
+                                            map.put("xwxb", "早退" + dk[j]);
+                                            ztcs++;
+                                            xwxbztts = (float) (xwxbztts + 0.25D);
+                                        }
                                     }
                                 }
 
@@ -4029,7 +4831,15 @@ public class JdbcKqxx {
                     if ("2018-02".equals(cxsj)) {
                         mqts = byts - 1 - tdts - gxts;
                     }
-
+                    if ("2019-10".equals(cxsj)) {
+                        mqts = 25f;
+                    }
+                    if ("2019-12".equals(cxsj)) {
+                        mqts = 26f;
+                    }
+                    if ("2020-01".equals(cxsj)) {
+                        mqts = 27f;
+                    }
                     float kqzs = 0.0F;
 
                     kqzs = ts - gxts - -qjts - tdts - swsbwqd - xwxbwqd;
@@ -4113,7 +4923,7 @@ public class JdbcKqxx {
 
 
         //根据页面查询条件查询OA人员
-        String sql_oary = "select p.stuff_id  as gh,p.per_sort as ryxh,b.bmmc,p.truename as ryxm,p.id as oaryid from person p,t_mdkbm b where p.isaway = '0' and b.oa_bmid = p.dep_id  and p.id!='10554' " + whereSql_oary;
+        String sql_oary = "select p.stuff_id  as gh,p.per_sort as ryxh,b.bmmc,b.bmid,p.truename as ryxm,p.id as oaryid from person p,t_mdkbm b where p.isaway = '0' and b.oa_bmid = p.dep_id  and p.id!='10554' " + whereSql_oary;
         Statement st_oary = this.con_oa.createStatement();
         ResultSet rs_oary = st_oary.executeQuery(sql_oary);
 
@@ -4130,6 +4940,7 @@ public class JdbcKqxx {
             String ryxm = rs_oary.getString("ryxm");
             String oaryid = rs_oary.getString("oaryid");
             String ryxh = rs_oary.getString("ryxh");
+            String bmid = rs_oary.getString("bmid");
             whereSql_kqjl = " where e.employeeCode in ('" + gh_int + "','" + ryxh + "')";
 
             int cdcs = 0;
@@ -4182,7 +4993,7 @@ public class JdbcKqxx {
                     map.put("xm", ryxm);
                     map.put("gh", gh);
                     map.put("bm", bmmc);
-
+                    map.put("bmid",bmid);
 
                     String dksj = rs_kqjl.getString("dksj");
                     boolean wfsswsbwdk = false;
@@ -4333,7 +5144,7 @@ public class JdbcKqxx {
                     }
 
                     //总监免签
-                    if ("02670".equals(gh) || "800070".equals(gh) || "800193".equals(gh) || "800494".equals(gh) || "800157".equals(gh) || "800533".equals(gh)) {
+                    if ("02670".equals(gh) || "800070".equals(gh) || "800193".equals(gh) || "800494".equals(gh) || "800157".equals(gh) || "800533".equals(gh)||"800652".equals(gh)) {
                         zj_flag = true;
                         String currTime = df_rqsj.format(new Date());
                         if (compareTime(currTime, df_rq.format(date) + " 12:00:00", df_rqsj) >= 0L && isEmpty((String) map.get("swxb"))) {
@@ -4373,6 +5184,18 @@ public class JdbcKqxx {
                         }
                     }
 
+                    String Sql_tskq1 = "select t.rq,t.swsb,t.swxb,t.xwsb,t.xwxb,t.lb,t1.tmember from t_team_tskq t,t_team t1 where t.teamid = t1.id  and t1.gslb='51' and t.rq= '" + df_rq.format(date) + "'";
+                    Statement st_tskq1 = this.con_oa.createStatement();
+                    ResultSet rs_tskq1 = st_tskq.executeQuery(Sql_tskq1);
+                    String ts_member1="";
+                    String ts_lb1="";
+                    String ts_rq1="";
+                    while (rs_tskq1.next()) {
+                        //停电放假tdfj/停电补签tdbq/放假fj/喜宴xy
+                        ts_lb1 = rs_tskq1.getString("lb");
+                        ts_rq1 = rs_tskq1.getString("rq");
+                        ts_member1 = rs_tskq1.getString("tmember");
+                    }
 
                     if (!isEmpty(dksj)) {
                         String[] dk = dksj.split(",");
@@ -4380,32 +5203,32 @@ public class JdbcKqxx {
                         for (int j = 0; j < dk.length; j++) { // begin 循环每天的打卡记录
                             if (isSummer(df_rq.format(date), df_rq)) { //begin 亚都夏季打卡时间
                                 if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
                                         map.put("swsb", "正常" + dk[j]);
                                         swsbzcts = (float) (swsbzcts + 0.25D);
                                         wfsswsbwdk = true;
                                     }
                                 } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
                                         map.put("swsb", "迟到" + dk[j]);
                                         cdcs++;
                                         swsbcdts = (float) (swsbcdts + 0.25D);
                                         wfsswsbwdk = true;
                                     }
                                 } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
                                         map.put("swsb", "迟到" + dk[j]);
                                         cdcs_15++;
                                         swsbcdts_15 = (float) (swsbcdts_15 + 0.25D);
                                         wfsswsbwdk = true;
                                     }
                                 } else if (compareTime(dk[j], "12:00:00", df_sj) >= 0L && compareTime(dk[j], "13:31:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swxb")) && wfsswsbwdk) {
+                                    if (dk[j].length()>0 && wfsswsbwdk) {
                                         map.put("swxb", "正常" + dk[j]);
                                         swxbzcts = (float) (swxbzcts + 0.25D);
                                         wfsswsbwdk = false;
                                     } else {
-                                        if (isEmpty((String) map.get("xwsb"))) {
+                                        if (dk[j].length()>0) {
                                             map.put("xwsb", "正常" + dk[j]);
                                             xwsbzcts = (float) (xwsbzcts + 0.25D);
                                         }
@@ -4416,29 +5239,34 @@ public class JdbcKqxx {
 			   			                    xwsbzcts = (float)(xwsbzcts + 0.25D);
 			   			              }
 			                }*/ else if (compareTime(dk[j], "13:31:00", df_sj) >= 0L && compareTime(dk[j], "13:45:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
+                                    if (dk[j].length()>0) {
                                         map.put("xwsb", "迟到" + dk[j]);
                                         cdcs++;
                                         xwsbcdts = (float) (xwsbcdts + 0.25D);
                                     }
 
                                 } else if (compareTime(dk[j], "13:45:00", df_sj) > 0L && compareTime(dk[j], "14:30:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
+                                    if (dk[j].length()>0) {
                                         map.put("xwsb", "迟到" + dk[j]);
                                         cdcs_15++;
                                         xwsbcdts_15 = (float) (xwsbcdts_15 + 0.25D);
                                     }
 
                                 } else if (compareTime(dk[j], "17:30:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
+                                    if (dk[j].length()>0) {
                                         map.put("xwxb", "正常" + dk[j]);
                                         xwxbzcts = (float) (xwxbzcts + 0.25D);
                                     }
                                 } else if (compareTime(dk[j], "17:30:00", df_sj) < 0L && compareTime(dk[j], "15:30:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
-                                        map.put("xwxb", "早退" + dk[j]);
-                                        ztcs++;
-                                        xwxbztts = (float) (xwxbztts + 0.25D);
+                                    if (dk[j].length()>0) {
+                                        if ("2019-09-12".equals(fdate)&&compareTime(dk[j], "16:30:00", df_sj) >= 0L) {//中秋节下班
+                                            map.put("xwxb", "正常" + dk[j]);
+                                            xwxbzcts = (float) (xwxbzcts + 0.25D);
+                                        }else{
+                                            map.put("xwxb", "早退" + dk[j]);
+                                            ztcs++;
+                                            xwxbztts = (float) (xwxbztts + 0.25D);
+                                        }
                                     }
                                 }
                                 if (isEmpty((String) map.get("swsb"))) {
@@ -4457,57 +5285,92 @@ public class JdbcKqxx {
                             } else { // end 亚都夏季打卡时间/begin 亚都冬季打卡时间
 
                                 if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("swsb", "正常" + dk[j]);
                                         swsbzcts = (float) (swsbzcts + 0.25D);
                                         wfsswsbwdk = true;
                                     }
                                 } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("swsb", "迟到" + dk[j]);
                                         cdcs++;
                                         swsbcdts = (float) (swsbcdts + 0.25D);
                                         wfsswsbwdk = true;
                                     }
                                 } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("swsb", "迟到" + dk[j]);
                                         cdcs_15++;
                                         swsbcdts_15 = (float) (swsbcdts_15 + 0.25D);
                                         wfsswsbwdk = true;
                                     }
                                 } else if (compareTime(dk[j], "12:00:00", df_sj) >= 0L && compareTime(dk[j], "13:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swxb")) && wfsswsbwdk) {
+                                    if (dk[j].length()>0 && wfsswsbwdk) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("swxb", "正常" + dk[j]);
                                         swxbzcts = (float) (swxbzcts + 0.25D);
                                         wfsswsbwdk = false;
                                     } else {
-                                        if (isEmpty((String) map.get("xwsb"))) {
+                                        if (dk[j].length()>0) {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.5D);
+                                            }
                                             map.put("xwsb", "正常" + dk[j]);
                                             xwsbzcts = (float) (xwsbzcts + 0.25D);
                                         }
                                     }
-                                } else if (compareTime(dk[j], "13:00:00", df_sj) > 0L && compareTime(dk[j], "13:15:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
+                                }else if (compareTime(dk[j], "13:31:00", df_sj) < 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
+                                        map.put("xwsb", "正常" + dk[j]);
+                                        xwsbzcts = (float) (xwsbzcts + 0.25D);
+                                    }
+                                }  else if (compareTime(dk[j], "13:31:00", df_sj) >=0L && compareTime(dk[j], "14:15:00", df_sj) <= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("xwsb", "迟到" + dk[j]);
                                         cdcs++;
                                         xwsbcdts = (float) (xwsbcdts + 0.25D);
                                     }
 
-                                } else if (compareTime(dk[j], "13:15:00", df_sj) > 0L && compareTime(dk[j], "14:30:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
+                                } else if (compareTime(dk[j], "14:15:00", df_sj) > 0L && compareTime(dk[j], "14:30:00", df_sj) < 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("xwsb", "迟到" + dk[j]);
                                         cdcs_15++;
                                         xwsbcdts_15 = (float) (xwsbcdts_15 + 0.25D);
                                     }
 
-                                } else if (compareTime(dk[j], "17:00:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
+                                } else if (compareTime(dk[j], "17:30:00", df_sj) >= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("xwxb", "正常" + dk[j]);
                                         xwxbzcts = (float) (xwxbzcts + 0.25D);
                                     }
-                                } else if (compareTime(dk[j], "17:00:00", df_sj) < 0L && compareTime(dk[j], "15:00:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
+                                } else if (compareTime(dk[j], "17:30:00", df_sj) < 0L && compareTime(dk[j], "15:00:00", df_sj) >= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.5D);
+                                        }
                                         map.put("xwxb", "早退" + dk[j]);
                                         ztcs++;
                                         xwxbztts = (float) (xwxbztts + 0.25D);
@@ -4554,14 +5417,17 @@ public class JdbcKqxx {
 
                     //  String sql_oabq = "select u.field4 as bqcx,u.field8 as bqlb from utm_00163 u where u.field1 = '"+oaryid+"' and u.field2 = '"+df_rq.format(date)+"' and u.flowid in (select per_id from document d where d.state='2' )";
                     // String sql_oabq = "select u.field4 as bqcx,u.field8 as bqlb from utm_00163 u,document d where u.field1 = '"+oaryid+"' and u.field2 = '"+fdate+"' and d.state = '2' and u.flowid=d.id";
-                    String sql_oabq = "select u.field4 as bqcx,u.field8 as bqlb from utm_00163 u,flownode_member d,nodetactics n where u.field1 = '" + oaryid + "' and u.field2 = '" + fdate + "' and d.entity in ('10703','10966','11060','11019','11072') and d.workflag = '1' and  n.tac_id = '3' and n.attach_info in ('已阅','同意') and n.mem_id = d.id and u.flowid=d.doc_id";
+                    String sql_oabq = "select u.field4 as bqcx,u.field8 as bqlb from utm_00163 u,flownode_member d,nodetactics n where u.field1 = '" + oaryid + "' and u.field2 = '" + fdate + "' and d.entity in ('11717','11611','10437','10531') and d.workflag = '1' and  n.tac_id = '3' and n.attach_info in ('已阅','同意') and n.mem_id = d.id and u.flowid=d.doc_id";
                     Statement st_oabq = this.con_oa.createStatement();
                     ResultSet rs_oabq = st_oabq.executeQuery(sql_oabq);
                     while (rs_oabq.next()) {
                         String bkcx = rs_oabq.getString("bqcx");
                         String bqlb = rs_oabq.getString("bqlb");
                         if ("0".equals(bkcx)) {
-                            if ((isEmpty((String) map.get("swsb"))) || ("无".equals((String) map.get("swsb")))) {
+                            if ((isEmpty((String) map.get("swsb"))) || ("无".equals((String) map.get("swsb")))|| ("元旦放假".equals((String) map.get("swsb")))) {
+                                if(("元旦放假".equals((String) map.get("swsb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("swsb", "因公补签");
@@ -4571,7 +5437,10 @@ public class JdbcKqxx {
                                 }
                             }
                         } else if ("1".equals(bkcx)) {
-                            if ((isEmpty((String) map.get("swxb"))) || ("无".equals((String) map.get("swxb")))) {
+                            if ((isEmpty((String) map.get("swxb"))) || ("无".equals((String) map.get("swxb")))|| ("元旦放假".equals((String) map.get("swxb")))) {
+                                if(("元旦放假".equals((String) map.get("swxb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("swxb", "因公补签");
@@ -4581,7 +5450,10 @@ public class JdbcKqxx {
                                 }
                             }
                         } else if ("2".equals(bkcx)) {
-                            if ((isEmpty((String) map.get("xwsb"))) || ("无".equals((String) map.get("xwsb")))) {
+                            if ((isEmpty((String) map.get("xwsb"))) || ("无".equals((String) map.get("xwsb")))|| ("元旦放假".equals((String) map.get("xwsb")))) {
+                                if(("元旦放假".equals((String) map.get("xwsb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("xwsb", "因公补签");
@@ -4591,7 +5463,10 @@ public class JdbcKqxx {
                                 }
                             }
                         } else if ("3".equals(bkcx)) {
-                            if ((isEmpty((String) map.get("xwxb"))) || ("无".equals((String) map.get("xwxb")))) {
+                            if ((isEmpty((String) map.get("xwxb"))) || ("无".equals((String) map.get("xwxb")))|| ("元旦放假".equals((String) map.get("xwxb")))) {
+                                if(("元旦放假".equals((String) map.get("xwxb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("xwxb", "因公补签");
@@ -4611,7 +5486,7 @@ public class JdbcKqxx {
                     //oa请假
                     //String sql_oaqj = "select u.field4 as qjlb,u.id from utm_00162 u where u.field1 = '"+oaryid+"' and u.field6 <= '"+df_rq.format(date)+"' and u.field7>= '"+df_rq.format(date)+"' and u.flowid in (select id from document d where d.state='2')";
                     // String sql_oaqj = "select u.field4 as qjlb,u.id from utm_00162 u,document d where u.field1 = '"+oaryid+"' and u.field6 <= '"+fdate+"' and u.field7>= '"+fdate+"' and d.state = '2' and u.flowid = d.id";
-                    String sql_oaqj = "select u.field4 as qjlb,u.field6 as ksrq,u.field7 as jsrq,u.field17 as kssj,u.field18 as jssj from utm_00162 u,flownode_member d,nodetactics n where u.field1 = '" + oaryid + "' and u.field6 <= '" + fdate + "' and u.field7>= '" + fdate + "' and d.entity in ('10703','10966','11060','11019','11072') and d.workflag = '1' and  n.tac_id = '3' and n.attach_info in ('已阅','同意') and n.mem_id = d.id and u.flowid = d.doc_id";
+                    String sql_oaqj = "select u.field4 as qjlb,u.field6 as ksrq,u.field7 as jsrq,u.field17 as kssj,u.field18 as jssj from utm_00162 u,flownode_member d,nodetactics n where u.field1 = '" + oaryid + "' and u.field6 <= '" + fdate + "' and u.field7>= '" + fdate + "' and d.entity in ('11717','11611','10437','10531') and d.workflag = '1' and  n.tac_id = '3' and n.attach_info in ('已阅','同意') and n.mem_id = d.id and u.flowid = d.doc_id";
                     Statement st_oaqj = this.con_oa.createStatement();
                     ResultSet rs_oaqj = st_oaqj.executeQuery(sql_oaqj);
                     while (rs_oaqj.next()) {
@@ -4634,6 +5509,8 @@ public class JdbcKqxx {
                             } else if ("1".equals(kssj) && "1".equals(jssj)) { //下午请半天假
                                 xwbt = true;
                             } else if ("0".equals(kssj) && "1".equals(jssj)) { //上下午请一天假
+                                sxw = true;
+                            }else if ("2".equals(kssj) && "2".equals(jssj)) { //上下午请一天假
                                 sxw = true;
                             }
                         } else {
@@ -4725,7 +5602,7 @@ public class JdbcKqxx {
                     //oa出差
                     // String sql_oacc = "select u.field3,u.id from utm_00164 u where u.field3 = '"+oaryid+"' and u.field7 >= '"+df_rq.format(date)+"' and u.field6<= '"+df_rq.format(date)+"' and u.flowid in (select id from document d where d.state='2')";
                     // String sql_oacc = "select u.field3,u.id from utm_00164 u,document d where u.field3 = '"+oaryid+"' and u.field7 >= '"+fdate+"' and u.field6<= '"+fdate+"' and d.state = '2' and u.flowid = d.id";
-                    String sql_oacc = "select u.field3,u.id from utm_00164 u,flownode_member d,nodetactics n where u.field3 = '" + oaryid + "' and u.field7 >= '" + fdate + "' and u.field6<= '" + fdate + "' and d.entity in ('10703','10966','11060','11019','11072') and d.workflag = '1' and  n.tac_id = '3' and n.attach_info in ('已阅','同意') and n.mem_id = d.id and u.flowid = d.doc_id";
+                    String sql_oacc = "select u.field3,u.id from utm_00164 u,flownode_member d,nodetactics n where u.field3 = '" + oaryid + "' and u.field7 >= '" + fdate + "' and u.field6<= '" + fdate + "' and d.entity in ('10703','10966','11060','11019','11072','10437') and d.workflag = '1' and  n.tac_id = '3' and n.attach_info in ('已阅','同意') and n.mem_id = d.id and u.flowid = d.doc_id";
                     Statement st_oacc = this.con_oa.createStatement();
                     ResultSet rs_oacc = st_oacc.executeQuery(sql_oacc);
                     while (rs_oacc.next()) {
@@ -4813,7 +5690,14 @@ public class JdbcKqxx {
                     if ("2018-02".equals(cxsj)) {
                         mqts = myts - 1 - tdts - gxts;
                     }
-
+                    if ("2019-10".equals(cxsj)) {
+                        mqts = 25f;
+                    } if ("2019-12".equals(cxsj)) {
+                        mqts = 26f;
+                    }
+                    if ("2020-01".equals(cxsj)) {
+                        mqts = 27f;
+                    }
                     float kqzs = 0.0F;
 
 
@@ -5125,7 +6009,7 @@ public class JdbcKqxx {
                     }
 
                     //总监免签
-                    if ("02670".equals(gh) || "800070".equals(gh) || "800193".equals(gh) || "800494".equals(gh) || "800157".equals(gh) || "800533".equals(gh)) {
+                    if ("02670".equals(gh) || "800070".equals(gh) || "800193".equals(gh) || "800494".equals(gh) || "800157".equals(gh) || "800533".equals(gh)||"800652".equals(gh)) {
                         zj_flag = true;
                         String currTime = df_rqsj.format(new Date());
                         if (compareTime(currTime, df_rq.format(date) + " 12:00:00", df_rqsj) >= 0L && isEmpty((String) map.get("swxb"))) {
@@ -5165,7 +6049,18 @@ public class JdbcKqxx {
                         }
                     }
 
-
+                    String Sql_tskq1 = "select t.rq,t.swsb,t.swxb,t.xwsb,t.xwxb,t.lb,t1.tmember from t_team_tskq t,t_team t1 where t.teamid = t1.id  and t1.gslb='51' and t.rq= '" + df_rq.format(date) + "'";
+                    Statement st_tskq1 = this.con_oa.createStatement();
+                    ResultSet rs_tskq1 = st_tskq.executeQuery(Sql_tskq1);
+                    String ts_member1="";
+                    String ts_lb1="";
+                    String ts_rq1="";
+                    while (rs_tskq1.next()) {
+                        //停电放假tdfj/停电补签tdbq/放假fj/喜宴xy
+                        ts_lb1 = rs_tskq1.getString("lb");
+                        ts_rq1 = rs_tskq1.getString("rq");
+                        ts_member1 = rs_tskq1.getString("tmember");
+                    }
                     if (!isEmpty(dksj)) {
                         String[] dk = dksj.split(",");
 
@@ -5223,9 +6118,15 @@ public class JdbcKqxx {
                                     }
                                 } else if (compareTime(dk[j], "17:30:00", df_sj) < 0L && compareTime(dk[j], "15:30:00", df_sj) >= 0L) {
                                     if (isEmpty((String) map.get("xwxb"))) {
-                                        map.put("xwxb", "早退" + dk[j]);
-                                        ztcs++;
-                                        xwxbztts = (float) (xwxbztts + 0.25D);
+                                        if ("2019-09-12".equals(fdate)&&compareTime(dk[j], "16:30:00", df_sj) >= 0L) {//中秋节下班
+                                            map.put("xwxb", "正常" + dk[j]);
+                                            xwxbzcts = (float) (xwxbzcts + 0.25D);
+                                        }else{
+                                            map.put("xwxb", "早退" + dk[j]);
+                                            ztcs++;
+                                            xwxbztts = (float) (xwxbztts + 0.25D);
+                                        }
+
                                     }
                                 }
                                 if (isEmpty((String) map.get("swsb"))) {
@@ -5244,57 +6145,92 @@ public class JdbcKqxx {
                             } else { // end 亚都夏季打卡时间/begin 亚都冬季打卡时间
 
                                 if (compareTime(dk[j], "08:01:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.25D);
+                                        }
                                         map.put("swsb", "正常" + dk[j]);
                                         swsbzcts = (float) (swsbzcts + 0.25D);
                                         wfsswsbwdk = true;
                                     }
                                 } else if (compareTime(dk[j], "08:01:00", df_sj) > 0L && compareTime(dk[j], "08:15:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.25D);
+                                        }
                                         map.put("swsb", "迟到" + dk[j]);
                                         cdcs++;
                                         swsbcdts = (float) (swsbcdts + 0.25D);
                                         wfsswsbwdk = true;
                                     }
                                 } else if (compareTime(dk[j], "08:15:00", df_sj) > 0L && compareTime(dk[j], "10:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swsb"))) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.25D);
+                                        }
                                         map.put("swsb", "迟到" + dk[j]);
                                         cdcs_15++;
                                         swsbcdts_15 = (float) (swsbcdts_15 + 0.25D);
                                         wfsswsbwdk = true;
                                     }
                                 } else if (compareTime(dk[j], "12:00:00", df_sj) >= 0L && compareTime(dk[j], "13:00:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("swxb")) && wfsswsbwdk) {
+                                    if (dk[j].length()>0 && wfsswsbwdk) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.25D);
+                                        }
                                         map.put("swxb", "正常" + dk[j]);
                                         swxbzcts = (float) (swxbzcts + 0.25D);
                                         wfsswsbwdk = false;
                                     } else {
-                                        if (isEmpty((String) map.get("xwsb"))) {
+                                        if (dk[j].length()>0) {
+                                            if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                                gxts = (float) (gxts - 0.25D);
+                                            }
                                             map.put("xwsb", "正常" + dk[j]);
                                             xwsbzcts = (float) (xwsbzcts + 0.25D);
                                         }
                                     }
-                                } else if (compareTime(dk[j], "13:00:00", df_sj) > 0L && compareTime(dk[j], "13:15:00", df_sj) <= 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
+                                } else if (compareTime(dk[j], "13:31:00", df_sj) < 0L && compareTime(dk[j], "13:00:00", df_sj) >= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.25D);
+                                        }
+                                        map.put("xwsb", "正常" + dk[j]);
+                                        xwsbzcts = (float) (xwsbzcts + 0.25D);
+                                    }
+                                } else if (compareTime(dk[j], "13:31:00", df_sj) >= 0L && compareTime(dk[j], "14:15:00", df_sj) <= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.25D);
+                                        }
                                         map.put("xwsb", "迟到" + dk[j]);
                                         cdcs++;
                                         xwsbcdts = (float) (xwsbcdts + 0.25D);
                                     }
 
-                                } else if (compareTime(dk[j], "13:15:00", df_sj) > 0L && compareTime(dk[j], "14:30:00", df_sj) < 0L) {
-                                    if (isEmpty((String) map.get("xwsb"))) {
+                                } else if (compareTime(dk[j], "14:15:00", df_sj) > 0L && compareTime(dk[j], "15:30:00", df_sj) < 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.25D);
+                                        }
                                         map.put("xwsb", "迟到" + dk[j]);
                                         cdcs_15++;
                                         xwsbcdts_15 = (float) (xwsbcdts_15 + 0.25D);
                                     }
 
-                                } else if (compareTime(dk[j], "17:00:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
+                                } else if (compareTime(dk[j], "17:30:00", df_sj) >= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.25D);
+                                        }
                                         map.put("xwxb", "正常" + dk[j]);
                                         xwxbzcts = (float) (xwxbzcts + 0.25D);
                                     }
-                                } else if (compareTime(dk[j], "17:00:00", df_sj) < 0L && compareTime(dk[j], "15:00:00", df_sj) >= 0L) {
-                                    if (isEmpty((String) map.get("xwxb"))) {
+                                } else if (compareTime(dk[j], "17:30:00", df_sj) < 0L && compareTime(dk[j], "15:30:00", df_sj) >= 0L) {
+                                    if (dk[j].length()>0) {
+                                        if ( "all".equals(ts_member1) && "fj".equals(ts_lb1) ){
+                                            gxts = (float) (gxts - 0.25D);
+                                        }
                                         map.put("xwxb", "早退" + dk[j]);
                                         ztcs++;
                                         xwxbztts = (float) (xwxbztts + 0.25D);
@@ -5551,14 +6487,17 @@ public class JdbcKqxx {
                     map.put("ztcs", Integer.valueOf(ztcs));
 
                     //String sql_oabq = "select u.field4 as bqcx,u.field8 as bqlb from utm_00163 u,person p where u.field1 = p.id and p.stuff_id = '"+gh+"' and u.field2 = '"+df_rq.format(date)+"' and u.flowid in (select id from document d where d.state='2')";
-                    String sql_oabq = "select u.field4 as bqcx,u.field8 as bqlb from utm_00163 u,person p,flownode_member d,nodetactics n where u.field1 = p.id and u.flowid = d.doc_id and p.stuff_id = '" + gh + "' and u.field2 = '" + df_rq.format(date) + "' and d.entity in ('10703','10966','11060','11019','11072') and d.workflag = '1' and  n.tac_id = '3' and n.attach_info in ('已阅','同意') and n.mem_id = d.id";
+                    String sql_oabq = "select u.field4 as bqcx,u.field8 as bqlb from utm_00163 u,person p,flownode_member d,nodetactics n where u.field1 = p.id and u.flowid = d.doc_id and p.stuff_id = '" + gh + "' and u.field2 = '" + df_rq.format(date) + "' and d.entity in ('11717','11611','10437','10531') and d.workflag = '1' and  n.tac_id = '3' and n.attach_info in ('已阅','同意') and n.mem_id = d.id";
                     Statement st_oabq = this.con_oa.createStatement();
                     ResultSet rs_oabq = st_oabq.executeQuery(sql_oabq);
                     while (rs_oabq.next()) {
                         String bkcx = rs_oabq.getString("bqcx");
                         String bqlb = rs_oabq.getString("bqlb");
                         if ("0".equals(bkcx)) {
-                            if ((isEmpty((String) map.get("swsb"))) || ("无".equals((String) map.get("swsb")))) {
+                            if ((isEmpty((String) map.get("swsb"))) || ("无".equals((String) map.get("swsb")))||("元旦放假".equals((String) map.get("swsb")))) {
+                                if(("元旦放假".equals((String) map.get("swsb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("swsb", "因公补签");
@@ -5568,7 +6507,10 @@ public class JdbcKqxx {
                                 }
                             }
                         } else if ("1".equals(bkcx)) {
-                            if ((isEmpty((String) map.get("swxb"))) || ("无".equals((String) map.get("swxb")))) {
+                            if ((isEmpty((String) map.get("swxb"))) || ("无".equals((String) map.get("swxb")))||("元旦放假".equals((String) map.get("swxb")))) {
+                                if(("元旦放假".equals((String) map.get("swxb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("swxb", "因公补签");
@@ -5578,7 +6520,10 @@ public class JdbcKqxx {
                                 }
                             }
                         } else if ("2".equals(bkcx)) {
-                            if ((isEmpty((String) map.get("xwsb"))) || ("无".equals((String) map.get("xwsb")))) {
+                            if ((isEmpty((String) map.get("xwsb"))) || ("无".equals((String) map.get("xwsb")))||("元旦放假".equals((String) map.get("xwsb")))) {
+                                if(("元旦放假".equals((String) map.get("xwsb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("xwsb", "因公补签");
@@ -5588,7 +6533,10 @@ public class JdbcKqxx {
                                 }
                             }
                         } else if ("3".equals(bkcx)) {
-                            if ((isEmpty((String) map.get("xwxb"))) || ("无".equals((String) map.get("xwxb")))) {
+                            if ((isEmpty((String) map.get("xwxb"))) || ("无".equals((String) map.get("xwxb")))|| ("元旦放假".equals((String) map.get("xwxb")))) {
+                                if(("元旦放假".equals((String) map.get("xwxb")))){
+                                    gxts = (float) (gxts - 0.25D);
+                                }
                                 bqts = (float) (bqts + 0.25D);
                                 if ("0".equals(bqlb)) {
                                     map.put("xwxb", "因公补签");
@@ -5608,7 +6556,7 @@ public class JdbcKqxx {
                     //oa请假
                     //String sql_oaqj = "select u.field4 as qjlb,u.id from utm_00162 u,person p where u.field1 = p.id and p.stuff_id ='"+gh+"' and u.field6 <= '"+df_rq.format(date)+"' and u.field7>= '"+df_rq.format(date)+"' and u.flowid in (select id from document d where d.state='2' )";
                     //  String sql_oaqj = "select u.field4 as qjlb,u.field17 as kssj,u.field18 as jssj from utm_00162 u,person p,flownode_member d,nodetactics n where u.field1 = p.id and u.flowid = d.doc_id and p.stuff_id ='"+gh+"' and u.field6 <= '"+df_rq.format(date)+"' and u.field7>= '"+df_rq.format(date)+"' and u.flowid in (select id from document d where d.state='2' )";
-                    String sql_oaqj = "select u.field4 as qjlb,u.field6 as ksrq,u.field7 as jsrq,u.field17 as kssj,u.field18 as jssj  from utm_00162 u,person p,flownode_member d,nodetactics n where u.field1 = p.id and u.flowid = d.doc_id and p.stuff_id ='" + gh + "' and u.field6 <= '" + df_rq.format(date) + "' and u.field7>= '" + df_rq.format(date) + "' and d.entity in ('10703','10966','11060','11019','11072') and d.workflag = '1' and  n.tac_id = '3' and n.attach_info in ('已阅','同意') and n.mem_id = d.id";
+                    String sql_oaqj = "select u.field4 as qjlb,u.field6 as ksrq,u.field7 as jsrq,u.field17 as kssj,u.field18 as jssj  from utm_00162 u,person p,flownode_member d,nodetactics n where u.field1 = p.id and u.flowid = d.doc_id and p.stuff_id ='" + gh + "' and u.field6 <= '" + df_rq.format(date) + "' and u.field7>= '" + df_rq.format(date) + "' and d.entity in ('11717','11611','10437','10531') and d.workflag = '1' and  n.tac_id = '3' and n.attach_info in ('已阅','同意') and n.mem_id = d.id";
                     Statement st_oaqj = this.con_oa.createStatement();
                     ResultSet rs_oaqj = st_oaqj.executeQuery(sql_oaqj);
                     while (rs_oaqj.next()) {
@@ -5631,6 +6579,8 @@ public class JdbcKqxx {
                             } else if ("1".equals(kssj) && "1".equals(jssj)) { //下午请半天假
                                 xwbt = true;
                             } else if ("0".equals(kssj) && "1".equals(jssj)) { //上下午请一天假
+                                sxw = true;
+                            } else if ("2".equals(kssj) && "2".equals(jssj)) { //上下午请一天假
                                 sxw = true;
                             }
                         } else {
@@ -5721,7 +6671,7 @@ public class JdbcKqxx {
 
                     //oa出差
                     //String sql_oacc = "select u.field3,u.id from utm_00164 u,person p where u.field3 = p.id and p.stuff_id ='"+gh+"' and u.field7 >= '"+df_rq.format(date)+"' and u.field6<= '"+df_rq.format(date)+"' and u.flowid in (select id from document d where d.state='2')";
-                    String sql_oacc = "select u.field3,u.id from utm_00164 u,person p,flownode_member d,nodetactics n where u.field3 = p.id and u.flowid = d.doc_id and p.stuff_id ='" + gh + "' and u.field7 >= '" + df_rq.format(date) + "' and u.field6<= '" + df_rq.format(date) + "' and d.entity in ('10703','10966','11060','11019','11072') and d.workflag = '1' and  n.tac_id = '3' and n.attach_info in ('已阅','同意') and n.mem_id = d.id";
+                    String sql_oacc = "select u.field3,u.id from utm_00164 u,person p,flownode_member d,nodetactics n where u.field3 = p.id and u.flowid = d.doc_id and p.stuff_id ='" + gh + "' and u.field7 >= '" + df_rq.format(date) + "' and u.field6<= '" + df_rq.format(date) + "' and d.entity in ('10703','10966','11060','11019','11072',,'10437') and d.workflag = '1' and  n.tac_id = '3' and n.attach_info in ('已阅','同意') and n.mem_id = d.id";
                     Statement st_oacc = this.con_oa.createStatement();
                     ResultSet rs_oacc = st_oacc.executeQuery(sql_oacc);
                     while (rs_oacc.next()) {
@@ -5808,7 +6758,15 @@ public class JdbcKqxx {
                     if ("2018-02".equals(cxsj)) {
                         mqts = byts - 1 - tdts - gxts;
                     }
-
+                    if ("2019-10".equals(cxsj)) {
+                        mqts = 25f;
+                    }
+                    if ("2019-12".equals(cxsj)) {
+                        mqts = 26f;
+                    }
+                    if ("2020-01".equals(cxsj)) {
+                        mqts = 27f;
+                    }
                     float kqzs = 0.0F;
 
 
@@ -6704,7 +7662,6 @@ public class JdbcKqxx {
 
     //获取打卡记录列表
     public Map<String, Object> getDkjl(HttpServletRequest req, String method) throws Exception {
-        req.setCharacterEncoding("GBK");
         if (con_kq == null || con_kq.isClosed()) {
             con_kq = getKqjlCon();
         }
@@ -6730,7 +7687,7 @@ public class JdbcKqxx {
         String seq = "";
         List params = new ArrayList();
         if ("sy_dkjl".equals(method)) { //查询打卡记录列表
-            String ryxm = new String(req.getParameter("ryxm").getBytes("ISO-8859-1"), "gb2312");
+            String ryxm = URLDecoder.decode(req.getParameter("ryxm"),"UTF-8");
             String rygh = req.getParameter("rygh");
             String cxn = req.getParameter("cxn");
             String cxy = req.getParameter("cxy");
@@ -6742,7 +7699,7 @@ public class JdbcKqxx {
             }
 
             if (!isEmpty(rygh)) {
-                whereSql += " and t.employeeCode like  '%" + rygh + "' ";
+                whereSql += " and t.employeeCode like  '" + rygh + "' ";
             }
 
 

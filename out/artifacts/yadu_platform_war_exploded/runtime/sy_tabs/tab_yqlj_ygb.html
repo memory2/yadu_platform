@@ -1,256 +1,1070 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<base target="_blank">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>网址/软件导航</title>
-	<link rel="Shortcut Icon" href="../../images/dl.ico" type="image/x-icon"/> 
+    <base target="_blank">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>网址/软件导航</title>
+    <link rel="Shortcut Icon" href="../../images/dl.ico" type="image/x-icon"/>
     <link rel="icon" href="../../images/dl.ico" type="image/x-icon"/>
 
-	<script type="text/javascript" src="../../js/txjs/jquery.min.js"></script>
-<script type="text/javascript" src="../../js/txjs/jquery.bumpytext.packed.js"></script>
-<script type="text/javascript" src="../../js/txjs/easying.js"></script>
-	<script type="text/javascript">
-	$().ready(function() {
-		$('.bt2_font').bumpyText();
-		$('#bt').bumpyText();
-		$('.bz').bumpyText();
-	});
-	   
-	</script>
+    <script type="text/javascript" src="../../js/txjs/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/txjs/jquery.bumpytext.packed.js"></script>
+    <script type="text/javascript" src="../../js/txjs/easying.js"></script>
+    <script type="text/javascript">
+        $().ready(function () {
+            $('.bt2_font').bumpyText();
+            $('#bt').bumpyText();
+            $('.bz').bumpyText();
+        });
+
+    </script>
 
 
-<style type="text/css">
- body{text-align:center;}
-#dituContent{width:70%;margin:0px auto;font-family:"微软雅黑"}
+    <style type="text/css">
+        body {
+            text-align: center;
+        }
 
-    tr td{border:solid #add9c0; border-width:1px 1px 1px 1px; text-align:center;font-size:12px;white-space:0; width:14%;height:35px;font-size:16px;}
-    table{width:100%;border-collapse:collapse;text-align:center;}
-    #bt {color:#CC5522;font-size:24px;font-weight:bold;margin:15px;text-align:center;}
-    .bz{color:red;font-size:14px;text-align:left;padding-left:10px;}
-    .bt2{font-size:16px;font-weight:bold;text-align:left;padding-left:5px;}
-    .normol a{color:blue;}
-    .special a{color:green!important;}
-    img{vertical-align:middle;}
-.bumpy-char{line-height:2.4em;position:relative;}
+        #dituContent {
+            width: 70%;
+            margin: 0px auto;
+            font-family: "微软雅黑"
+        }
 
-  html, body {
-  margin: 0;
-  padding:0;
-  height: 100%
-}
+        tr td {
+            border: solid #add9c0;
+            border-width: 1px 1px 1px 1px;
+            text-align: center;
+            font-size: 12px;
+            white-space: 0;
+            width: 14%;
+            height: 35px;
+            font-size: 16px;
+        }
 
-.trunk, .trunk div {
-    background: #136086;
-    /*border-radius:$w;*/
-    width: 100px;
-    height: 10px;
-    position: absolute;
-    left:50%;
-    top:90%;
-    margin-left: -10px;
-    -webkit-animation-name: rot;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        #bt {
+            color: #CC5522;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 15px;
+            text-align: center;
+        }
+
+        .bz {
+            color: red;
+            font-size: 14px;
+            text-align: left;
+            padding-left: 10px;
+        }
+
+        .bt2 {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+            padding-left: 5px;
+        }
+
+        .normol a {
+            color: blue;
+        }
+
+        .special a {
+            color: green !important;
+        }
+
+        img {
+            vertical-align: middle;
+        }
+
+        .bumpy-char {
+            line-height: 2.4em;
+            position: relative;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%
+        }
+
+        .trunk, .trunk div {
+            background: #136086;
+            /*border-radius:$w;*/
+            width: 100px;
+            height: 10px;
+            position: absolute;
+            left: 50%;
+            top: 90%;
+            margin-left: -10px;
+            -webkit-animation-name: rot;
             animation-name: rot;
-    -webkit-animation-duration: 2.02s;
+            -webkit-animation-duration: 2.02s;
             animation-duration: 2.02s;
-    -webkit-animation-iteration-count: infinite;
+            -webkit-animation-iteration-count: infinite;
             animation-iteration-count: infinite;
-    -webkit-animation-direction: alternate;
+            -webkit-animation-direction: alternate;
             animation-direction: alternate;
-    -webkit-transform-origin: 5px 5px;
-        -ms-transform-origin: 5px 5px;
+            -webkit-transform-origin: 5px 5px;
+            -ms-transform-origin: 5px 5px;
             transform-origin: 5px 5px;
-    -webkit-animation-timing-function: ease-in-out;
+            -webkit-animation-timing-function: ease-in-out;
             animation-timing-function: ease-in-out;
 
-}
-.trunk.trunk, .trunk div.trunk {
-    bottom: 0;
-    left: 50%;
-    -webkit-animation-name: rot-root;
+        }
+
+        .trunk.trunk, .trunk div.trunk {
+            bottom: 0;
+            left: 50%;
+            -webkit-animation-name: rot-root;
             animation-name: rot-root;
-    -webkit-animation-duration: 2.5s;
+            -webkit-animation-duration: 2.5s;
             animation-duration: 2.5s;
-}
-.trunk > div, .trunk div > div {
-    /*opacity:0.9;*/
-    top: 0;
-    left: 100px;
-    -webkit-animation-duration: calc(inherit / 2);
+        }
+
+        .trunk > div, .trunk div > div {
+            /*opacity:0.9;*/
+            top: 0;
+            left: 100px;
+            -webkit-animation-duration: calc(inherit / 2);
             animation-duration: calc(inherit / 2);
-    /* don't works  */
-}
-.trunk > div:nth-child(2), .trunk div > div:nth-child(2) {
-    /*animation-duration:15s;*/
-    -webkit-animation-name: rot-inv;
+            /* don't works  */
+        }
+
+        .trunk > div:nth-child(2), .trunk div > div:nth-child(2) {
+            /*animation-duration:15s;*/
+            -webkit-animation-name: rot-inv;
             animation-name: rot-inv;
-    -webkit-animation-duration: 1.7s;
+            -webkit-animation-duration: 1.7s;
             animation-duration: 1.7s;
-}
+        }
 
-@-webkit-keyframes rot {
-    from {
-      -webkit-transform: rotate(15deg) scale(0.72);
-              transform: rotate(15deg) scale(0.72);
-    }
-    to {
-      -webkit-transform: rotate(45deg) scale(0.72);
-              transform: rotate(45deg) scale(0.72);
-    }
-}
+        @-webkit-keyframes rot {
+            from {
+                -webkit-transform: rotate(15deg) scale(0.72);
+                transform: rotate(15deg) scale(0.72);
+            }
+            to {
+                -webkit-transform: rotate(45deg) scale(0.72);
+                transform: rotate(45deg) scale(0.72);
+            }
+        }
 
-@keyframes rot {
-    from {
-      -webkit-transform: rotate(15deg) scale(0.72);
-              transform: rotate(15deg) scale(0.72);
-    }
-    to {
-      -webkit-transform: rotate(45deg) scale(0.72);
-              transform: rotate(45deg) scale(0.72);
-    }
-}
-@-webkit-keyframes rot-inv {
-    from {
-      -webkit-transform: rotate(-45deg) scale(0.72);
-              transform: rotate(-45deg) scale(0.72);
-    }
-    to {
-      -webkit-transform: rotate(-15deg) scale(0.72);
-              transform: rotate(-15deg) scale(0.72);
-    }
-}
-@keyframes rot-inv {
-    from {
-      -webkit-transform: rotate(-45deg) scale(0.72);
-              transform: rotate(-45deg) scale(0.72);
-    }
-    to {
-      -webkit-transform: rotate(-15deg) scale(0.72);
-              transform: rotate(-15deg) scale(0.72);
-    }
-}
-@-webkit-keyframes rot-root {
-    from {
-      -webkit-transform: rotate(-95deg);
-              transform: rotate(-95deg);
-    }
-    to {
-      -webkit-transform: rotate(-85deg);
-              transform: rotate(-85deg);
-    }
-}
-@keyframes rot-root {
-    from {
-      -webkit-transform: rotate(-95deg);
-              transform: rotate(-95deg);
-    }
-    to {
-      -webkit-transform: rotate(-85deg);
-              transform: rotate(-85deg);
-    }
-}
+        @keyframes rot {
+            from {
+                -webkit-transform: rotate(15deg) scale(0.72);
+                transform: rotate(15deg) scale(0.72);
+            }
+            to {
+                -webkit-transform: rotate(45deg) scale(0.72);
+                transform: rotate(45deg) scale(0.72);
+            }
+        }
 
-</style>
+        @-webkit-keyframes rot-inv {
+            from {
+                -webkit-transform: rotate(-45deg) scale(0.72);
+                transform: rotate(-45deg) scale(0.72);
+            }
+            to {
+                -webkit-transform: rotate(-15deg) scale(0.72);
+                transform: rotate(-15deg) scale(0.72);
+            }
+        }
+
+        @keyframes rot-inv {
+            from {
+                -webkit-transform: rotate(-45deg) scale(0.72);
+                transform: rotate(-45deg) scale(0.72);
+            }
+            to {
+                -webkit-transform: rotate(-15deg) scale(0.72);
+                transform: rotate(-15deg) scale(0.72);
+            }
+        }
+
+        @-webkit-keyframes rot-root {
+            from {
+                -webkit-transform: rotate(-95deg);
+                transform: rotate(-95deg);
+            }
+            to {
+                -webkit-transform: rotate(-85deg);
+                transform: rotate(-85deg);
+            }
+        }
+
+        @keyframes rot-root {
+            from {
+                -webkit-transform: rotate(-95deg);
+                transform: rotate(-95deg);
+            }
+            to {
+                -webkit-transform: rotate(-85deg);
+                transform: rotate(-85deg);
+            }
+        }
+
+    </style>
 </head>
 <body>
- 
-  <div  id="dituContent" >
- 
-   <div id="bt">网址/软件导航</div>
-   <table>
-    <tr>
-     <td class="bt2" colspan=5 ><img src="../../images/work.png"></img>&nbsp;<font class="bt2_font">工作类</font></td>
-    </tr>
-    <tr>
-       <td class="special"><a href="http://www.rrzxw.net/" >人人自学网</td> 
-       <td class="special"><a href="http://tushuo.baidu.com/">百度图说</td>
-       <td class="special"><a href="http://www.w3school.com.cn/">编程帮助文档</td> 
-       <td class="special"><a href="http://www.haxx.lss.gov.cn/ggxx/perinfo.php">养老保险查询</td>
-       <td class="special"><a href="http://mail.yadugroup.com/">企业邮箱</td> 
-    </tr>
+
+<div id="dituContent">
+
+    <div id="bt">网址/软件导航</div>
+    <table>
         <tr>
-        <td class="special"><a href="http://www.51zxw.net/">我要自学网</td>
-       <td class="normol"><a href="../../download/peixun.zip" >信息技术基础培训</td> 
-       <td class="normol"><a href="../../download/peixun1.zip">如何制作PPT培训</td> 
-       <td class="normol"><a href="../../download/peixun2.zip">Excel使用技巧培训</td>
-       <td class="special"><a href="http://mail.yadugroup.com/"></td> 
-    </tr>
-    <tr>
-     <td class="bt2" colspan=5><img src="../../images/life.png"></img>&nbsp;<font class="bt2_font">生活类</font></td>
-    </tr>
-    <tr>
-       <td class="special"><a href="http://www.jsyst.cn/km1/118393/">驾考网</td>
-       <td class="special"><a href="http://www.12306.cn/mormhweb/">12306火车订票</td> 
-       <td class="special"><a href="http://gongan.changyuan.gov.cn/channels/banshi/index.html">办事指南</td> 
-       <td class="special"><a href="http://www.weather.com.cn/weather/101180308.shtml">长垣天气</td> 
-       <td class="special"><a href="http://www.changyuan.ccoo.cn/">长垣在线</td> 
-    </tr>
-      <tr>
-      <td class="special"><a href="http://map.baidu.com/?newmap=1&s=s%26wd%3D%E9%95%BF%E5%9E%A3%E5%8E%BF%26c%3D1505&from=alamap&tpl=mapcity">长垣地图</td>
-       <td class="normol"><a href="http://10.0.10.30:443/yadu_OA/runtime/sy_tabs/tab_shcydh.html">生活常用电话</td>
-       <td class="normol"><a href="http://10.0.10.30:443/yadu_OA/runtime/sy_tabs/tools_calendar.htm">万年历</td> 
-       <td class="normol"><a href="http://gongan.changyuan.gov.cn/channels/banshi/index.html"></td> 
-       <td class="normol"><a href="http://www.weather.com.cn/weather/101180308.shtml"></td> 
-    </tr>
+            <td class="bt2" colspan=5><img src="../../images/work.png"></img>&nbsp;<font class="bt2_font">工作类</font>
+            </td>
+        </tr>
         <tr>
-     <td class="bt2" colspan=5><img src="../../images/download.png"></img>&nbsp;<font class="bt2_font">软件下载</font></td>
-    </tr>
-    <tr>
-       <td class="normol"><a href="../../download/QQ7.9.exe">QQ</td>
-       <td class="normol"><a href="../../download/WeChat1.5.exe">微信电脑版</td> 
-       <td class="normol"><a href="../../download/fm727chb26_build_setup.exe">FoxMail邮箱</td> 
-       <td class="normol"><a href="../../download/Google_Setup.exe" style="font-weight:bold;">谷歌浏览器</td> 
-       <td class="normol"><a href="../../download/360se_setup.exe">360浏览器</td> 
-       
-    </tr>
-     <tr>
-       <td class="normol"><a href="../../download/nt6 oem loader v3.3.1.exe">win7系统激活</td>
-       <td class="normol"><a href="../../download/AdbeRdr940_zh_CN.exe">PDF阅读器</td> 
-       <td class="normol"><a href="../../download/rtxcsetup.exe">腾讯通</td> 
-       <td class="normol"><a href="../../download/pdf-to-word.zip">pdf转word</td> 
-       <td class="normol"><a href="../../download/Everything-1.3.4.686.x86-Setup.exe">快速检索</td> 
-    </tr>
-      <tr>
-       <td class="normol"><a href="../../download/360EntInst(10.0.10.36_80).exe">360安全卫士</td>
-       <td class="normol"><a href="../../download/jidianwubi.zip">五笔输入法</td>
-       <td class="normol"><a href="../../download/sogou_pinyin_80l.exe">搜狗输入法</td>
-       <td class="normol"><a href="../../download/CADReaderPc_4.1.0.31.exe">CAD快速看图</td>
-       <td class="normol"><a href="../../download/QQPlayer_Setup_39_936.exe">QQ播放器</td>
-    </tr>
-     <tr>
-     <td class="bz" colspan=5 >友情提示：绿色的链接需要电脑接入互联网才能正常访问！</td>
-    </tr>
-   </table>
-<!-- 代码部分begin -->
-<div class="trunk1"><div><div><div><div><div><div><div><div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div>
-<div><div><div><div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div></div><div><div><div><div><div></div>
-<div></div></div><div><div></div><div></div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div><div><div><div><div></div><div></div></div><div><div></div><div>
-</div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div></div></div><div><div><div><div><div><div></div><div></div></div><div><div></div><div></div></div>
-</div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div><div><div><div><div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div><div>
-</div></div><div><div></div><div></div></div></div></div></div><div><div><div><div><div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div><div></div></div><div><div>
-</div><div></div></div></div></div><div><div><div><div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div>
-</div></div></div><div><div><div><div><div><div><div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div><div>
-<div><div><div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div></div><div><div><div><div><div></div><div>
-</div></div><div><div></div><div></div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div><div><div><div><div></div><div></div></div><div><div></div><div></div>
-</div></div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div></div></div><div><div><div><div><div><div></div><div></div></div><div><div></div><div></div></div></div><div>
-<div><div></div><div></div></div><div><div></div><div></div></div></div></div><div><div><div><div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div><div></div></div><div>
-<div></div><div></div></div></div></div></div><div><div><div><div><div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div>
-</div></div><div><div><div><div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div></div></div></div></div><div>
-<div><div><div><div><div><div><div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div><div><div><div><div></div><div>
-</div></div><div><div></div><div></div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div></div><div><div><div><div><div></div><div></div></div><div><div></div><div>
-</div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div><div><div><div><div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div><div>
-</div></div><div><div></div><div></div></div></div></div></div></div><div><div><div><div><div><div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div><div></div></div><div><div>
-</div><div></div></div></div></div><div><div><div><div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div></div><div>
-<div><div><div><div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div><div><div><div><div></div><div></div></div><div>
-<div></div><div></div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div></div></div></div><div><div><div><div><div><div><div></div><div></div></div><div><div></div><div>
-</div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div><div><div><div><div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div><div></div>
-</div><div><div></div><div></div></div></div></div></div><div><div><div><div><div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div>
-</div></div><div><div><div><div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div></div></div><div><div><div><div><div>
-<div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div><div><div><div><div></div><div></div></div><div><div></div><div>
-</div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div></div></div></div><div><div><div><div><div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div>
-<div></div></div><div><div></div><div></div></div></div></div><div><div><div><div></div><div></div></div><div><div></div><div></div></div></div><div><div><div></div><div></div></div><div><div></div><div></div></div>
-</div></div></div></div></div></div></div>
-<!-- 代码部分end -->
-  </div>
+            <td class="special"><a href="http://www.rrzxw.net/">人人自学网</td>
+            <td class="special"><a href="http://tushuo.baidu.com/">百度图说</td>
+            <td class="special"><a href="http://www.w3school.com.cn/">编程帮助文档</td>
+            <td class="special"><a href="http://www.haxx.lss.gov.cn/ggxx/perinfo.php">养老保险查询</td>
+            <td class="special"><a href="http://mail.yadugroup.com/">企业邮箱</td>
+        </tr>
+        <tr>
+            <td class="special"><a href="http://www.51zxw.net/">我要自学网</td>
+            <td class="normol"><a href="../../download/peixun.zip">信息技术基础培训</td>
+            <td class="normol"><a href="../../download/peixun1.zip">如何制作PPT培训</td>
+            <td class="normol"><a href="../../download/peixun2.zip">Excel使用技巧培训</td>
+            <td class="special"><a href="http://mail.yadugroup.com/"></td>
+        </tr>
+        <tr>
+            <td class="bt2" colspan=5><img src="../../images/life.png"></img>&nbsp;<font class="bt2_font">生活类</font>
+            </td>
+        </tr>
+        <tr>
+            <td class="special"><a href="http://www.jsyst.cn/km1/118393/">驾考网</td>
+            <td class="special"><a href="http://www.12306.cn/mormhweb/">12306火车订票</td>
+            <td class="special"><a href="http://gongan.changyuan.gov.cn/channels/banshi/index.html">办事指南</td>
+            <td class="special"><a href="http://www.weather.com.cn/weather/101180308.shtml">长垣天气</td>
+            <td class="special"><a href="http://www.changyuan.ccoo.cn/">长垣在线</td>
+        </tr>
+        <tr>
+            <td class="special"><a
+                    href="http://map.baidu.com/?newmap=1&s=s%26wd%3D%E9%95%BF%E5%9E%A3%E5%8E%BF%26c%3D1505&from=alamap&tpl=mapcity">长垣地图
+            </td>
+            <td class="normol"><a href="http://10.0.10.30:443/yadu_OA/runtime/sy_tabs/tab_shcydh.html">生活常用电话</td>
+            <td class="normol"><a href="http://10.0.10.30:443/yadu_OA/runtime/sy_tabs/tools_calendar.htm">万年历</td>
+            <td class="normol"><a href="http://gongan.changyuan.gov.cn/channels/banshi/index.html"></td>
+            <td class="normol"><a href="http://www.weather.com.cn/weather/101180308.shtml"></td>
+        </tr>
+        <tr>
+            <td class="bt2" colspan=5><img src="../../images/download.png"></img>&nbsp;<font
+                    class="bt2_font">软件下载</font></td>
+        </tr>
+        <tr>
+            <td class="normol"><a href="../../download/QQ7.9.exe">QQ</td>
+            <td class="normol"><a href="../../download/WeChat1.5.exe">微信电脑版</td>
+            <td class="normol"><a href="../../download/fm727chb26_build_setup.exe">FoxMail邮箱</td>
+            <td class="normol"><a href="../../download/Google_Setup.exe" style="font-weight:bold;">谷歌浏览器</td>
+            <td class="normol"><a href="../../download/360se_setup.exe">360浏览器</td>
+
+        </tr>
+        <tr>
+            <td class="normol"><a href="../../download/nt6 oem loader v3.3.1.exe">win7系统激活</td>
+            <td class="normol"><a href="../../download/AdbeRdr940_zh_CN.exe">PDF阅读器</td>
+            <td class="normol"><a href="../../download/rtxcsetup.exe">腾讯通</td>
+            <td class="normol"><a href="../../download/pdf-to-word.zip">pdf转word</td>
+            <td class="normol"><a href="../../download/Everything-1.3.4.686.x86-Setup.exe">快速检索</td>
+        </tr>
+        <tr>
+            <td class="normol"><a href="../../download/360EntInst(10.0.10.36_80).exe">360安全卫士</td>
+            <td class="normol"><a href="../../download/jidianwubi.zip">五笔输入法</td>
+            <td class="normol"><a href="../../download/sogou_pinyin_80l.exe">搜狗输入法</td>
+            <td class="normol"><a href="../../download/CADReaderPc_4.1.0.31.exe">CAD快速看图</td>
+            <td class="normol"><a href="../../download/QQPlayer_Setup_39_936.exe">QQ播放器</td>
+        </tr>
+        <tr>
+            <td class="bz" colspan=5>友情提示：绿色的链接需要电脑接入互联网才能正常访问！</td>
+        </tr>
+    </table>
+    <!-- 代码部分begin -->
+    <div class="trunk1">
+        <div>
+            <div>
+                <div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div>
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div>
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 代码部分end -->
+</div>
 </body>
 </html>

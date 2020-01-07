@@ -11,7 +11,7 @@ import java.util.Date;
 public class DateUtil {
     public static void main(String[] args) {
         try {
-            System.out.println("有" + getMondayNumber("2019-09-01","2019-09-30",6) + "个"+getMonthFirstday("2019-09-01"));
+            System.out.println("有" + getMondayNumber("2019-09-01","2019-09-30",6) + "个"+getMonthFirstday("2019-09-08"));
         } catch (ParseException e) {
             e.printStackTrace();
         }

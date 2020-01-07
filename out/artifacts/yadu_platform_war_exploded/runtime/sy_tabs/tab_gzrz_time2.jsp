@@ -1,33 +1,33 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html >
-  <head>
+<html>
+<head>
     <base href="<%=basePath%>">
-    
-    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
     <title>亚都工作日志</title>
     <link href="css/time_css/chinaz.css" rel="stylesheet">
 
     <script src="js/time_js/jquery-1.9.1.min.js"></script>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
 
-  </head>
-  
-  <body>
- <div class="wrapper">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="This is my page">
+    <!--
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    -->
+
+</head>
+
+<body>
+<div class="wrapper">
 
     <div class="history">
         <div class="start-history">
@@ -188,30 +188,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script src="js/time_js/jquery.slidy.js"></script>
 <script>
-$(window).scroll(function(){
-    var msg = $(".history-img");
-    var item = $(".history_L");
-    var items = $(".history_R");
-    var windowHeight = $(window).height();
-    var Scroll = $(document).scrollTop();
-    if((msg.offset().top - Scroll -windowHeight)<=0){
-        msg.fadeIn(1500);
-    }
-    for(var i=0;i<item.length;i++){
-        if(($(item[i]).offset().top - Scroll - windowHeight)<= -100){
-            $(item[i]).animate({marginRight:'0px'},'50','swing');
+    $(window).scroll(function () {
+        var msg = $(".history-img");
+        var item = $(".history_L");
+        var items = $(".history_R");
+        var windowHeight = $(window).height();
+        var Scroll = $(document).scrollTop();
+        if ((msg.offset().top - Scroll - windowHeight) <= 0) {
+            msg.fadeIn(1500);
         }
-    }
-    for(var i=0;i<items.length;i++){
-        if(($(items[i]).offset().top - Scroll - windowHeight)<= -100){
-            $(items[i]).animate({marginLeft:'0px'},'50','swing');
+        for (var i = 0; i < item.length; i++) {
+            if (($(item[i]).offset().top - Scroll - windowHeight) <= -100) {
+                $(item[i]).animate({marginRight: '0px'}, '50', 'swing');
+            }
         }
-    }});
+        for (var i = 0; i < items.length; i++) {
+            if (($(items[i]).offset().top - Scroll - windowHeight) <= -100) {
+                $(items[i]).animate({marginLeft: '0px'}, '50', 'swing');
+            }
+        }
+    });
 
 </script>
 
 <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
-<p>适用浏览器：360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. 不支持IE8及以下浏览器。</p>
+    <p>适用浏览器：360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. 不支持IE8及以下浏览器。</p>
 </div>
-  </body>
+</body>
 </html>

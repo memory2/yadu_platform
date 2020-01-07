@@ -72,12 +72,14 @@
 
 
             //alert(sqksrq+"--"+jbzgs);
-            var url = 'servlet/KqAction?method=sy_dkjl&cxn=' + cxn + '&cxy=' + cxy + '&cxr=' + cxr + '&rygh=' + rygh + '&ryxm=' + ryxm;
+
+            var url = 'servlet/KqAction?method=sy_dkjl&cxn=' + cxn + '&cxy=' + cxy + '&cxr=' + cxr + '&rygh=' + rygh + '&ryxm=' + encodeURI(encodeURI(ryxm));
             var gridID = "dg_dkjl";
             var gridBT = "打卡记录";
             var xm = '<%=xm%>';
-
-            if (bmdm != '4110000000' && bmdm != '4113000000') {
+            if (bmdm=='6107000000'){
+                getDataGird(url, gridID, gridBT);
+            }else if (bmdm != '4110000000' && bmdm !== '4113000000') {
                 alert("您无此权限，请联系管理员！");
                 return;
             }
