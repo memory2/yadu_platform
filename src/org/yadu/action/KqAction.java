@@ -214,7 +214,7 @@ public class KqAction extends HttpServlet {
 
         String oaryid = (String) session.getAttribute("oaryid");
         mymap.put("oaryid", oaryid);
-        String zdmc = new String(req.getParameter("zdmc").getBytes("ISO-8859-1"), "gb2312");
+        String zdmc = req.getParameter("zdmc");
         String zdlb = req.getParameter("zdlb");
         mymap.put("zdmc", zdmc);
         mymap.put("zdlb", zdlb);
@@ -328,7 +328,6 @@ public class KqAction extends HttpServlet {
 
     //获取通讯录、角色、权限、特殊考勤、特殊考勤组列表
     private void cxlb(HttpServletRequest req, HttpServletResponse resp, String method) throws Exception {
-        req.setCharacterEncoding("GBK");
         resp.setContentType("text/html; charset=GBK");
         Map<String, Object> m = null;
         if ("sy_dkjl".equals(method)) {

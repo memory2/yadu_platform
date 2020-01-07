@@ -68,7 +68,7 @@
                         url: "servlet/KqAction?method=tc",
                         success: function (msg) {
                             //window.close();
-                            window.location.href = "http://kq.yadugroup.com:443/yadu_OA/runtime/login.jsp";
+                            window.location.href = "http://kq.yadugroup.com:8443/yadu_OA/runtime/login.jsp";
                         }, error: function () {
                             alert("系统报错，请联系管理员！");
                             //错误处理

@@ -52,6 +52,8 @@ public class CalculationKq {
          * 部门
          */
         String bm="";
+
+        String bmmid="";
         /**
          * 姓名
          */
@@ -85,6 +87,10 @@ public class CalculationKq {
                 rq=map.get("rq").toString();
                 xq=map.get("xq").toString();
                 bm=map.get("bm").toString();
+                if(map.containsKey("bmid")){
+                    bmmid=map.get("bmid").toString();
+                }
+
                 gh=map.get("gh").toString();
                 intRq=Integer.parseInt(rq);
                 if(intRq<10){
@@ -103,42 +109,226 @@ public class CalculationKq {
 
                     //如果该时间上班，前台则显示无打开记录
                     if(!CalculateHoliday(time) && !"日".equals(xq)){
-                        if ("无".equals(swsb)){
-                            kgts+=0.25;
-                            map.put("swsb","旷工");
-                            map.put("kgts",kgts);
-                        }if ("无".equals(swxb) ){
-                            kgts+=0.25;
-                            map.put("swxb","旷工");
-                            map.put("kgts",kgts);
-                        }if ("无".equals(xwsb) ){
-                            kgts+=0.25;
-                            map.put("xwsb","旷工");
-                            map.put("kgts",kgts);
-                        }if("无".equals(xwxb) ){
-                            kgts+=0.25;
-                            map.put("xwxb","旷工");
-                            map.put("kgts",kgts);
+
+                        if(map.containsKey("bmid")){
+                            if ("4121000001".equals(bmmid)){
+                                if ("2".equals(rq)&&"四".equals(xq)){
+                                    if(swsb.indexOf(":")>0||xwxb.indexOf(":")>0){
+                                        if ("元旦放假".equals(swsb)){
+                                            kgts+=0.5;
+                                            map.put("swsb","旷工");
+                                            map.put("kgts",kgts);
+                                        }if ("元旦放假".equals(swxb) ){
+                                            map.put("swxb","无");
+                                            map.put("kgts",kgts);
+                                        }if ("元旦放假".equals(xwsb) ){
+                                            map.put("xwsb","无");
+                                            map.put("kgts",kgts);
+                                        }if("元旦放假".equals(xwxb) ){
+                                            kgts+=0.5;
+                                            map.put("xwxb","旷工");
+                                            map.put("kgts",kgts);
+                                        }
+                                    }else{
+                                        if ("元旦放假".equals(swsb)){
+                                            kgts+=0.5;
+                                            map.put("swsb","元旦放假");
+                                            map.put("kgts",kgts);
+                                        }if ("元旦放假".equals(swxb) ){
+                                            map.put("swxb","无");
+                                            map.put("kgts",kgts);
+                                        }if ("元旦放假".equals(xwsb) ){
+                                            map.put("xwsb","无");
+                                            map.put("kgts",kgts);
+                                        }if("元旦放假".equals(xwxb) ){
+                                            kgts+=0.5;
+                                            map.put("xwxb","元旦放假");
+                                            map.put("kgts",kgts);
+                                        }
+                                    }
+
+
+                                }else{
+                                    if ("无".equals(swsb)){
+                                        kgts+=0.5;
+                                        map.put("swsb","旷工");
+                                        map.put("kgts",kgts);
+                                    }if("无".equals(xwxb) ){
+                                        kgts+=0.5;
+                                        map.put("xwxb","旷工");
+                                        map.put("kgts",kgts);
+                                    }
+                                }
+
+                            }else{
+                                if("2".equals(rq)&&"四".equals(xq)){
+                                    if(swsb.indexOf(":")>0||swxb.indexOf(":")>0||xwsb.indexOf(":")>0||xwxb.indexOf(":")>0){
+                                        if ("元旦放假".equals(swsb)){
+                                            kgts+=0.25;
+                                            map.put("swsb","旷工");
+                                            map.put("kgts",kgts);
+                                        }if ("元旦放假".equals(swxb) ){
+                                            kgts+=0.25;
+                                            map.put("swxb","旷工");
+                                            map.put("kgts",kgts);
+                                        }if ("元旦放假".equals(xwsb) ){
+                                            kgts+=0.25;
+                                            map.put("xwsb","旷工");
+                                            map.put("kgts",kgts);
+                                        }if("元旦放假".equals(xwxb) ){
+                                            kgts+=0.25;
+                                            map.put("xwxb","旷工");
+                                            map.put("kgts",kgts);
+                                        }
+                                    }
+                                }else{
+                                    if ("无".equals(swsb)){
+                                        kgts+=0.25;
+                                        map.put("swsb","旷工");
+                                        map.put("kgts",kgts);
+                                    }if ("无".equals(swxb) ){
+                                        kgts+=0.25;
+                                        map.put("swxb","旷工");
+                                        map.put("kgts",kgts);
+                                    }if ("无".equals(xwsb) ){
+                                        kgts+=0.25;
+                                        map.put("xwsb","旷工");
+                                        map.put("kgts",kgts);
+                                    }if("无".equals(xwxb) ){
+                                        kgts+=0.25;
+                                        map.put("xwxb","旷工");
+                                        map.put("kgts",kgts);
+                                    }
+                                }
+
+                            }
+                            if("日".equals(xq)&&CalculateSH(time)){
+                                if ("无".equals(swsb)){
+                                    kgts+=0.5;
+                                    map.put("swsb","旷工");
+                                    map.put("kgts",kgts);
+                                }if("无".equals(xwxb) ){
+                                    kgts+=0.5;
+                                    map.put("xwxb","旷工");
+                                    map.put("kgts",kgts);
+                                }
+                            }
+                        } else{
+                            if ("灭菌操作组".equals(bm)){
+                                if ("2".equals(rq)&&"四".equals(xq)){
+                                    if(swsb.indexOf(":")>0||xwxb.indexOf(":")>0){
+                                        if ("元旦放假".equals(swsb)){
+                                            kgts+=0.5;
+                                            map.put("swsb","旷工");
+                                            map.put("kgts",kgts);
+                                        }if ("元旦放假".equals(swxb) ){
+                                            map.put("swxb","无");
+                                            map.put("kgts",kgts);
+                                        }if ("元旦放假".equals(xwsb) ){
+                                            map.put("xwsb","无");
+                                            map.put("kgts",kgts);
+                                        }if("元旦放假".equals(xwxb) ){
+                                            kgts+=0.5;
+                                            map.put("xwxb","旷工");
+                                            map.put("kgts",kgts);
+                                        }
+                                    }else{
+                                        if ("元旦放假".equals(swsb)){
+                                            kgts+=0.5;
+                                            map.put("swsb","元旦放假");
+                                            map.put("kgts",kgts);
+                                        }if ("元旦放假".equals(swxb) ){
+                                            map.put("swxb","无");
+                                            map.put("kgts",kgts);
+                                        }if ("元旦放假".equals(xwsb) ){
+                                            map.put("xwsb","无");
+                                            map.put("kgts",kgts);
+                                        }if("元旦放假".equals(xwxb) ){
+                                            kgts+=0.5;
+                                            map.put("xwxb","元旦放假");
+                                            map.put("kgts",kgts);
+                                        }
+                                    }
+
+                                }else{
+                                    if ("无".equals(swsb)){
+                                        kgts+=0.5;
+                                        map.put("swsb","旷工");
+                                        map.put("kgts",kgts);
+                                    }if("无".equals(xwxb) ){
+                                        kgts+=0.5;
+                                        map.put("xwxb","旷工");
+                                        map.put("kgts",kgts);
+                                    }
+                                }
+                            }else{
+                                if("2".equals(rq)&&"四".equals(xq)){
+                                    if(swsb.indexOf(":")>0||swxb.indexOf(":")>0||xwsb.indexOf(":")>0||xwxb.indexOf(":")>0) {
+                                        if ("元旦放假".equals(swsb)) {
+                                            kgts += 0.25;
+                                            map.put("swsb", "旷工");
+                                            map.put("kgts", kgts);
+                                        }
+                                        if ("元旦放假".equals(swxb)) {
+                                            kgts += 0.25;
+                                            map.put("swxb", "旷工");
+                                            map.put("kgts", kgts);
+                                        }
+                                        if ("元旦放假".equals(xwsb)) {
+                                            kgts += 0.25;
+                                            map.put("xwsb", "旷工");
+                                            map.put("kgts", kgts);
+                                        }
+                                        if ("元旦放假".equals(xwxb)) {
+                                            kgts += 0.25;
+                                            map.put("xwxb", "旷工");
+                                            map.put("kgts", kgts);
+                                        }
+                                    }
+                                }else{
+                                    if ("无".equals(swsb)){
+                                        kgts+=0.25;
+                                        map.put("swsb","旷工");
+                                        map.put("kgts",kgts);
+                                    }if ("无".equals(swxb) ){
+                                        kgts+=0.25;
+                                        map.put("swxb","旷工");
+                                        map.put("kgts",kgts);
+                                    }if ("无".equals(xwsb) ){
+                                        kgts+=0.25;
+                                        map.put("xwsb","旷工");
+                                        map.put("kgts",kgts);
+                                    }if("无".equals(xwxb) ){
+                                        kgts+=0.25;
+                                        map.put("xwxb","旷工");
+                                        map.put("kgts",kgts);
+                                    }
+                                }
+
+                            }
+
                         }
-                    }
-                    if("日".equals(xq)&&CalculateSH(time)){
-                        if ("无".equals(swsb)){
-                            kgts+=0.25;
-                            map.put("swsb","旷工");
-                            map.put("kgts",kgts);
-                        }if ("无".equals(swxb) ){
-                            kgts+=0.25;
-                            map.put("swxb","旷工");
-                            map.put("kgts",kgts);
-                        }if ("无".equals(xwsb) ){
-                            kgts+=0.25;
-                            map.put("xwsb","旷工");
-                            map.put("kgts",kgts);
-                        }if("无".equals(xwxb) ){
-                            kgts+=0.25;
-                            map.put("xwxb","旷工");
-                            map.put("kgts",kgts);
+
+                        if("日".equals(xq)&&CalculateSH(time)){
+                            if ("无".equals(swsb)){
+                                kgts+=0.25;
+                                map.put("swsb","旷工");
+                                map.put("kgts",kgts);
+                            }if ("无".equals(swxb) ){
+                                kgts+=0.25;
+                                map.put("swxb","旷工");
+                                map.put("kgts",kgts);
+                            }if ("无".equals(xwsb) ){
+                                kgts+=0.25;
+                                map.put("xwsb","旷工");
+                                map.put("kgts",kgts);
+                            }if("无".equals(xwxb) ){
+                                kgts+=0.25;
+                                map.put("xwxb","旷工");
+                                map.put("kgts",kgts);
+                            }
                         }
+
                     }
 
                     //特殊人员特殊日期处理
@@ -249,7 +439,7 @@ public class CalculationKq {
         calendar.setTime(date);
         int day=calendar.get(Calendar.DATE);
         //                      此处修改为+1则是获取后一天
-        calendar.set(Calendar.DATE,day-2);
+        calendar.set(Calendar.DATE,day-1);
 
         String lastDay = sdf.format(calendar.getTime());
         return lastDay;

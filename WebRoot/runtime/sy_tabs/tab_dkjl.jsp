@@ -72,7 +72,8 @@
 
 
             //alert(sqksrq+"--"+jbzgs);
-            var url = 'servlet/KqAction?method=sy_dkjl&cxn=' + cxn + '&cxy=' + cxy + '&cxr=' + cxr + '&rygh=' + rygh + '&ryxm=' + ryxm;
+
+            var url = 'servlet/KqAction?method=sy_dkjl&cxn=' + cxn + '&cxy=' + cxy + '&cxr=' + cxr + '&rygh=' + rygh + '&ryxm=' + encodeURI(encodeURI(ryxm));
             var gridID = "dg_dkjl";
             var gridBT = "´ò¿¨¼ÇÂ¼";
             var xm = '<%=xm%>';

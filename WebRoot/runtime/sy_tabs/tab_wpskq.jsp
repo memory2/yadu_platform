@@ -84,8 +84,9 @@
             bmdm1=bmdm;
             if (bmmc == "信息部" || bmmc == "人力资源部"||bmmc == '亚都人资行政部' || txm == "10838" || txm == "11048" || txm=="10269") {
                 bmdm = "6100000000";
-            }else if (txm == "10715") { //10715-邓雪
-                bmdm = "7102000000";
+            }
+            if (txm == "10715") { //10715-邓雪 无纺布产品线
+                bmdm = "6100000000";
             }
             if(txm=="10556"){
                 bmdm = "6106000000";
@@ -98,7 +99,7 @@
 
             $("#bm").combobox({
                 onChange: function (n, o) {
-                    if (txm == "10715" && $("#bm").combobox('getValue').substring(0, 4) == "7103") {
+                    if ($("#bm").combobox('getValue').substring(0, 4) == "7103") {
                         alert("您无此部门查询权限！");
                         $("#bm").combotree('setValue', bmdm);
                         return;

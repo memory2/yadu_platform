@@ -329,6 +329,7 @@ function getDept(selectid, deptid) {
         url: theurl,
         success: function (treeData) {
             var data = strToJson(treeData);
+            console.info(data);
             $('#' + selectid).combotree('loadData', data);
             $("#" + selectid).combotree({
                 multiple: false,
